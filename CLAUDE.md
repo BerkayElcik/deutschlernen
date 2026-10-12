@@ -67,6 +67,13 @@ console.log('parses OK, cards',n);
 
 It must print `parses OK` and no `MISSING` or `UNUSED` lines. Check that `german-notes.html` has as many `</div>` as `<div` after edits.
 
+## Git
+
+- Remote: https://github.com/BerkayElcik/deutschlernen.git (branch `main`). Commit identity is set locally for this repo only.
+- **Push routinely without asking, but not after every small update.** Commit and push a batch of related changes (for example after several picked items are added, or at the end of a study session). A single new card on its own does not need its own push.
+- Commit message: short summary line, bullet list of what changed, then the `Co-Authored-By` line from the harness.
+- Never force-push.
+
 ## Things to remember
 
 - The artifact page must stay theme-aware (light and dark tokens on `:root`), work at phone width, and use no `<html>` / `<body>` wrapper tags (the publish step adds them).
