@@ -1,0 +1,4 @@
+das Kleid	dress
+die Handschuhe	gloves
+der Helm	helmet
+die Mütze	hat

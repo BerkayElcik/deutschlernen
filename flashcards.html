@@ -1,0 +1,2409 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>German Flashcards</title>
+<style>
+  :root {
+    --bg: #f6f3ec; --panel: #ffffff; --text: #222; --muted: #6f6a60; --border: #e2ddd0;
+    --accent: #d4a017; --on-accent: #222; --chip: #f3efe4;
+    --der: #1f5fbf; --die: #c0392b; --das: #1e8a4c;
+    --good: #2e8b57; --bad: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1c1b22; --panel: #2a2833; --text: #eee; --muted: #aaa; --border: #3d3a48;
+      --accent: #e0b43a; --on-accent: #1c1b22; --chip: #35323f;
+      --der: #6ea8ff; --die: #ff7b6b; --das: #5fd18f;
+      --good: #5fd18f; --bad: #ff7b6b;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1c1b22; --panel: #2a2833; --text: #eee; --muted: #aaa; --border: #3d3a48;
+    --accent: #e0b43a; --on-accent: #1c1b22; --chip: #35323f;
+    --der: #6ea8ff; --die: #ff7b6b; --das: #5fd18f;
+    --good: #5fd18f; --bad: #ff7b6b;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 24px 16px 60px; }
+  header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  h1 { margin: 0; font-size: 1.6em; }
+  button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--border); background: var(--panel); color: var(--text); padding: 8px 14px; }
+  button:hover { border-color: var(--accent); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .muted { color: var(--muted); }
+  .tiles { display: flex; flex-direction: column; gap: 14px; }
+  .tile { background: var(--panel); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: 10px; padding: 14px 16px; }
+  .tile .head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .tile h3 { margin: 0; }
+  .tile .desc { font-size: 0.9em; color: var(--muted); margin-top: 2px; }
+  .tile .actions { display: flex; gap: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip { background: var(--chip); border-color: transparent; padding: 5px 11px; font-size: 0.88em; border-radius: 999px; }
+  .chip span { color: var(--muted); }
+  .legend { margin: 18px 0 0; font-size: 0.9em; }
+  .der { color: var(--der); } .die { color: var(--die); } .das { color: var(--das); }
+
+  .bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin: 8px 0 18px; }
+  .bar > div { height: 100%; background: var(--accent); transition: width .2s; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; min-height: 260px; padding: 28px 22px;
+          display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; user-select: none; }
+  .card .front { font-size: 1.7em; font-weight: 600; }
+  .card .back { margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--border); width: 100%; }
+  .card .back .main { font-size: 1.3em; }
+  .card .note { margin-top: 10px; color: var(--muted); white-space: pre-line; line-height: 1.6; }
+  .hint { font-size: 0.85em; color: var(--muted); margin-top: 16px; }
+  .ex-row { display: flex; justify-content: center; margin-top: 12px; }
+  .ex-btn { font-size: 0.9em; padding: 6px 12px; background: var(--chip); border-color: transparent; }
+  .ex-box { margin-top: 14px; padding: 10px 14px; background: var(--chip); border-radius: 8px; font-size: 1rem; line-height: 1.5; max-width: 100%; }
+  .ex-box .ex-en { color: var(--muted); font-style: italic; margin-top: 4px; }
+  .ex-label { font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 2px; }
+  td .ex { font-size: 0.88em; margin-top: 6px; }
+  td .ex i { color: var(--muted); }
+  .answer-btns { display: flex; gap: 12px; justify-content: center; margin-top: 16px; }
+  .answer-btns button { min-width: 140px; padding: 12px; font-weight: 600; }
+  .again { color: var(--bad); border-color: var(--bad); }
+  .got { color: var(--good); border-color: var(--good); }
+  .topline { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+  h4 { margin: 22px 0 8px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: 10px; overflow: hidden; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; width: 50%; }
+  td .note { color: var(--muted); font-size: 0.88em; white-space: pre-line; }
+  .hidden { display: none !important; }
+  .tile.artikel-tile { border-left-color: var(--das); }
+  .p-sentence { font-size: 1.35em; line-height: 1.45; }
+  .opt-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px; }
+  .opt-btns button { min-width: 120px; padding: 12px 16px; font-size: 1.1em; font-weight: 600; }
+  .opt-btns button.is-right { border-color: var(--good); color: var(--good); }
+  .opt-btns button.is-wrong { border-color: var(--bad); color: var(--bad); }
+  .opt-btns .k { color: var(--muted); font-weight: 400; margin-right: 6px; }
+  .art-btns button { min-width: 110px; font-size: 1.2em; }
+  .art-btns .b-der { color: var(--der); border-color: var(--der); }
+  .art-btns .b-die { color: var(--die); border-color: var(--die); }
+  .art-btns .b-das { color: var(--das); border-color: var(--das); }
+  .card.right { border: 2px solid var(--good); }
+  .card.wrong { border: 2px solid var(--bad); }
+  .verdict { font-weight: 700; margin-bottom: 6px; }
+  .verdict.right { color: var(--good); } .verdict.wrong { color: var(--bad); }
+  .rule { margin-top: 10px; font-size: 0.9em; background: var(--chip); border-radius: 8px; padding: 6px 10px; display: inline-block; }
+</style>
+<div class="wrap">
+  <header>
+    <h1>German Flashcards</h1>
+    <button id="dirBtn" title="Switch which side is shown first"></button>
+  </header>
+
+  <!-- Home -->
+  <section id="home">
+    <div class="tiles" id="setGrid"></div>
+    <p class="legend">Colors: <b class="der">der</b> = masculine, <b class="die">die</b> = feminine, <b class="das">das</b> = neuter.
+      Click a topic to study only that topic.</p>
+  </section>
+
+  <!-- Study -->
+  <section id="study" class="hidden">
+    <div class="topline">
+      <button id="backBtn">← Sets</button>
+      <b id="studyTitle"></b>
+      <span class="muted" id="counter"></span>
+    </div>
+    <div class="bar"><div id="progress"></div></div>
+    <div class="card" id="card">
+      <div class="front" id="front"></div>
+      <div class="ex-box hidden" id="exFront"><div class="ex-label">Beispiel</div><div id="exFrontText"></div></div>
+      <div class="back hidden" id="back">
+        <div class="main" id="backMain"></div>
+        <div class="note" id="backNote"></div>
+        <div class="ex-box hidden" id="exBack"><div class="ex-label">Beispiel</div><div id="exBackDe"></div><div class="ex-en" id="exBackEn"></div></div>
+      </div>
+    </div>
+    <div class="ex-row"><button class="ex-btn" id="exBtn">💬 Beispiel zeigen</button></div>
+    <div class="answer-btns hidden" id="answerBtns">
+      <button class="again" id="againBtn">✗ Again</button>
+      <button class="got" id="gotBtn">✓ Got it</button>
+    </div>
+    <p class="hint">Click the card or press <b>Space</b> to flip. Then press <b>1</b> = again, <b>2</b> = got it. Press <b>E</b> to show an example first.</p>
+  </section>
+
+  <!-- Done -->
+  <section id="done" class="hidden" style="text-align:center">
+    <h2>Fertig! 🎉</h2>
+    <p id="doneText"></p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="primary" id="missedBtn">Study the ones I missed</button>
+      <button id="restartBtn">Restart</button>
+      <button id="homeBtn">← Sets</button>
+    </div>
+  </section>
+
+  <!-- Artikel -->
+  <section id="artikel" class="hidden">
+    <div class="topline">
+      <button id="aBack">← Sets</button>
+      <b id="aTitle"></b>
+      <span class="muted" id="aCounter"></span>
+    </div>
+    <div class="bar"><div id="aProgress"></div></div>
+    <div id="aPlay">
+      <div class="card" id="aCard" style="cursor:default">
+        <div class="front" id="aNoun"></div>
+        <div class="back hidden" id="aResult">
+          <div class="verdict" id="aVerdict"></div>
+          <div class="main" id="aFull"></div>
+          <div class="note" id="aMeaning"></div>
+          <div class="rule hidden" id="aRule"></div>
+        </div>
+      </div>
+      <div class="answer-btns art-btns" id="aBtns">
+        <button class="b-der" data-art="der">der</button>
+        <button class="b-die" data-art="die">die</button>
+        <button class="b-das" data-art="das">das</button>
+      </div>
+      <div class="answer-btns hidden" id="aNextWrap"><button class="primary" id="aNext">Weiter →</button></div>
+      <p class="hint">Keys: <b>1</b> = der, <b>2</b> = die, <b>3</b> = das, <b>Space</b> = next. Wrong answers come back later.</p>
+    </div>
+    <div id="aDone" class="hidden" style="text-align:center">
+      <h2>Fertig! 🎉</h2>
+      <p id="aDoneText"></p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="primary" id="aMissedBtn">Practice the ones I missed</button>
+        <button id="aRestart">Restart</button>
+        <button id="aHome">← Sets</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Präpositionen -->
+  <section id="praep" class="hidden">
+    <div class="topline">
+      <button id="pBack">← Sets</button>
+      <b id="pTitle"></b>
+      <span class="muted" id="pCounter"></span>
+    </div>
+    <div class="bar"><div id="pProgress"></div></div>
+    <div id="pPlay">
+      <div class="card" id="pCard" style="cursor:default">
+        <div class="front p-sentence" id="pSentence"></div>
+        <div class="back hidden" id="pResult">
+          <div class="verdict" id="pVerdict"></div>
+          <div class="main" id="pFull"></div>
+          <div class="note" id="pEn"></div>
+          <div class="rule" id="pWhy"></div>
+        </div>
+      </div>
+      <div class="opt-btns" id="pOptions"></div>
+      <div class="answer-btns hidden" id="pNextWrap"><button class="primary" id="pNext">Weiter →</button></div>
+      <p class="hint">Keys: <b>1</b> / <b>2</b> / <b>3</b> = choose, <b>Space</b> = next. Wrong answers come back later.</p>
+    </div>
+    <div id="pDone" class="hidden" style="text-align:center">
+      <h2>Fertig! 🎉</h2>
+      <p id="pDoneText"></p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="primary" id="pMissedBtn">Practice the ones I missed</button>
+        <button id="pRestart">Restart</button>
+        <button id="pHome">← Sets</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse -->
+  <section id="browse" class="hidden">
+    <div class="topline">
+      <button id="browseBack">← Sets</button>
+      <b id="browseTitle"></b>
+      <span></span>
+    </div>
+    <div id="browseBody"></div>
+  </section>
+</div>
+
+<script>
+// Each card: [German, English, optional note shown on the back]
+const SETS = [
+  { name: "A1.1", desc: "First words: greetings, family, food, everyday words", topics: [
+    { name: "Hallo & wichtige Sätze", cards: [
+      ["Hallo, ihr zwei!", "Hi, you two!", "ihr = you (several people, informal)\nAlso: ihr beiden = you both · ihr drei = you three\nHallo zusammen! = Hello everyone!"],
+      ["Bis bald!", "See you soon!"],
+      ["Bis später!", "See you later!"],
+      ["Es tut mir leid. / Tut mir leid.", "I'm sorry."],
+      ["Verzeihung!", "Excuse me! / Sorry!", "die Verzeihung = forgiveness"],
+      ["Wie bitte?", "Pardon? Sorry, what did you say?"],
+      ["Noch einmal, bitte!", "One more time, please!"],
+      ["wiederholen", "to repeat"],
+      ["buchstabieren", "to spell"],
+      ["natürlich", "of course; naturally"],
+      ["Fertig!", "Done! Finished! Ready!"],
+      ["keine Ahnung", "no idea"],
+      ["Ja, gerne.", "Yes, gladly. / Yes, please."],
+      ["Na ja, es geht.", "Well, it's so-so. / It's okay.", "na ja = well… (hesitating)\nes geht = literally 'it goes'\nLukewarm: between 'ein bisschen' and 'leider nicht'"],
+      ["Kannst du (gut) …?", "Can you (well) …?", "Ja, sehr gut. / Ja, gut. / Ja, ein bisschen.\nNa ja, es geht. / Leider nicht.\nNatürlich."],
+      ["Nein, leider nicht.", "No, unfortunately not.", "A polite, soft 'no'"],
+      ["Wie geht's? – Es geht.", "How are you? – So-so.", "Es geht alone is lukewarm. For 'good': Gut, danke. / Es geht mir gut.\nNot so good: Nicht so gut. · Bad: Schlecht."],
+      ["Gern geschehen.", "You're welcome. My pleasure.", "Answer to 'Danke'"],
+      ["Nichts zu danken.", "Don't mention it. (Ne demek / Teşekküre gerek yok)", "Answer to 'Danke'"],
+      ["begrüßen (+ Akk.)", "to greet, to welcome", "Ich begrüße euch heute im Live-Chat mit unserem Fallschirmsprung-Experten Freddy Jung.\ndie Begrüßung = greeting"],
+      ["die Pause, die Pausen", "break"],
+      ["das erste Mal", "the first time", "Mit 18 Jahren bin ich das erste Mal gesprungen.\n≠ einmal = once, at some point"],
+    ]},
+    { name: "Familie & Menschen", cards: [
+      ["die Eltern (Pl.)", "parents"],
+      ["die Geschwister (Pl.)", "siblings"],
+      ["der Sohn, die Söhne", "son"],
+      ["die Tochter, die Töchter", "daughter"],
+      ["die Schwester, die Schwestern", "sister"],
+      ["der Junge, die Jungen", "boy"],
+      ["der Mann, die Männer", "man; husband"],
+      ["die Frau, die Frauen", "woman; wife"],
+      ["der Opa", "grandpa"],
+      ["die Oma", "grandma"],
+      ["die Leute (Pl.)", "people"],
+      ["der Nachbar, -n / die Nachbarin, -nen", "neighbor"],
+      ["verheiratet", "married"],
+      ["ledig", "single, unmarried"],
+      ["geschieden", "divorced", "separated = getrennt"],
+      ["geboren", "born", "Ich bin 2000 geboren. = I was born in 2000."],
+      ["wohnen", "to live (somewhere), to reside", "Ich wohne in Berlin."],
+      ["leben", "to live; to be alive", "Er lebt noch. = He's still alive."],
+      ["meine Süße", "my sweetheart, my sweetie"],
+    ]},
+    { name: "Dinge & Farben", cards: [
+      ["die Flasche, die Flaschen", "bottle"],
+      ["die Tasche, die Taschen", "bag"],
+      ["das Handy, die Handys", "mobile phone, cell phone"],
+      ["der Stift, die Stifte", "pen"],
+      ["der Rucksack, die Rucksäcke", "backpack"],
+      ["die Tasse, die Tassen", "cup"],
+      ["die Brille", "glasses", "Singular in German! eine Brille = one pair of glasses"],
+      ["die Sonnenbrille", "sunglasses"],
+      ["das Fahrrad, die Fahrräder", "bicycle"],
+      ["das Kleid, die Kleider", "dress"],
+      ["das Hemd, die Hemden", "shirt"],
+      ["die Mütze, die Mützen", "hat, beanie, cap"],
+      ["die Armbanduhr", "wristwatch"],
+      ["die Wanduhr", "wall clock"],
+      ["das Regal, die Regale", "shelf, bookshelf"],
+      ["die Stadt, die Städte", "city, town"],
+      ["die Kirche", "church", "Don't confuse: die Kirsche = cherry"],
+      ["die Straßenbahn", "tram"],
+      ["der Termin, die Termine", "appointment"],
+      ["die Nachricht, die Nachrichten", "message", "die Nachrichten (pl.) also = the news"],
+      ["die Zahl, die Zahlen", "number"],
+      ["gelb", "yellow"],
+      ["Welche Farbe ist das?", "What color is that?"],
+    ]},
+    { name: "Essen & Trinken", cards: [
+      ["das Fleisch", "meat"],
+      ["der Fisch, die Fische", "fish"],
+      ["das Ei, die Eier", "egg"],
+      ["der Käse", "cheese"],
+      ["der Reis", "rice"],
+      ["der Joghurt", "yogurt"],
+      ["der Kuchen, die Kuchen", "cake"],
+      ["ein Stück Kuchen", "a piece of cake"],
+      ["das Eis", "ice; ice cream"],
+      ["das Getränk, die Getränke", "drink"],
+      ["das Bier, die Biere", "beer"],
+      ["der Wein", "wine"],
+      ["die Birne, die Birnen", "pear", "Also: light bulb"],
+      ["die Erdbeere, die Erdbeeren", "strawberry"],
+      ["die Traube, die Trauben", "grape"],
+      ["die Gurke, die Gurken", "cucumber"],
+      ["lecker / köstlich", "delicious, tasty"],
+      ["schmecken", "to taste (good)", "Das schmeckt gut! = That tastes good!"],
+      ["schmecken nach (+ Dat.)", "to taste like"],
+      ["Ich habe Hunger.", "I'm hungry."],
+      ["Hast du Durst? / Bist du durstig?", "Are you thirsty?"],
+      ["kochen", "to cook; to boil"],
+      ["heiß", "hot"],
+    ]},
+    { name: "Kleine Wörter", cards: [
+      ["hier", "here"],
+      ["da", "there; here"],
+      ["dort", "there, over there"],
+      ["auch", "also, too"],
+      ["aber", "but"],
+      ["denn", "because", "The verb stays in position 2: …, denn ich bin müde."],
+      ["dann", "then"],
+      ["mit (+ Dat.)", "with"],
+      ["ohne (+ Akk.)", "without"],
+      ["von (+ Dat.)", "from, of"],
+      ["aus (+ Dat.)", "from, out of", "Ich komme aus der Türkei."],
+      ["zu (+ Dat.)", "to, at"],
+      ["sein / ihr", "his / her", "sein Buch = his book · ihr Buch = her book"],
+      ["immer", "always"],
+      ["oft", "often"],
+      ["manchmal", "sometimes"],
+      ["nie", "never"],
+      ["niemals", "never (stronger than nie)", "Niemals möchte ich das probieren!"],
+      ["noch nie", "never (so far)", "usually with the Perfekt: Ich war noch nie in Berlin.\nnie = never in general: Ich trinke nie Kaffee."],
+      ["fast", "almost, nearly", "False friend! fast ≠ fast (fast = schnell)\nfast nie = almost never · fast immer = almost always"],
+      ["mehr", "more"],
+      ["viel", "much, a lot"],
+      ["viele", "many"],
+      ["Wie viele?", "How many?"],
+      ["wenig", "little, not much", "ein wenig = a little"],
+      ["ein bisschen", "a little bit"],
+      ["mindestens / höchstens", "at least / at most", "mindestens zweimal pro Woche = at least twice a week\nhöchstens zweimal pro Woche = at most twice a week"],
+      ["bestimmt", "surely, definitely, I'm sure", "Er kommt bestimmt. = He'll surely come."],
+      ["etwas", "something", "In speech often: was"],
+      ["alles", "everything"],
+      ["nichts", "nothing"],
+      ["jemand", "someone, somebody", "Accusative: jemanden"],
+      ["niemand", "nobody, no one"],
+      ["gern", "gladly", "With a verb = to like doing: Ich spiele gern Fußball."],
+      ["leider", "unfortunately"],
+    ]},
+    { name: "Adjektive", cards: [
+      ["neu", "new"],
+      ["alt", "old"],
+      ["gut, besser, am besten", "good, better, best"],
+      ["schlecht", "bad"],
+      ["schnell", "fast, quick"],
+      ["langsam", "slow, slowly"],
+      ["einfach", "easy, simple"],
+      ["schwierig", "difficult, hard"],
+      ["wichtig", "important"],
+      ["nett", "nice, kind"],
+      ["klug", "smart, clever"],
+      ["lustig", "funny, amusing"],
+      ["langweilig", "boring, dull"],
+      ["ruhig", "quiet, calm"],
+      ["teuer", "expensive"],
+      ["billig", "cheap", "Often means: cheap and low quality"],
+      ["günstig", "inexpensive, good value", "Cheap but good quality"],
+      ["genug", "enough"],
+      ["müde", "tired, sleepy"],
+      ["faul", "lazy"],
+      ["süß", "sweet; cute"],
+      ["toll", "great, awesome"],
+      ["genial", "brilliant, awesome", "Colloquial, not 'genius-like'.\nIch kann mich noch immer gut an diesen Sprung erinnern. Er war genial!"],
+    ]},
+    { name: "Verben", cards: [
+      ["kaufen", "to buy"],
+      ["suchen", "to look for, to search"],
+      ["arbeiten", "to work"],
+      ["bleiben", "to stay"],
+      ["treffen", "to meet"],
+      ["zeigen", "to show"],
+      ["schauen", "to look"],
+      ["kennen", "to know (a person, a place)", "To know a fact = wissen"],
+      ["kennenlernen", "to get to know, to meet (for the first time)"],
+      ["finden", "to find; to think, to like", "Ich finde meinen Schlüssel nicht. = I can't find my key.\nIch finde den Film gut. = I think the film is good.\nWie findest du das? = What do you think of that?"],
+      ["geben", "to give"],
+      ["nehmen", "to take"],
+      ["brauchen", "to need"],
+      ["fragen", "to ask"],
+      ["sagen", "to say"],
+      ["zahlen / bezahlen", "to pay"],
+      ["bestellen", "to order (e.g. food)"],
+      ["mögen", "to like"],
+      ["möchten", "would like", "More polite than wollen"],
+      ["können", "can, to be able to"],
+      ["wollen", "to want"],
+      ["dürfen", "to be allowed to, may"],
+      ["sollen", "should, to be supposed to"],
+    ]},
+    { name: "Natur", cards: [
+      ["die Natur", "nature, countryside, outdoors"],
+      ["der Berg, die Berge", "mountain"],
+      ["der Baum, die Bäume", "tree"],
+      ["der Wald, die Wälder", "forest, woods"],
+      ["die Wiese, die Wiesen", "meadow, field"],
+      ["der Fluss, die Flüsse", "river"],
+      ["die Wolke, die Wolken", "cloud"],
+      ["der Himmel", "sky, heaven"],
+      ["der Weg, die Wege", "way, path"],
+      ["das Gras, die Gräser", "grass"],
+      ["der Stein, die Steine", "stone, rock"],
+    ]},
+  ]},
+
+  { name: "A1.2", desc: "Restaurant, home, daily routine, time, weather, parties", topics: [
+    { name: "Im Restaurant", cards: [
+      ["die Speisekarte", "menu"],
+      ["die Speisen (Pl.)", "dishes, food"],
+      ["der Kellner, - / die Kellnerin, -nen", "waiter / waitress"],
+      ["die Bedienung", "waiter / waitress; service"],
+      ["der Gast, die Gäste", "guest"],
+      ["Möchten Sie bestellen?", "Would you like to order?", "Also: Sind Sie bereit zu bestellen? / Haben Sie schon gewählt?"],
+      ["bereit", "ready, prepared"],
+      ["Darf es etwas zu trinken sein?", "Can I get you something to drink?", "Colloquial: Darf's was zu trinken sein?"],
+      ["etwas zu trinken / etwas zu essen", "something to drink / something to eat"],
+      ["für mich", "for me"],
+      ["ein Glas Weißwein", "a glass of white wine"],
+      ["das Bier vom Fass", "draft beer, beer on tap"],
+      ["Kommt gleich! / Kommt sofort!", "Coming right up!"],
+      ["sofort / gleich", "immediately, right away"],
+      ["der Nachtisch / die Nachspeise", "dessert", "Don't confuse: der Nachttisch (tt) = bedside table"],
+      ["War alles in Ordnung?", "Was everything okay?"],
+      ["Alles ist in Ordnung.", "Everything is fine."],
+      ["die Rechnung", "bill, check"],
+      ["Können wir bitte die Rechnung bekommen?", "Can we have the bill, please?"],
+      ["zusammen", "together", "Paying: Zusammen oder getrennt?"],
+      ["getrennt", "separately (separate checks)"],
+      ["das Trinkgeld", "tip (for the waiter)"],
+      ["Stimmt so!", "Keep the change!", "Literally: 'That's right like that'"],
+      ["das Bargeld", "cash"],
+      ["Ich zahle bar.", "I'll pay in cash."],
+      ["Wie viel kostet das? / Was kostet das?", "How much does it cost?"],
+      ["Das kostet … / Das macht …", "That costs … / That comes to …"],
+      ["der Preis, die Preise", "price"],
+      ["am liebsten", "most of all (what you like best)", "gern → lieber → am liebsten"],
+      ["es gibt (+ Akk.)", "there is, there are"],
+    ]},
+    { name: "Essen in Deutschland", cards: [
+      ["das Schweinefleisch", "pork"],
+      ["das Rindfleisch", "beef (sığır eti)"],
+      ["das Lammfleisch", "lamb (kuzu eti)"],
+      ["das Hähnchen", "chicken (as food)"],
+      ["das Huhn, die Hühner", "chicken (the animal)"],
+      ["die Ente", "duck"],
+      ["der Schinken", "ham (domuz jambonu)"],
+      ["die Wurst, die Würste", "sausage"],
+      ["die Bratwurst", "fried sausage, bratwurst"],
+      ["das Sauerkraut", "sauerkraut (pickled cabbage)"],
+      ["das Rührei", "scrambled eggs"],
+      ["die Semmel", "bread roll (South Germany, Austria)", "Elsewhere: das Brötchen"],
+      ["die Brezel / die Breze (Bayern)", "pretzel"],
+      ["die Lebensmittel (Pl.)", "groceries, food"],
+      ["die Nahrungsmittel (Pl.)", "food products"],
+      ["der Ziegenkäse", "goat cheese"],
+      ["die Küche", "kitchen; cuisine"],
+      ["der Koch / die Köchin", "cook, chef"],
+      ["backen", "to bake"],
+    ]},
+    { name: "Wohnung", cards: [
+      ["die Wohnung, die Wohnungen", "apartment, flat"],
+      ["die Wohngemeinschaft (WG)", "shared flat"],
+      ["der Mitbewohner, - / die Mitbewohnerin, -nen", "flatmate, roommate"],
+      ["das Badezimmer / das Bad", "bathroom"],
+      ["baden", "to bathe, to take a bath"],
+      ["der Flur", "hallway, corridor"],
+      ["das Erdgeschoss (EG)", "ground floor"],
+      ["der Stock", "floor, storey"],
+      ["der erste Stock", "first floor (one above the ground floor)", "der zweite Stock, der dritte Stock …"],
+      ["der Dachboden", "attic"],
+      ["der Keller", "basement, cellar"],
+      ["die Treppe", "stairs"],
+      ["der Garten, die Gärten", "garden"],
+      ["der Balkon", "balcony"],
+      ["die Garage", "garage"],
+      ["der Schrank, die Schränke", "closet, cupboard, cabinet"],
+      ["der Tisch, die Tische", "table, desk"],
+      ["der Couchtisch", "coffee table"],
+      ["der Nachttisch", "bedside table (komodin)", "Don't confuse: der Nachtisch (one t) = dessert"],
+      ["der Stuhl, die Stühle", "chair"],
+      ["das Bett, die Betten", "bed"],
+      ["der Teppich", "carpet, rug"],
+      ["der Fernseher", "TV"],
+      ["das Bild, die Bilder", "picture, image"],
+      ["der Herd", "stove"],
+      ["der Kühlschrank", "fridge"],
+      ["die Spüle", "kitchen sink"],
+      ["die Waschmaschine", "washing machine"],
+      ["die Dusche", "shower"],
+      ["die Badewanne", "bathtub"],
+      ["das Waschbecken", "bathroom sink"],
+      ["der Spiegel", "mirror"],
+      ["das Gebäude", "building"],
+      ["gemütlich", "cozy, comfortable"],
+      ["hell", "bright, light"],
+      ["dunkel", "dark"],
+      ["hässlich", "ugly"],
+      ["zu (+ Adjektiv)", "too", "zu klein = too small, zu teuer = too expensive"],
+    ]},
+    { name: "Wo ist das?", cards: [
+      ["links", "left, on the left"],
+      ["rechts", "right, on the right"],
+      ["links von (+ Dat.)", "to the left of"],
+      ["dort rechts / dort links", "there on the right / left"],
+      ["vorne", "at the front, ahead"],
+      ["da vorne", "up there in front"],
+      ["hinten", "at the back, behind"],
+      ["neben", "next to, beside"],
+      ["daneben", "next to it"],
+      ["nebenan", "next door"],
+      ["da drüben", "over there"],
+      ["zwischen", "between", "zwischen … und … (+ Dat. for a choice or position)\nDie Sportfans können zwischen Windsurfen und Kitesurfen auswählen."],
+    ]},
+    { name: "Personalpronomen", cards: [
+      ["ich → Akk. / Dat.", "mich / mir", "Er sieht mich. / Er hilft mir."],
+      ["du → Akk. / Dat.", "dich / dir", "Ich begrüße dich. / Ich helfe dir."],
+      ["er → Akk. / Dat.", "ihn / ihm", "Ich sehe ihn. / Ich helfe ihm."],
+      ["sie (she) → Akk. / Dat.", "sie / ihr", "Ich sehe sie. / Ich helfe ihr."],
+      ["es → Akk. / Dat.", "es / ihm", "Ich sehe es. / Ich helfe ihm."],
+      ["wir → Akk. / Dat.", "uns / uns", "Er sieht uns. / Er hilft uns."],
+      ["ihr → Akk. / Dat.", "euch / euch", "Ich begrüße euch. / Ich helfe euch."],
+      ["sie (they) → Akk. / Dat.", "sie / ihnen", "Ich sehe sie. / Ich helfe ihnen."],
+      ["Sie (formal) → Akk. / Dat.", "Sie / Ihnen", "Ich begrüße Sie. / Ich helfe Ihnen."],
+    ]},
+    { name: "dieser, diese, dieses", cards: [
+      ["dieser (m.) → Nom. / Akk. / Dat.", "dieser / diesen / diesem", "Like der / den / dem\nIch erinnere mich an diesen Sprung."],
+      ["diese (f.) → Nom. / Akk. / Dat.", "diese / diese / dieser", "Like die / die / der"],
+      ["dieses (n.) → Nom. / Akk. / Dat.", "dieses / dieses / diesem", "Like das / das / dem"],
+      ["diese (Pl.) → Nom. / Akk. / Dat.", "diese / diese / diesen", "Like die / die / den (+ n on the noun)"],
+      ["Dativ Plural: Nomen + -n", "den Jahren · den Kindern · den Freunden", "Article AND noun change: die Jahre → den Jahren\nNo article? Still +n: seit über zehn Jahren\nException: plurals ending in -n or -s: den Frauen, den Autos"],
+    ]},
+    { name: "Gefallen", cards: [
+      ["gefallen", "to please (= to like)", "Das Zimmer gefällt mir. = I like the room.\n(Literally: The room pleases me.)"],
+      ["Wie gefällt dir …? / Wie gefällt Ihnen …?", "How do you like …?"],
+      ["Es gefällt mir.", "I like it."],
+      ["Es gefällt mir nicht.", "I don't like it."],
+      ["Es gefällt mir sehr gut.", "I like it very much."],
+      ["Das gefällt mir nicht so gut.", "I don't really like it."],
+      ["Das gefällt mir überhaupt nicht.", "I don't like it at all."],
+    ]},
+    { name: "Tagesablauf", cards: [
+      ["aufwachen", "to wake up"],
+      ["aufstehen", "to get up"],
+      ["sich die Zähne putzen", "to brush one's teeth"],
+      ["der Zahn, die Zähne", "tooth, teeth"],
+      ["sich anziehen", "to get dressed"],
+      ["anziehen", "to put on (clothes)"],
+      ["ausziehen", "to take off (clothes)"],
+      ["zur Arbeit fahren / gehen", "to go to work"],
+      ["nach Hause kommen", "to come home"],
+      ["einkaufen", "to shop, to buy groceries"],
+      ["einkaufen gehen / shoppen gehen", "to go shopping"],
+      ["aufräumen", "to tidy up"],
+      ["sauber machen / putzen", "to clean (up)", "Also written together: saubermachen"],
+      ["abwaschen", "to wash up (dishes); to wash (a car)"],
+      ["abtrocknen", "to dry (the dishes)"],
+      ["anrufen", "to call (on the phone)"],
+      ["aufmachen", "to open", "To turn on = anmachen"],
+      ["zumachen", "to close"],
+      ["ausmachen", "to turn off"],
+      ["geschlossen", "closed"],
+      ["schlafen gehen / ins Bett gehen", "to go to bed"],
+      ["einschlafen", "to fall asleep"],
+      ["Ich stehe nicht gerne früh auf.", "I don't like getting up early."],
+      ["Hausaufgaben machen", "to do homework"],
+      ["warten (auf + Akk.)", "to wait (for)"],
+    ]},
+    { name: "Zeit", cards: [
+      ["Wie spät ist es? / Wie viel Uhr ist es?", "What time is it?"],
+      ["Es ist halb zehn.", "It's half past nine (9:30).", "halb zehn = half TO ten = 9:30"],
+      ["von … bis … Uhr", "from … to … o'clock"],
+      ["um … Uhr", "at … o'clock", "Um wie viel Uhr? = At what time?\nRückfahrt: um 19 Uhr."],
+      ["am Freitag / am Firmenparkplatz", "on Friday / at the company parking lot", "am = an dem\nam Montag, am Morgen, am Abend (but: in der Nacht)"],
+      ["bis spätestens …", "by … at the latest", "bis = until, by · spätestens = at the latest"],
+      ["vor (+ Dat.)", "before; in front of"],
+      ["nach (+ Dat.)", "after; to (a city or country)"],
+      ["bis", "until, by, up to"],
+      ["früh", "early"],
+      ["spät", "late"],
+      ["später", "later"],
+      ["gestern", "yesterday"],
+      ["morgen", "tomorrow", "der Morgen (capital M) = the morning"],
+      ["der Morgen", "morning"],
+      ["Welcher Tag ist heute?", "What day is it today?", "Welcher Tag war gestern? / Welcher Tag ist morgen?"],
+      ["der Samstag", "Saturday"],
+      ["Bis Samstag!", "See you on Saturday!"],
+      ["jeden Tag", "every day"],
+      ["jeden Tag / jede Woche / jedes Jahr", "every day / every week / every year", "jeder / jede / jedes: endings like dieser\nTime expression = Akkusativ, no preposition"],
+      ["täglich", "daily"],
+      ["wöchentlich", "weekly"],
+      ["monatlich", "monthly"],
+      ["einmal pro Woche / einmal in der Woche", "once a week"],
+      ["zweimal pro Monat / zweimal im Monat", "twice a month"],
+      ["alle zwei Wochen", "every two weeks"],
+      ["jeden Sommer", "every summer"],
+      ["letztes Jahr", "last year"],
+      ["zuerst / zunächst", "first, first of all"],
+      ["danach", "after that, afterwards"],
+      ["am Ende / zum Schluss", "in the end, finally"],
+      ["pünktlich", "punctual, on time"],
+      ["Sei pünktlich!", "Be on time!"],
+      ["frei sein", "to be free"],
+      ["die Zeit", "time"],
+      ["wieder", "again"],
+      ["schon", "already"],
+      ["mit … Jahren", "at the age of …", "Mit 18 Jahren bin ich das erste Mal gesprungen."],
+      ["seit + Dat.", "since / for (still going on)", "Use the PRESENT tense: Ich tanze seit zehn Jahren.\nNot: Ich habe seit zehn Jahren getanzt.\nseit always takes the Dativ."],
+      ["schon seit", "already for / already since", "schon stresses how long it has been"],
+      ["seit · vor · für", "since/for (ongoing) · ago · for (planned)", "seit zehn Jahren = still going on\nvor zehn Jahren = ago, it's over\nfür zehn Tage = a planned duration"],
+      ["bereits", "already", "= schon, a bit more formal\nFreddy hat bereits über 19 000 Sprünge gemacht."],
+      ["in den letzten … Jahren", "in the last … years", "in + Dativ plural: die Jahre → in den Jahren\nFreddy Jung hat in den letzten 20 Jahren bereits über 19 000 Sprünge gemacht."],
+      ["gerade", "just (now); straight; exactly"],
+      ["normalerweise / gewöhnlich", "normally, usually"],
+      ["selten", "rarely, seldom"],
+    ]},
+    { name: "Wetter & Jahreszeiten", cards: [
+      ["Wie ist das Wetter?", "How's the weather?"],
+      ["regnen", "to rain"],
+      ["Es regnet.", "It's raining."],
+      ["der Regen", "rain"],
+      ["Es schneit.", "It's snowing."],
+      ["der Schnee", "snow"],
+      ["Die Sonne scheint.", "The sun is shining."],
+      ["Es ist sonnig.", "It's sunny."],
+      ["warm", "warm"],
+      ["kalt", "cold"],
+      ["kühl", "cool"],
+      ["wolkig", "cloudy"],
+      ["der Wind, die Winde", "wind"],
+      ["windig", "windy"],
+      ["der Nebel", "fog"],
+      ["das Gewitter", "thunderstorm"],
+      ["der Regenbogen", "rainbow 🌈"],
+      ["die Temperatur", "temperature"],
+      ["der Grad", "degree", "Es ist 20 Grad. = It's 20 degrees."],
+      ["Die Temperatur liegt zwischen 15 und 22 Grad.", "The temperature is between 15 and 22 degrees."],
+      ["die Jahreszeit, die Jahreszeiten", "season"],
+      ["der Frühling", "spring"],
+      ["der Herbst", "autumn, fall"],
+      ["der Norden", "north"],
+      ["der Süden", "south"],
+      ["der Westen", "west"],
+      ["der Osten", "east"],
+    ]},
+    { name: "Feiern & Freizeit", cards: [
+      ["die Einladung", "invitation"],
+      ["die Einladung zum Firmenausflug", "the invitation to the company outing", "zu + Dativ: zu dem → zum (der Firmenausflug)\neinladen zu + Dat. = to invite to"],
+      ["einladen", "to invite"],
+      ["der Geburtstag", "birthday"],
+      ["Herzlichen Glückwunsch!", "Congratulations! / Happy birthday!", "der Glückwunsch = congratulations, good wishes"],
+      ["das Geschenk, die Geschenke", "gift, present"],
+      ["schenken", "to give (as a gift)"],
+      ["der Spaß", "fun"],
+      ["feiern", "to celebrate; to party"],
+      ["der Gastgeber / die Gastgeberin", "host"],
+      ["mitbringen", "to bring along"],
+      ["mitnehmen", "to take along"],
+      ["mitkommen", "to come along"],
+      ["Lass uns gehen!", "Let's go!", "Formal: Lassen Sie uns gehen!"],
+      ["das Herz", "heart"],
+      ["herzlich", "warm, hearty, sincere"],
+      ["der Traum, die Träume", "dream"],
+      ["die Traumfrau", "dream woman"],
+      ["aufregend", "exciting"],
+      ["malen", "to paint"],
+      ["gar nicht so gut", "not that good at all (yarrak gibi)"],
+      ["der Lieblingssport", "favorite sport"],
+      ["die Lieblingsmusik", "favorite music"],
+      ["das Lieblingslied", "favorite song"],
+      ["das Lied, die Lieder", "song", "Often a traditional or classic song"],
+      ["der Song, die Songs", "song", "Modern / pop song"],
+      ["die Hochzeit", "wedding"],
+      ["die Freundschaft, die Freundschaften", "friendship"],
+    ]},
+    { name: "Nützliche Sätze", cards: [
+      ["noch immer / immer noch", "still (continuing until now)", "Ich kann mich noch immer gut an diesen Sprung erinnern."],
+      ["noch", "still; more; yet", "Bist du noch an der Uni? = Are you still at university?\nIch möchte noch ein Bier. = One more beer, please.\nnoch nicht = not yet"],
+      ["doch", "yes (contradicting a 'no'); but, however", "Kommst du nicht? – Doch! = Aren't you coming? – Yes, I am!"],
+      ["Es ist doch gefährlich.", "It's surely dangerous (you know that).", "doch as a softening word = surely, after all, you know\nDas weißt du doch! = You know that (of course)!\nKomm doch mit! = Why don't you come along!"],
+      ["…, oder?", "…, right? / …, isn't it?", "Es ist doch auch sehr gefährlich, oder?\nDas ist teuer, oder? = That's expensive, isn't it?\nDu kommst morgen, oder? = You're coming tomorrow, right?"],
+      ["Geht das?", "Is that possible?", "Ich will einen Tandemsprung machen. Geht das?\nDas geht nicht = that's not possible\nYes/no question: verb first"],
+      ["einmal", "once, at some point", "Ich will unbedingt einmal fliegen!\n≠ das erste Mal = the first time"],
+      ["Schade, das geht leider nicht.", "Too bad, unfortunately that's not possible."],
+      ["Na, …?", "So…? / Well…? (friendly opener)", "Na, wie geht's? · Na, alles klar?\nna klar = of course · na gut = well, okay · na ja = well, so-so"],
+      ["Das wird bestimmt toll.", "That will definitely be great.", "werden = future: ich werde, du wirst, er wird\nwir werden, ihr werdet, sie werden\nEs wird bestimmt regnen. = It will surely rain."],
+      ["Habe ich. / Weiß ich. / Finde ich auch.", "= Das habe ich. / Das weiß ich. / Das finde ich auch.", "Leave out 'das' → the verb comes first, then 'ich'.\nCommon in spoken German."],
+      ["in Ordnung (sein)", "OK, alright (to be OK, to be in order)"],
+      ["ganz genau", "exactly"],
+      ["vielleicht", "maybe, perhaps"],
+      ["Ich bin nicht sicher.", "I'm not sure."],
+      ["ziemlich gut", "quite good, pretty good"],
+      ["ziemlich kalt", "quite cold, pretty cold"],
+      ["ziemlich schlecht", "pretty bad"],
+      ["einige", "some, a few"],
+      ["andere", "other, different"],
+      ["Ich habe einen Fehler gemacht.", "I made a mistake."],
+      ["der Fehler, die Fehler", "mistake, error"],
+      ["wenn", "if; when(ever)"],
+      ["wenn ja, …", "if so, …"],
+    ]},
+    { name: "Alltag", cards: [
+      ["der Handschuh, die Handschuhe", "glove, gloves"],
+      ["der Bart, die Bärte", "beard"],
+      ["der Rücken", "back (of the body) (sırt)"],
+      ["der Bildschirm", "screen, monitor"],
+      ["der Laden, die Läden", "shop, store"],
+      ["das Geschäft, die Geschäfte", "shop, store; business"],
+      ["der Buchladen", "bookstore"],
+      ["der Verkäufer, - / die Verkäuferin, -nen", "salesperson, shop assistant"],
+      ["der Kollege, -n / die Kollegin, -nen", "colleague, coworker"],
+      ["die Fremdsprache, die Fremdsprachen", "foreign language"],
+      ["der Spitzname", "nickname", "username = der Benutzername"],
+      ["die Unterschrift", "signature"],
+      ["die Lösung", "solution"],
+      ["gesund", "healthy"],
+      ["die Gesundheit", "health", "Also said after someone sneezes!"],
+      ["das Angebot, die Angebote", "offer, deal, option", "From anbieten (to offer)\nshop: special offer · event: the options on offer · job: job offer"],
+      ["das Gefühl, die Gefühle", "feeling", "From fühlen (to feel)\nEs ist ein super Gefühl!"],
+      ["probieren / ausprobieren", "to try (out); to taste", "Niemals möchte ich das probieren!\nProbier mal den Kuchen! = Try the cake!\nIch möchte Kitesurfen ausprobieren. = I'd like to try out kitesurfing.\nKitesurfen habe ich noch nie ausprobiert. = I've never tried kitesurfing.\nausprobieren is separable: hat ausprobiert"],
+      ["gefährlich", "dangerous", "die Gefahr = danger\nEs ist doch auch sehr gefährlich, oder?"],
+      ["sicher", "safe; sure", "Ich bin nicht sicher. = I'm not sure.\ndie Sicherheit = safety"],
+      ["der Unfall, die Unfälle", "accident"],
+      ["passieren", "to happen", "Perfekt with sein: Was ist passiert? = What happened?"],
+      ["fröhlich", "happy, cheerful"],
+      ["traurig", "sad"],
+      ["allein", "alone"],
+      ["trocken", "dry"],
+      ["meinen, hat gemeint", "to mean; to think, to have an opinion"],
+      ["werden", "to become"],
+      ["bekommen", "to get, to receive", "Careful: NOT 'to become' (that's werden)"],
+      ["ansehen", "to look at"],
+      ["anfangen mit (+ Dat.)", "to start (with) something", "ich fange an · Perfekt: hat angefangen\nMit 18 Jahren habe ich mit dem Studium angefangen."],
+      ["lieben", "to love"],
+      ["geliebt", "loved", "Partizip II of lieben: Ich habe dich geliebt."],
+      ["liegen", "to lie; to be located"],
+      ["benutzen", "to use"],
+      ["rechnen", "to calculate"],
+    ]},
+  ]},
+
+  { name: "A2.1", desc: "Travel, jobs, opinions, shopping, weddings", topics: [
+    { name: "Reisen & Unterwegs", cards: [
+      ["der Bahnhof, die Bahnhöfe", "train station"],
+      ["die Bahn, die Bahnen", "train, railway"],
+      ["die Fahrkarte", "ticket"],
+      ["die Ankunft", "arrival"],
+      ["ankommen", "to arrive"],
+      ["die Abfahrt", "departure"],
+      ["abfahren", "to depart, to leave"],
+      ["einsteigen", "to get on, to board (binmek)"],
+      ["aussteigen", "to get off (inmek)"],
+      ["zu Fuß", "on foot"],
+      ["nach Norderney / an die Nordsee", "to Norderney / to the North Sea", "nach + city, country, island (no article)\nan + Akk. for sea, coast, river: an die Nordsee, an den Rhein"],
+      ["die Stadtführung, die Stadtführungen", "guided city tour", "die Stadt + die Führung"],
+      ["die Landkarte", "map"],
+      ["die Wanderkarte", "hiking map"],
+      ["besuchen", "to visit (people, places)"],
+      ["besichtigen", "to visit, to tour (sights)"],
+      ["reisen", "to travel"],
+      ["der Urlaub", "vacation, holiday"],
+      ["die Ferien (Pl.)", "holidays (school / university)"],
+      ["die Vereinigten Staaten (Pl.)", "the United States"],
+      ["das Meer, die Meere", "sea, ocean"],
+      ["die Küste, die Küsten", "coast"],
+      ["tauchen", "to dive"],
+      ["Ski fahren", "to ski"],
+      ["Schlittschuh laufen", "to ice-skate", "The noun: das Schlittschuhlaufen"],
+      ["spazieren gehen", "to go for a walk"],
+      ["dort gibt es …", "there is / there are …"],
+      ["das Tier, die Tiere", "animal"],
+      ["das Zelt, die Zelte", "tent"],
+      ["Am schönsten ist …", "The nicest thing is …"],
+      ["am meisten", "the most, most of all"],
+      ["draußen", "outside, outdoors"],
+      ["verbringen", "to spend (time)"],
+      ["das Schwimmbad", "swimming pool"],
+      ["die Badehose", "swimming trunks"],
+      ["der Badeanzug", "swimsuit"],
+      ["das Handtuch, die Handtücher", "towel"],
+      ["der Jogginganzug", "tracksuit, jogging suit", "der Anzug = suit (from anziehen)"],
+      ["der Besuch", "visit"],
+      ["zu Besuch kommen", "to come for a visit"],
+      ["abholen", "to pick up, to collect"],
+      ["begleiten", "to accompany"],
+      ["das Fundbüro, die Fundbüros", "lost property office"],
+      ["verloren", "lost"],
+      ["abgeben", "to hand in, to hand over"],
+      ["die Sicht", "view; visibility", "A scenic view (manzara) is usually: die Aussicht"],
+      ["Die Bewohner sind wie eine Familie.", "The residents are like a family."],
+      ["verschieden", "different, various"],
+    ]},
+    { name: "Beruf & Lernen", cards: [
+      ["unterrichten", "to teach"],
+      ["übersetzen", "to translate"],
+      ["der Übersetzer / die Übersetzerin", "translator"],
+      ["die Ausbildung", "vocational training, education"],
+      ["der Bereich", "area, field, sector"],
+      ["die Stelle", "job, position; place, spot"],
+      ["der Krankenpfleger / die Krankenpflegerin", "nurse", "Older word for a female nurse: die Krankenschwester"],
+      ["der Zahnarzt, die Zahnärzte / die Zahnärztin, -nen", "dentist"],
+      ["der Polizist / die Polizistin", "police officer"],
+      ["die Polizei", "the police (the organization)"],
+      ["der Geschäftsmann / die Geschäftsfrau", "businessman / businesswoman"],
+      ["der Anwalt / die Anwältin", "lawyer"],
+      ["der Friseur / die Friseurin", "hairdresser"],
+      ["das Krankenhaus", "hospital"],
+      ["der Profi, die Profis", "professional, pro", "Er ist DER Profi. = He is THE pro."],
+      ["Ich bin arbeitslos und auf Arbeitssuche.", "I'm unemployed and looking for a job."],
+      ["die Arbeitssuche", "job search"],
+      ["das Büro, die Büros", "office"],
+      ["die Sitzung", "meeting, session"],
+      ["dauern", "to last, to take (time)"],
+      ["schicken", "to send"],
+      ["die Aufgabe", "task, exercise, assignment"],
+      ["ausfüllen", "to fill out (a form)"],
+      ["auswählen", "to choose, to select"],
+      ["teilnehmen (an + Dat.)", "to take part (in)"],
+      ["das Hörverstehen", "listening comprehension"],
+      ["die Aussprache", "pronunciation"],
+      ["der Gesprächspartner / die Gesprächspartnerin", "speaking partner"],
+      ["verbessern", "to improve"],
+      ["der / die Ersti", "first-year student, freshman", "Short for: Erstsemester"],
+      ["das Prozent", "percent"],
+      ["die Geschichte", "history; story"],
+      ["die Bewegung", "movement, exercise"],
+      ["die Bedingung", "condition", "Don't confuse: die Bedienung = waiter / service"],
+      ["der Kursteilnehmer, - / die Kursteilnehmerin, -nen", "course participant"],
+      ["die Schulzeit", "school days"],
+      ["das Formular, die Formulare", "form (to fill in)"],
+      ["herunterladen", "to download"],
+    ]},
+    { name: "Meinung & Gespräch", cards: [
+      ["denken", "to think"],
+      ["glauben", "to believe"],
+      ["Was denkst du?", "What do you think?"],
+      ["Wie findest du …? – Ich finde …", "What do you think of …? – I think …", "finden takes the Akkusativ: Wie findest du den Film? – Ich finde ihn super."],
+      ["Ja, finde ich auch.", "Yes, I think so too.", "Short for: Das finde ich auch. (das left out → verb first)"],
+      ["Finde ich nicht.", "I don't think so. / I disagree.", "Short for: Das finde ich nicht."],
+      ["Denkst du, wir sollten …?", "Do you think we should …?"],
+      ["Stimmt das?", "Is that right?"],
+      ["Das stimmt.", "That's right."],
+      ["Unsinn! / Quatsch!", "Nonsense! Rubbish!"],
+      ["weil + gern", "gern stays in the middle, the verb goes to the very end", "Er ist gern in der Natur.\n→ …, weil er gern in der Natur ist.\nIch spiele gern Fußball.\n→ …, weil ich gern Fußball spiele."],
+      ["Ich kann es nur empfehlen.", "I highly recommend it.", "nur empfehlen ≠ 'only recommend'.\nIt means: the only thing I can do is recommend it = a STRONG recommendation."],
+      ["duzen", "to address someone with 'du'"],
+      ["siezen", "to address someone with 'Sie'"],
+      ["Du kannst mich duzen.", "You can call me 'du'."],
+      ["der Ratschlag, die Ratschläge", "advice"],
+      ["der Tipp, die Tipps", "tip, advice"],
+      ["Da ist nichts zu machen.", "Nothing can be done."],
+      ["sorgen für (+ Akk.)", "to take care of", "sich sorgen um (+ Akk.) = to worry about"],
+      ["Glück haben", "to be lucky"],
+      ["glücklich", "happy"],
+      ["als", "when (one event in the past); as; than", "Als ich klein war … / größer als ich"],
+      ["aufzeigen", "to show, to point out"],
+      ["kompliziert", "complicated"],
+      ["schwer", "difficult; heavy"],
+      ["leicht", "easy; light"],
+      ["spannend", "exciting, thrilling"],
+      ["praktisch", "practical, handy"],
+      ["komisch", "funny, strange, weird"],
+      ["bekannt", "well-known, famous"],
+      ["unbedingt", "absolutely, at all costs", "Ich will unbedingt einmal fliegen!"],
+      ["anstrengend sein", "to be exhausting, tiring"],
+      ["immer besser", "better and better"],
+      ["immer besser werden", "to get better and better"],
+      ["dieses Buch / jenes Buch", "this book / that book", "jenes is formal / written. In speech: 'das Buch da'."],
+    ]},
+    { name: "Wechselpräpositionen", cards: [
+      ["Wechselpräpositionen", "Wo? → Dativ · Wohin? → Akkusativ", "an · auf · in · neben · vor · hinter · über · unter · zwischen\nWo? = at rest in a place. Wohin? = movement to a place.\nDativ: dem / der / dem / den · Akkusativ: den / die / das / die"],
+      ["an (Wo? + Dat. / Wohin? + Akk.)", "at, on (wall, edge), to", "an der Wand / an die Wand\nan der Nordsee / an die Nordsee"],
+      ["auf (Wo? + Dat. / Wohin? + Akk.)", "on (top of)", "auf dem Tisch / auf den Tisch"],
+      ["in (Wo? + Dat. / Wohin? + Akk.)", "in, into", "in der Küche / in die Küche"],
+      ["neben (Wo? + Dat. / Wohin? + Akk.)", "next to", "neben dem Sofa / neben das Sofa"],
+      ["vor (Wo? + Dat. / Wohin? + Akk.)", "in front of", "vor dem Haus / vor das Haus"],
+      ["hinter (Wo? + Dat. / Wohin? + Akk.)", "behind", "hinter dem Schrank / hinter den Schrank"],
+      ["über (Wo? + Dat. / Wohin? + Akk.)", "above, over", "über dem Tisch / über den Tisch"],
+      ["unter (Wo? + Dat. / Wohin? + Akk.)", "under; among", "unter dem Tisch / unter den Tisch\nunter Freunden = among friends"],
+      ["zwischen (Wo? + Dat. / Wohin? + Akk.)", "between", "zwischen dem Sofa und dem Fenster / zwischen das Sofa und das Fenster\nA choice (auswählen zwischen) is always Dativ."],
+      ["Dativ → Akkusativ: die Artikel", "dem → den · der → die · dem → das · den → die", "m.: auf dem Tisch → auf den Tisch\nf.: auf der Couch → auf die Couch\nn.: auf dem Bett → auf das Bett\nPl.: auf den Tischen → auf die Tische"],
+      ["liegen – legen · stehen – stellen · sitzen – setzen", "Wo? (Dativ) – Wohin? (Akkusativ)", "Das Buch liegt auf dem Tisch. → Ich lege das Buch auf den Tisch.\nDie Flasche steht auf dem Tisch. → Ich stelle die Flasche auf den Tisch.\nEr sitzt auf dem Stuhl. → Er setzt sich auf den Stuhl."],
+    ]},
+    { name: "Wörter wie zwischen", cards: [
+      ["dazwischen", "in between (them)", "da + zwischen"],
+      ["mitten in (+ Dat.)", "in the middle of", "mitten in der Stadt, mitten auf dem Platz"],
+      ["entweder … oder …", "either … or …"],
+      ["weder … noch …", "neither … nor …", "No extra 'nicht' needed"],
+      ["sowohl … als auch …", "both … and …"],
+      ["der Unterschied zwischen … und …", "the difference between … and …", "der Unterschied, die Unterschiede"],
+    ]},
+    { name: "Einkaufen & Hochzeit", cards: [
+      ["die Käsesorte, die Käsesorten", "type of cheese"],
+      ["der Emmentaler", "Emmental cheese (Swiss cheese)"],
+      ["der Bergkäse", "mountain cheese, alpine cheese"],
+      ["die Plastikfolie", "plastic wrap"],
+      ["das Kühlregal", "refrigerated shelf"],
+      ["das Holzregal", "wooden shelf"],
+      ["das Etikett, die Etiketten", "label, sticker"],
+      ["das Karohemd", "checked shirt"],
+      ["der Helm, die Helme", "helmet"],
+      ["der Müll", "rubbish, trash, garbage"],
+      ["die Mülltonne", "garbage can, bin"],
+      ["der Hügel, die Hügel", "hill"],
+      ["der Zaun, die Zäune", "fence"],
+      ["die Erde", "earth, soil"],
+      ["das Paar", "couple, pair"],
+      ["die Braut", "bride"],
+      ["der Bräutigam", "groom"],
+      ["das Brautkleid", "wedding dress (gelinlik)"],
+      ["der Blumenstrauß", "bouquet of flowers"],
+      ["der Strauß", "bouquet", "Also means: ostrich"],
+      ["gewinnen", "to win"],
+      ["der Sieger / die Siegerin", "winner"],
+      ["selbst", "self; (by) myself, yourself…"],
+      ["basteln", "to do crafts, to make things by hand"],
+      ["selbst gebastelt", "home-made, handmade"],
+      ["reingehen", "to go in(side)"],
+      ["rausgehen", "to go out(side)"],
+      ["reinkommen", "to come in"],
+    ]},
+  ]},
+
+  { name: "A2.2", desc: "School, events, prepositions, the fair (Volksfest)", topics: [
+    { name: "Schule & Ereignisse", cards: [
+      ["die Weide, die Weiden", "pasture, meadow"],
+      ["die Heide", "heath"],
+      ["aufpassen", "to pay attention, to watch out"],
+      ["auf Kinder aufpassen", "to look after the children"],
+      ["vorbereiten", "to prepare"],
+      ["abgeschlossen", "completed, finished; locked"],
+      ["der Schulabschluss", "school-leaving qualification, graduation"],
+      ["stattfinden", "to take place"],
+      ["die Abteilung", "department, section"],
+      ["entscheiden", "to decide"],
+      ["das Ereignis, die Ereignisse", "event"],
+      ["berichten", "to report, to tell"],
+      ["der Führerschein", "driving licence"],
+      ["treten", "to step; to kick"],
+      ["betreten", "to enter (a room, a building)", "du betrittst, er betritt · hat betreten\nBetreten verboten! = No entry!"],
+      ["verpassen", "to miss (a train, bus, party…)"],
+      ["ärgerlich", "annoying; annoyed"],
+    ]},
+    { name: "Präpositionen", cards: [
+      ["durch (+ Akk.)", "through; by"],
+      ["wegen (+ Gen.)", "because of"],
+      ["an … vorbei (+ Dat.)", "past (going past something)"],
+      ["bis zu (+ Dat.)", "as far as, up to, until"],
+      ["gegenüber von (+ Dat.)", "across from, opposite"],
+      ["bei + Dat.: beim Firmenausflug", "at / during (an event or activity)", "beim = bei dem\nbeim Essen = while eating · beim Sport = while doing sports\nzu = to (die Einladung zum Ausflug), bei = at / during"],
+      ["Immer Akkusativ: durch · für · gegen · ohne · um", "through · for · against · without · around", "Memory trick: DOGFU\ndurch den Park · für dich · gegen die Idee · ohne Zucker · um den Tisch"],
+      ["Immer Dativ: aus · bei · mit · nach · seit · von · zu", "from · at · with · after/to · since · from/of · to", "dem / der / dem / den (+n)\naus der Türkei · bei meiner Oma · mit dem Bus · nach der Arbeit · seit einem Jahr · von meiner Mutter · zum Arzt"],
+      ["Kontraktionen: am · im · zum · zur · vom · beim · ins · ans", "an dem · in dem · zu dem · zu der · von dem · bei dem · in das · an das", "am Freitag · im Juli · zum Arzt · zur Arbeit · vom Arzt · beim Arzt · ins Kino · ans Meer"],
+      ["da- / wo- + Präposition", "darauf · worauf · dafür · wofür · davor · wovor …", "For things, not people. Add an r before a vowel: da + auf = darauf.\nFor people: auf wen? – auf sie."],
+    ]},
+    { name: "Auf dem Volksfest", cards: [
+      ["der Essensstand, die Essensstände", "food stand"],
+      ["die Zuckerwatte", "cotton candy"],
+      ["das Karussell", "carousel, merry-go-round"],
+      ["der Autoscooter", "bumper car"],
+      ["das Riesenrad", "Ferris wheel"],
+      ["die Achterbahn", "roller coaster"],
+      ["das Bierzelt", "beer tent"],
+      ["der Lebkuchen", "gingerbread"],
+      ["die gebrannten Mandeln (Pl.)", "candied roasted almonds"],
+      ["die Losbude", "raffle stall, lottery booth"],
+    ]},
+  ]},
+
+  { name: "B1.1", desc: "Reflexive verbs, care & official matters", topics: [
+    { name: "Reflexive Verben", cards: [
+      ["sich ärgern (über + Akk.)", "to get angry / annoyed (about)"],
+      ["sich erinnern (an + Akk.)", "to remember", "Ich kann mich noch immer gut an diesen Sprung erinnern."],
+      ["sich unterhalten (mit + Dat. / über + Akk.)", "to chat, to talk (with / about)"],
+      ["sich freuen auf (+ Akk.)", "to look forward to", "Future: Ich freue mich auf den Urlaub."],
+      ["sich freuen über (+ Akk.)", "to be pleased about", "Now / past: Ich freue mich über das Geschenk."],
+      ["Ich freue mich schon.", "I'm already looking forward to it.", "= sich freuen auf (future); the 'auf …' is left out when it's clear\nFull: Ich freue mich schon auf den Ausflug. / darauf"],
+      ["sich verabschieden", "to say goodbye"],
+      ["sich langweilen", "to be bored"],
+      ["sich kümmern um (+ Akk.)", "to look after, to take care of"],
+      ["gestresst von (+ Dat.) sein", "to be stressed by / about something"],
+    ]},
+    { name: "Verben mit Präposition", cards: [
+      ["denken an (+ Akk.)", "to think of", "Ich denke oft an dich."],
+      ["sich interessieren für (+ Akk.)", "to be interested in"],
+      ["sprechen mit (+ Dat.) / über (+ Akk.)", "to talk to / about", "mit jemandem sprechen · über etwas sprechen"],
+      ["fragen nach (+ Dat.)", "to ask about / for", "nach dem Weg fragen"],
+      ["träumen von (+ Dat.)", "to dream of"],
+      ["Angst haben vor (+ Dat.)", "to be afraid of"],
+      ["bitten um (+ Akk.)", "to ask for", "Wir bitten um Ihre Anmeldung."],
+      ["danken für (+ Akk.)", "to thank for"],
+      ["einladen zu (+ Dat.)", "to invite to", "Ich lade dich zu meinem Geburtstag ein."],
+      ["sich entscheiden für (+ Akk.)", "to decide on"],
+      ["sich vorbereiten auf (+ Akk.)", "to prepare for"],
+      ["gratulieren zu (+ Dat.)", "to congratulate on", "Ich gratuliere dir zum Geburtstag."],
+    ]},
+    { name: "Pflege & Ämter", cards: [
+      ["pflegen", "to take care of, to care for (a person, a plant)"],
+      ["bedienen", "to serve, to wait on"],
+      ["beschützen", "to protect, to guard"],
+      ["die Sicherheit", "safety; security"],
+      ["genehmigen", "to approve, to permit"],
+      ["der Antrag, die Anträge", "application; request, proposal"],
+      ["der Beamte / die Beamtin", "civil servant, official"],
+      ["leer", "empty (adjective)"],
+      ["leeren", "to empty (verb)"],
+      ["der Hundekot", "dog poo"],
+      ["Ich bin nicht eingeladen.", "I'm not invited.", "'geladen' also exists but is formal (geladene Gäste).\nColloquial 'geladen sein' = to be furious!"],
+      ["der Nehmer", "taker", "Rare alone. Common in compounds: der Arbeitnehmer = employee"],
+      ["anschießen", "to shoot and wound (someone)", "Football: to hit a player with the ball.\nDon't confuse with anschließen = to connect; sich anschließen = to join"],
+    ]},
+  ]},
+
+  { name: "B1.2", desc: "Idioms & colloquial phrases", topics: [
+    { name: "Redewendungen", cards: [
+      ["einen Blick auf etwas (Akk.) werfen", "to take a look at something"],
+      ["Bock auf etwas haben", "to be up for something", "Colloquial"],
+      ["Ich habe voll Bock auf BJJ heute Abend.", "I'm totally up for BJJ tonight."],
+      ["Null Bock!", "Can't be bothered! No desire at all!"],
+      ["Bescheid sagen", "to let someone know"],
+      ["Bescheid wissen", "to be in the know, to know about it"],
+      ["Sag mir einfach Bescheid, wenn du fertig bist.", "Just let me know when you're done."],
+      ["Ich habe ein Buch über BJJ gelesen.", "I read a book about BJJ."],
+      ["Wir unterhalten uns über das Projekt.", "We are chatting about the project."],
+    ]},
+  ]},
+
+  { name: "Unregelmäßige Verben", desc: "Irregular verbs: present tense + Perfekt", topics: [
+    { name: "Vokalwechsel im Präsens", cards: [
+      ["tragen", "to carry, to wear", "ich trage · du trägst · er trägt\nwir tragen · ihr tragt · sie tragen\nPerfekt: hat getragen"],
+      ["waschen", "to wash", "ich wasche · du wäschst · er wäscht\nwir waschen · ihr wascht · sie waschen\nPerfekt: hat gewaschen"],
+      ["fahren", "to drive, to go (by vehicle)", "ich fahre · du fährst · er fährt\nwir fahren · ihr fahrt · sie fahren\nPerfekt: ist gefahren"],
+      ["abfahren", "to depart", "ich fahre ab · du fährst ab · er fährt ab\nPerfekt: ist abgefahren"],
+      ["schlafen", "to sleep", "ich schlafe · du schläfst · er schläft\nwir schlafen · ihr schlaft · sie schlafen\nPerfekt: hat geschlafen"],
+      ["einschlafen", "to fall asleep", "ich schlafe ein · du schläfst ein · er schläft ein\nPerfekt: ist eingeschlafen"],
+      ["einladen", "to invite", "ich lade ein · du lädst ein · er lädt ein\nwir laden ein · ihr ladet ein · sie laden ein\nPerfekt: hat eingeladen"],
+      ["treten", "to step; to kick", "ich trete · du trittst · er tritt\nwir treten · ihr tretet · sie treten\nPerfekt: ist getreten (step) / hat getreten (kick)"],
+      ["essen", "to eat", "ich esse · du isst · er isst\nwir essen · ihr esst · sie essen\nPerfekt: hat gegessen"],
+      ["sprechen", "to speak", "ich spreche · du sprichst · er spricht\nwir sprechen · ihr sprecht · sie sprechen\nPerfekt: hat gesprochen"],
+      ["geben", "to give", "ich gebe · du gibst · er gibt\nwir geben · ihr gebt · sie geben\nPerfekt: hat gegeben"],
+      ["helfen", "to help", "ich helfe · du hilfst · er hilft\nwir helfen · ihr helft · sie helfen\nPerfekt: hat geholfen"],
+      ["nehmen", "to take", "ich nehme · du nimmst · er nimmt\nwir nehmen · ihr nehmt · sie nehmen\nPerfekt: hat genommen"],
+      ["treffen", "to meet", "ich treffe · du triffst · er trifft\nwir treffen · ihr trefft · sie treffen\nPerfekt: hat getroffen"],
+      ["empfehlen", "to recommend", "ich empfehle · du empfiehlst · er empfiehlt\nwir empfehlen · ihr empfehlt · sie empfehlen\nPerfekt: hat empfohlen\n+ Dativ (person) + Akkusativ (thing): Ich empfehle dir das Buch."],
+      ["lesen", "to read", "ich lese · du liest · er liest\nwir lesen · ihr lest · sie lesen\nPerfekt: hat gelesen"],
+      ["sehen", "to see", "ich sehe · du siehst · er sieht\nwir sehen · ihr seht · sie sehen\nPerfekt: hat gesehen"],
+      ["werden", "to become", "ich werde · du wirst · er wird\nwir werden · ihr werdet · sie werden\nPerfekt: ist geworden"],
+    ]},
+    { name: "Modalverben", cards: [
+      ["können", "can, to be able to", "ich kann · du kannst · er kann\nwir können · ihr könnt · sie können"],
+      ["wollen", "to want", "ich will · du willst · er will\nwir wollen · ihr wollt · sie wollen"],
+      ["mögen", "to like", "ich mag · du magst · er mag\nwir mögen · ihr mögt · sie mögen"],
+      ["möchten", "would like", "ich möchte · du möchtest · er möchte\nwir möchten · ihr möchtet · sie möchten"],
+      ["dürfen", "to be allowed to, may", "ich darf · du darfst · er darf\nwir dürfen · ihr dürft · sie dürfen\nPräteritum: durfte"],
+      ["sollen", "should, to be supposed to", "ich soll · du sollst · er soll\nwir sollen · ihr sollt · sie sollen"],
+    ]},
+    { name: "Unregelmäßiges Perfekt", cards: [
+      ["bleiben", "to stay", "Präteritum: blieb\nPerfekt: ist geblieben"],
+      ["aufstehen", "to get up", "Präteritum: stand auf\nPerfekt: ist aufgestanden"],
+      ["ankommen", "to arrive", "Präteritum: kam an\nPerfekt: ist angekommen"],
+      ["anrufen", "to call (on the phone)", "Präteritum: rief an\nPerfekt: hat angerufen"],
+      ["denken", "to think", "Präteritum: dachte\nPerfekt: hat gedacht"],
+      ["finden – fand – hat gefunden", "to find; to think", "ich finde · du findest · er findet\nwir finden · ihr findet · sie finden"],
+      ["kennen", "to know (a person)", "Präteritum: kannte\nPerfekt: hat gekannt"],
+      ["mitbringen", "to bring along", "Präteritum: brachte mit\nPerfekt: hat mitgebracht"],
+      ["gewinnen", "to win", "Present is regular: ich gewinne, du gewinnst…\nPräteritum: gewann\nPerfekt: hat gewonnen"],
+      ["entscheiden", "to decide", "Present is regular: ich entscheide, du entscheidest…\nPräteritum: entschied\nPerfekt: hat entschieden"],
+    ]},
+  ]},
+];
+
+// Example sentence for each card: German key → [German example, English translation].
+// Cards that came from the Freddy / Tom texts use those sentences.
+const EXAMPLES = {
+  // ---- A1.1 · Hallo & wichtige Sätze
+  "Bis bald!": ["Tschüss, Lena! Bis bald!", "Bye, Lena! See you soon!"],
+  "Bis später!": ["Ich gehe jetzt einkaufen. Bis später!", "I'm going shopping now. See you later!"],
+  "Es tut mir leid. / Tut mir leid.": ["Es tut mir leid, ich bin zu spät.", "I'm sorry, I'm late."],
+  "Verzeihung!": ["Verzeihung, wo ist der Bahnhof?", "Excuse me, where is the train station?"],
+  "Wie bitte?": ["Wie bitte? Ich habe Sie nicht verstanden.", "Pardon? I didn't understand you."],
+  "Noch einmal, bitte!": ["Das war zu schnell. Noch einmal, bitte!", "That was too fast. One more time, please!"],
+  "wiederholen": ["Können Sie das bitte wiederholen?", "Can you repeat that, please?"],
+  "buchstabieren": ["Können Sie Ihren Namen bitte buchstabieren?", "Can you spell your name, please?"],
+  "natürlich": ["Kannst du mir helfen? – Natürlich!", "Can you help me? – Of course!"],
+  "Fertig!": ["Ich habe alle Aufgaben gemacht. Fertig!", "I've done all the exercises. Done!"],
+  "keine Ahnung": ["Wo ist mein Handy? – Keine Ahnung!", "Where is my phone? – No idea!"],
+  "Ja, gerne.": ["Möchtest du einen Kaffee? – Ja, gerne.", "Would you like a coffee? – Yes, please."],
+  "Gern geschehen.": ["Danke für deine Hilfe! – Gern geschehen.", "Thanks for your help! – You're welcome."],
+  "Nichts zu danken.": ["Vielen Dank! – Nichts zu danken.", "Thank you very much! – Don't mention it."],
+  "begrüßen (+ Akk.)": ["Ich begrüße euch heute im Live-Chat mit unserem Fallschirmsprung-Experten Freddy Jung.", "Today I welcome you (all) to the live chat with our skydiving expert Freddy Jung."],
+  "die Pause, die Pausen": ["Wir machen jetzt zehn Minuten Pause.", "We're taking a ten-minute break now."],
+  "das erste Mal": ["Mit 18 Jahren bin ich das erste Mal gesprungen.", "At 18 I jumped for the first time."],
+
+  // ---- A1.1 · Familie & Menschen
+  "die Eltern (Pl.)": ["Meine Eltern wohnen in Istanbul.", "My parents live in Istanbul."],
+  "die Geschwister (Pl.)": ["Hast du Geschwister? – Ja, einen Bruder.", "Do you have siblings? – Yes, a brother."],
+  "der Sohn, die Söhne": ["Ihr Sohn ist fünf Jahre alt.", "Her son is five years old."],
+  "die Tochter, die Töchter": ["Meine Tochter geht schon zur Schule.", "My daughter already goes to school."],
+  "die Schwester, die Schwestern": ["Meine Schwester studiert in Berlin.", "My sister studies in Berlin."],
+  "der Junge, die Jungen": ["Der Junge spielt im Garten Fußball.", "The boy is playing football in the garden."],
+  "der Mann, die Männer": ["Das ist mein Mann, Thomas.", "This is my husband, Thomas."],
+  "die Frau, die Frauen": ["Die Frau dort ist meine Lehrerin.", "The woman over there is my teacher."],
+  "der Opa": ["Mein Opa ist 80 Jahre alt.", "My grandpa is 80 years old."],
+  "die Oma": ["Am Sonntag besuchen wir die Oma.", "On Sunday we're visiting grandma."],
+  "die Leute (Pl.)": ["Auf der Party waren viele Leute.", "There were a lot of people at the party."],
+  "der Nachbar, -n / die Nachbarin, -nen": ["Unser Nachbar ist sehr nett.", "Our neighbor is very nice."],
+  "verheiratet": ["Bist du verheiratet? – Nein, ich bin ledig.", "Are you married? – No, I'm single."],
+  "ledig": ["Ich bin ledig und habe keine Kinder.", "I'm single and have no children."],
+  "geschieden": ["Meine Eltern sind seit zehn Jahren geschieden.", "My parents have been divorced for ten years."],
+  "geboren": ["Ich bin 2000 in Ankara geboren.", "I was born in Ankara in 2000."],
+  "wohnen": ["Ich wohne in einer kleinen Wohnung.", "I live in a small apartment."],
+  "leben": ["Mein Opa lebt noch. Er ist 90.", "My grandpa is still alive. He's 90."],
+  "meine Süße": ["Gute Nacht, meine Süße!", "Good night, my sweetie!"],
+
+  // ---- A1.1 · Dinge & Farben
+  "die Flasche, die Flaschen": ["Ich kaufe eine Flasche Wasser.", "I'm buying a bottle of water."],
+  "die Tasche, die Taschen": ["Mein Handy ist in der Tasche.", "My phone is in the bag."],
+  "das Handy, die Handys": ["Ich habe ein neues Handy.", "I have a new mobile phone."],
+  "der Stift, die Stifte": ["Hast du einen Stift für mich?", "Do you have a pen for me?"],
+  "der Rucksack, die Rucksäcke": ["Ich nehme meinen Rucksack mit.", "I'm taking my backpack with me."],
+  "die Tasse, die Tassen": ["Möchtest du eine Tasse Tee?", "Would you like a cup of tea?"],
+  "die Brille": ["Ohne Brille sehe ich nichts.", "Without glasses I can't see anything."],
+  "die Sonnenbrille": ["Im Sommer trage ich immer eine Sonnenbrille.", "In summer I always wear sunglasses."],
+  "das Fahrrad, die Fahrräder": ["Ich fahre mit dem Fahrrad zur Uni.", "I ride my bike to university."],
+  "das Kleid, die Kleider": ["Das rote Kleid ist sehr schön.", "The red dress is very beautiful."],
+  "das Hemd, die Hemden": ["Er trägt ein weißes Hemd.", "He's wearing a white shirt."],
+  "die Mütze, die Mützen": ["Es ist kalt. Nimm eine Mütze mit!", "It's cold. Take a hat with you!"],
+  "die Armbanduhr": ["Meine Armbanduhr ist kaputt.", "My wristwatch is broken."],
+  "die Wanduhr": ["Die Wanduhr in der Küche geht falsch.", "The wall clock in the kitchen is wrong."],
+  "das Regal, die Regale": ["Die Bücher stehen im Regal.", "The books are on the shelf."],
+  "die Stadt, die Städte": ["München ist eine schöne Stadt.", "Munich is a beautiful city."],
+  "die Kirche": ["Die Kirche ist sehr alt.", "The church is very old."],
+  "die Straßenbahn": ["Ich fahre mit der Straßenbahn in die Stadt.", "I take the tram into town."],
+  "der Termin, die Termine": ["Ich habe morgen einen Termin beim Arzt.", "I have a doctor's appointment tomorrow."],
+  "die Nachricht, die Nachrichten": ["Ich schreibe dir später eine Nachricht.", "I'll write you a message later."],
+  "die Zahl, die Zahlen": ["Die Zahl 7 ist meine Glückszahl.", "The number 7 is my lucky number."],
+  "gelb": ["Die Banane ist gelb.", "The banana is yellow."],
+  "Welche Farbe ist das?": ["Welche Farbe ist das? – Das ist Grün.", "What color is that? – That's green."],
+
+  // ---- A1.1 · Essen & Trinken
+  "das Fleisch": ["Ich esse kein Fleisch.", "I don't eat meat."],
+  "der Fisch, die Fische": ["Am Freitag gibt es Fisch.", "On Friday there's fish."],
+  "das Ei, die Eier": ["Zum Frühstück esse ich zwei Eier.", "For breakfast I eat two eggs."],
+  "der Käse": ["Ich möchte ein Brot mit Käse.", "I'd like a sandwich with cheese."],
+  "der Reis": ["Zum Fisch gibt es Reis.", "There's rice with the fish."],
+  "der Joghurt": ["Ich esse jeden Morgen einen Joghurt.", "I eat a yogurt every morning."],
+  "der Kuchen, die Kuchen": ["Meine Oma backt den besten Kuchen.", "My grandma bakes the best cake."],
+  "ein Stück Kuchen": ["Möchtest du noch ein Stück Kuchen?", "Would you like another piece of cake?"],
+  "das Eis": ["Im Sommer esse ich gern Eis.", "In summer I like eating ice cream."],
+  "das Getränk, die Getränke": ["Die Getränke stehen im Kühlschrank.", "The drinks are in the fridge."],
+  "das Bier, die Biere": ["Ein Bier, bitte!", "A beer, please!"],
+  "der Wein": ["Trinkst du lieber Wein oder Bier?", "Do you prefer wine or beer?"],
+  "die Birne, die Birnen": ["Die Birne ist süß und saftig.", "The pear is sweet and juicy."],
+  "die Erdbeere, die Erdbeeren": ["Im Juni gibt es frische Erdbeeren.", "In June there are fresh strawberries."],
+  "die Traube, die Trauben": ["Die Trauben sind sehr süß.", "The grapes are very sweet."],
+  "die Gurke, die Gurken": ["Für den Salat brauche ich eine Gurke.", "I need a cucumber for the salad."],
+  "lecker / köstlich": ["Die Suppe ist sehr lecker!", "The soup is very tasty!"],
+  "schmecken": ["Schmeckt dir das Essen?", "Do you like the food?"],
+  "schmecken nach (+ Dat.)": ["Der Tee schmeckt nach Zitrone.", "The tea tastes like lemon."],
+  "Ich habe Hunger.": ["Ich habe Hunger. Wann essen wir?", "I'm hungry. When are we eating?"],
+  "Hast du Durst? / Bist du durstig?": ["Hast du Durst? Ich habe Wasser dabei.", "Are you thirsty? I have water with me."],
+  "kochen": ["Heute Abend koche ich Nudeln.", "Tonight I'm cooking pasta."],
+  "heiß": ["Vorsicht, der Kaffee ist heiß!", "Careful, the coffee is hot!"],
+
+  // ---- A1.1 · Kleine Wörter
+  "hier": ["Ich wohne hier seit zwei Jahren.", "I've lived here for two years."],
+  "da": ["Ist Tom da? – Nein, er ist nicht da.", "Is Tom here? – No, he's not here."],
+  "dort": ["Siehst du das Haus dort?", "Do you see the house over there?"],
+  "auch": ["Ich spreche Türkisch und auch Englisch.", "I speak Turkish and also English."],
+  "aber": ["Das Hemd ist schön, aber teuer.", "The shirt is nice, but expensive."],
+  "denn": ["Ich gehe ins Bett, denn ich bin müde.", "I'm going to bed because I'm tired."],
+  "dann": ["Zuerst esse ich, dann lerne ich.", "First I eat, then I study."],
+  "mit (+ Dat.)": ["Ich fahre mit dem Bus.", "I'm going by bus."],
+  "ohne (+ Akk.)": ["Ich trinke Kaffee ohne Zucker.", "I drink coffee without sugar."],
+  "von (+ Dat.)": ["Das ist ein Geschenk von meiner Mutter.", "This is a gift from my mother."],
+  "aus (+ Dat.)": ["Ich komme aus der Türkei.", "I come from Turkey."],
+  "zu (+ Dat.)": ["Ich gehe zum Arzt.", "I'm going to the doctor."],
+  "sein / ihr": ["Das ist sein Auto und das ist ihr Fahrrad.", "That's his car and that's her bike."],
+  "immer": ["Er ist immer pünktlich.", "He's always on time."],
+  "oft": ["Ich gehe oft ins Kino.", "I often go to the cinema."],
+  "manchmal": ["Manchmal koche ich am Wochenende.", "Sometimes I cook on the weekend."],
+  "nie": ["Ich trinke nie Kaffee.", "I never drink coffee."],
+  "niemals": ["Niemals möchte ich das probieren!!!", "I would never want to try that!!!"],
+  "fast": ["Es passieren fast nie Unfälle.", "There are almost never any accidents."],
+  "mehr": ["Ich möchte mehr Deutsch sprechen.", "I want to speak more German."],
+  "viel": ["Ich habe heute viel Arbeit.", "I have a lot of work today."],
+  "viele": ["In Berlin gibt es viele Museen.", "There are many museums in Berlin."],
+  "Wie viele?": ["Wie viele Geschwister hast du?", "How many siblings do you have?"],
+  "wenig": ["Ich habe heute wenig Zeit.", "I have little time today."],
+  "ein bisschen": ["Ich spreche ein bisschen Deutsch.", "I speak a little German."],
+  "etwas": ["Möchtest du etwas trinken?", "Would you like something to drink?"],
+  "alles": ["Alles ist gut!", "Everything is fine!"],
+  "nichts": ["Ich habe heute nichts gegessen.", "I haven't eaten anything today."],
+  "jemand": ["Ist da jemand?", "Is someone there?"],
+  "niemand": ["Niemand war zu Hause.", "Nobody was at home."],
+  "gern": ["Ich spiele gern Fußball.", "I like playing football."],
+  "leider": ["Ich kann leider nicht kommen.", "Unfortunately I can't come."],
+
+  // ---- A1.1 · Adjektive
+  "neu": ["Mein Handy ist ganz neu.", "My phone is brand new."],
+  "alt": ["Das Haus ist 200 Jahre alt.", "The house is 200 years old."],
+  "gut, besser, am besten": ["Tee ist gut, Kaffee ist besser, aber Wasser ist am besten.", "Tea is good, coffee is better, but water is best."],
+  "schlecht": ["Das Wetter ist heute schlecht.", "The weather is bad today."],
+  "schnell": ["Der Zug ist sehr schnell.", "The train is very fast."],
+  "langsam": ["Bitte sprechen Sie langsam!", "Please speak slowly!"],
+  "einfach": ["Die Aufgabe ist ganz einfach.", "The exercise is really easy."],
+  "schwierig": ["Deutsch ist manchmal schwierig.", "German is sometimes difficult."],
+  "wichtig": ["Der Termin ist sehr wichtig.", "The appointment is very important."],
+  "nett": ["Deine Freundin ist sehr nett.", "Your friend is very nice."],
+  "klug": ["Sie ist ein kluges Mädchen.", "She's a clever girl."],
+  "lustig": ["Der Film war sehr lustig.", "The film was very funny."],
+  "langweilig": ["Das Buch ist langweilig.", "The book is boring."],
+  "ruhig": ["Unsere Straße ist sehr ruhig.", "Our street is very quiet."],
+  "teuer": ["Fallschirmspringen ist teuer, weil man ein Flugzeug braucht.", "Skydiving is expensive because you need a plane."],
+  "billig": ["Die Schuhe waren billig, aber jetzt sind sie kaputt.", "The shoes were cheap, but now they're broken."],
+  "günstig": ["Das Hotel ist günstig und sauber.", "The hotel is inexpensive and clean."],
+  "genug": ["Hast du genug Geld dabei?", "Do you have enough money with you?"],
+  "müde": ["Ich bin heute sehr müde.", "I'm very tired today."],
+  "faul": ["Am Sonntag bin ich gern faul.", "On Sundays I like being lazy."],
+  "süß": ["Der Hund ist so süß!", "The dog is so cute!"],
+  "toll": ["Die Party war toll!", "The party was great!"],
+  "genial": ["Ich kann mich noch immer gut an diesen Sprung erinnern. Er war genial!", "I can still remember that jump well. It was brilliant!"],
+
+  // ---- A1.1 · Verben (shared with the irregular verb set)
+  "kaufen": ["Ich kaufe Brot im Supermarkt.", "I buy bread at the supermarket."],
+  "suchen": ["Ich suche meinen Schlüssel.", "I'm looking for my key."],
+  "arbeiten": ["Meine Mutter arbeitet im Krankenhaus.", "My mother works at the hospital."],
+  "bleiben": ["Heute bleibe ich zu Hause.", "Today I'm staying at home."],
+  "treffen": ["Sie trifft ihre Freunde im Café.", "She meets her friends at the café."],
+  "zeigen": ["Kannst du mir den Weg zeigen?", "Can you show me the way?"],
+  "schauen": ["Schau mal, da ist ein Regenbogen!", "Look, there's a rainbow!"],
+  "kennen": ["Kennst du meinen Bruder?", "Do you know my brother?"],
+  "kennenlernen": ["Ich möchte neue Leute kennenlernen.", "I'd like to meet new people."],
+  "geben": ["Gibst du mir bitte das Salz?", "Will you pass me the salt, please?"],
+  "nehmen": ["Er nimmt den Bus, ich nehme das Fahrrad.", "He takes the bus, I take the bike."],
+  "brauchen": ["Fallschirmspringen ist teuer, weil man ein Flugzeug braucht.", "Skydiving is expensive because you need a plane."],
+  "fragen": ["Darf ich dich etwas fragen?", "May I ask you something?"],
+  "sagen": ["Was hast du gesagt?", "What did you say?"],
+  "zahlen / bezahlen": ["Kann ich mit Karte bezahlen?", "Can I pay by card?"],
+  "bestellen": ["Ich bestelle eine Pizza.", "I'm ordering a pizza."],
+  "mögen": ["Ich mag Schokolade.", "I like chocolate."],
+  "möchten": ["Niemals möchte ich das probieren!!!", "I would never want to try that!!!"],
+  "können": ["Ich kann es nur empfehlen.", "I highly recommend it."],
+  "wollen": ["Ich will einen Tandemsprung machen.", "I want to do a tandem jump."],
+  "dürfen": ["Darf ich hier rauchen? – Nein, das darfst du nicht.", "May I smoke here? – No, you're not allowed to."],
+  "sollen": ["Der Arzt sagt, ich soll mehr schlafen.", "The doctor says I should sleep more."],
+
+  // ---- A1.1 · Natur
+  "die Natur": ["Am Wochenende bin ich gern in der Natur.", "On the weekend I like being out in nature."],
+  "der Berg, die Berge": ["Im Sommer wandern wir in den Bergen.", "In summer we go hiking in the mountains."],
+  "der Baum, die Bäume": ["Vor unserem Haus steht ein großer Baum.", "There's a big tree in front of our house."],
+  "der Wald, die Wälder": ["Wir gehen im Wald spazieren.", "We're going for a walk in the forest."],
+  "die Wiese, die Wiesen": ["Die Kühe stehen auf der Wiese.", "The cows are standing in the meadow."],
+  "der Fluss, die Flüsse": ["Der Rhein ist ein langer Fluss.", "The Rhine is a long river."],
+  "die Wolke, die Wolken": ["Heute ist keine Wolke am Himmel.", "There isn't a cloud in the sky today."],
+  "der Himmel": ["Der Himmel ist heute ganz blau.", "The sky is completely blue today."],
+  "der Weg, die Wege": ["Der Weg zum See ist nicht weit.", "The path to the lake isn't far."],
+  "das Gras, die Gräser": ["Die Kinder sitzen im Gras.", "The children are sitting in the grass."],
+  "der Stein, die Steine": ["Der Junge wirft einen Stein ins Wasser.", "The boy throws a stone into the water."],
+
+  // ---- A1.2 · Im Restaurant
+  "die Speisekarte": ["Können wir bitte die Speisekarte haben?", "Can we have the menu, please?"],
+  "die Speisen (Pl.)": ["Alle Speisen sind hier sehr frisch.", "All the dishes here are very fresh."],
+  "der Kellner, - / die Kellnerin, -nen": ["Der Kellner bringt die Getränke.", "The waiter brings the drinks."],
+  "die Bedienung": ["Die Bedienung war sehr freundlich.", "The service was very friendly."],
+  "der Gast, die Gäste": ["Heute Abend kommen zehn Gäste.", "Ten guests are coming tonight."],
+  "Möchten Sie bestellen?": ["Guten Abend! Möchten Sie bestellen?", "Good evening! Would you like to order?"],
+  "bereit": ["Bist du bereit? Wir gehen jetzt.", "Are you ready? We're leaving now."],
+  "Darf es etwas zu trinken sein?": ["Guten Tag! Darf es etwas zu trinken sein? – Ein Wasser, bitte.", "Hello! Can I get you something to drink? – A water, please."],
+  "etwas zu trinken / etwas zu essen": ["Hast du etwas zu essen im Kühlschrank?", "Do you have something to eat in the fridge?"],
+  "für mich": ["Für mich eine Cola, bitte.", "A Coke for me, please."],
+  "ein Glas Weißwein": ["Ich hätte gern ein Glas Weißwein.", "I'd like a glass of white wine."],
+  "das Bier vom Fass": ["Haben Sie Bier vom Fass?", "Do you have draft beer?"],
+  "Kommt gleich! / Kommt sofort!": ["Zwei Kaffee, bitte. – Kommt sofort!", "Two coffees, please. – Coming right up!"],
+  "sofort / gleich": ["Warte kurz, ich komme gleich.", "Wait a moment, I'll be right there."],
+  "der Nachtisch / die Nachspeise": ["Zum Nachtisch gibt es Eis.", "There's ice cream for dessert."],
+  "War alles in Ordnung?": ["War alles in Ordnung? – Ja, das Essen war sehr lecker.", "Was everything okay? – Yes, the food was very tasty."],
+  "Alles ist in Ordnung.": ["Keine Sorge, alles ist in Ordnung.", "Don't worry, everything is fine."],
+  "die Rechnung": ["Die Rechnung, bitte!", "The bill, please!"],
+  "Können wir bitte die Rechnung bekommen?": ["Wir müssen jetzt gehen. Können wir bitte die Rechnung bekommen?", "We have to go now. Can we have the bill, please?"],
+  "zusammen": ["Zusammen oder getrennt? – Zusammen, bitte.", "Together or separately? – Together, please."],
+  "getrennt": ["Wir zahlen getrennt.", "We're paying separately."],
+  "das Trinkgeld": ["In Deutschland gibt man etwa zehn Prozent Trinkgeld.", "In Germany people tip about ten percent."],
+  "Stimmt so!": ["Das macht 18 Euro. – Hier sind 20. Stimmt so!", "That's 18 euros. – Here's 20. Keep the change!"],
+  "das Bargeld": ["Ich habe kein Bargeld dabei.", "I don't have any cash on me."],
+  "Ich zahle bar.": ["Karte oder bar? – Ich zahle bar.", "Card or cash? – I'll pay in cash."],
+  "Wie viel kostet das? / Was kostet das?": ["Die Jacke ist schön. Wie viel kostet das?", "The jacket is nice. How much does it cost?"],
+  "Das kostet … / Das macht …": ["Zwei Kaffee und ein Kuchen – das macht 9 Euro.", "Two coffees and a cake – that comes to 9 euros."],
+  "der Preis, die Preise": ["Die Preise in München sind hoch.", "Prices in Munich are high."],
+  "am liebsten": ["Ich trinke am liebsten Tee.", "I like drinking tea best."],
+  "es gibt (+ Akk.)": ["In der Stadt gibt es einen schönen Park.", "There's a nice park in town."],
+
+  // ---- A1.2 · Essen in Deutschland
+  "das Schweinefleisch": ["Ich esse kein Schweinefleisch.", "I don't eat pork."],
+  "das Rindfleisch": ["Die Suppe ist mit Rindfleisch.", "The soup is made with beef."],
+  "das Lammfleisch": ["Zu Ostern gibt es oft Lammfleisch.", "At Easter there's often lamb."],
+  "das Hähnchen": ["Ich bestelle Hähnchen mit Pommes.", "I'm ordering chicken with fries."],
+  "das Huhn, die Hühner": ["Auf dem Bauernhof gibt es viele Hühner.", "There are lots of chickens on the farm."],
+  "die Ente": ["Auf dem See schwimmt eine Ente.", "A duck is swimming on the lake."],
+  "der Schinken": ["Ich möchte ein Brötchen mit Schinken.", "I'd like a roll with ham."],
+  "die Wurst, die Würste": ["Zum Frühstück gibt es Brot mit Wurst.", "For breakfast there's bread with cold cuts."],
+  "die Bratwurst": ["Auf dem Markt esse ich eine Bratwurst.", "At the market I eat a bratwurst."],
+  "das Sauerkraut": ["Zur Bratwurst gibt es Sauerkraut.", "There's sauerkraut with the bratwurst."],
+  "das Rührei": ["Am Sonntag mache ich Rührei zum Frühstück.", "On Sunday I make scrambled eggs for breakfast."],
+  "die Semmel": ["Ich hole beim Bäcker vier Semmeln.", "I'm getting four rolls at the bakery."],
+  "die Brezel / die Breze (Bayern)": ["In Bayern isst man zum Bier eine Brezel.", "In Bavaria people eat a pretzel with their beer."],
+  "die Lebensmittel (Pl.)": ["Ich kaufe Lebensmittel im Supermarkt.", "I buy groceries at the supermarket."],
+  "die Nahrungsmittel (Pl.)": ["Frische Nahrungsmittel sind gesund.", "Fresh foods are healthy."],
+  "der Ziegenkäse": ["Der Salat mit Ziegenkäse ist sehr lecker.", "The salad with goat cheese is very tasty."],
+  "die Küche": ["Wir essen in der Küche.", "We eat in the kitchen."],
+  "der Koch / die Köchin": ["Mein Bruder arbeitet als Koch.", "My brother works as a cook."],
+  "backen": ["Am Wochenende backe ich einen Kuchen.", "On the weekend I'm baking a cake."],
+
+  // ---- A1.2 · Wohnung
+  "die Wohnung, die Wohnungen": ["Meine Wohnung hat zwei Zimmer.", "My apartment has two rooms."],
+  "die Wohngemeinschaft (WG)": ["Ich wohne in einer WG mit drei Studenten.", "I live in a shared flat with three students."],
+  "der Mitbewohner, - / die Mitbewohnerin, -nen": ["Meine Mitbewohnerin kocht sehr gut.", "My flatmate cooks very well."],
+  "das Badezimmer / das Bad": ["Das Bad ist rechts neben der Küche.", "The bathroom is on the right next to the kitchen."],
+  "baden": ["Am Abend bade ich gern.", "In the evening I like to take a bath."],
+  "der Flur": ["Die Schuhe stehen im Flur.", "The shoes are in the hallway."],
+  "das Erdgeschoss (EG)": ["Die Küche ist im Erdgeschoss.", "The kitchen is on the ground floor."],
+  "der Stock": ["Ich wohne im dritten Stock.", "I live on the third floor."],
+  "der erste Stock": ["Das Schlafzimmer ist im ersten Stock.", "The bedroom is on the first floor."],
+  "der Dachboden": ["Die alten Bücher sind auf dem Dachboden.", "The old books are in the attic."],
+  "der Keller": ["Das Fahrrad steht im Keller.", "The bike is in the basement."],
+  "die Treppe": ["Das Bad ist oben, die Treppe hoch.", "The bathroom is upstairs, up the stairs."],
+  "der Garten, die Gärten": ["Im Sommer essen wir im Garten.", "In summer we eat in the garden."],
+  "der Balkon": ["Die Wohnung hat einen großen Balkon.", "The apartment has a big balcony."],
+  "die Garage": ["Das Auto steht in der Garage.", "The car is in the garage."],
+  "der Schrank, die Schränke": ["Die Teller sind im Schrank.", "The plates are in the cupboard."],
+  "der Tisch, die Tische": ["Das Essen steht auf dem Tisch.", "The food is on the table."],
+  "der Couchtisch": ["Die Fernbedienung liegt auf dem Couchtisch.", "The remote is on the coffee table."],
+  "der Nachttisch": ["Mein Handy liegt auf dem Nachttisch.", "My phone is on the bedside table."],
+  "der Stuhl, die Stühle": ["Wir brauchen noch zwei Stühle.", "We need two more chairs."],
+  "das Bett, die Betten": ["Um elf Uhr gehe ich ins Bett.", "At eleven o'clock I go to bed."],
+  "der Teppich": ["Der Teppich im Wohnzimmer ist neu.", "The rug in the living room is new."],
+  "der Fernseher": ["Der Fernseher ist zu laut.", "The TV is too loud."],
+  "das Bild, die Bilder": ["An der Wand hängt ein schönes Bild.", "A beautiful picture is hanging on the wall."],
+  "der Herd": ["Das Essen steht auf dem Herd.", "The food is on the stove."],
+  "der Kühlschrank": ["Die Milch ist im Kühlschrank.", "The milk is in the fridge."],
+  "die Spüle": ["Das Geschirr steht noch in der Spüle.", "The dishes are still in the sink."],
+  "die Waschmaschine": ["Die Waschmaschine ist im Bad.", "The washing machine is in the bathroom."],
+  "die Dusche": ["Ich gehe schnell unter die Dusche.", "I'm quickly jumping in the shower."],
+  "die Badewanne": ["Unser Bad hat keine Badewanne, nur eine Dusche.", "Our bathroom has no bathtub, only a shower."],
+  "das Waschbecken": ["Die Zahnbürste liegt am Waschbecken.", "The toothbrush is by the sink."],
+  "der Spiegel": ["Er schaut in den Spiegel.", "He looks in the mirror."],
+  "das Gebäude": ["Das Gebäude hat zehn Stockwerke.", "The building has ten floors."],
+  "gemütlich": ["Unser Wohnzimmer ist sehr gemütlich.", "Our living room is very cozy."],
+  "hell": ["Die Küche ist hell und groß.", "The kitchen is bright and big."],
+  "dunkel": ["Im Winter wird es früh dunkel.", "In winter it gets dark early."],
+  "hässlich": ["Das Sofa ist bequem, aber hässlich.", "The sofa is comfortable, but ugly."],
+  "zu (+ Adjektiv)": ["Die Wohnung ist schön, aber zu teuer.", "The apartment is nice, but too expensive."],
+
+  // ---- A1.2 · Wo ist das?
+  "links": ["Die Küche ist links.", "The kitchen is on the left."],
+  "rechts": ["Gehen Sie hier rechts!", "Turn right here!"],
+  "links von (+ Dat.)": ["Das Sofa steht links vom Fenster.", "The sofa is to the left of the window."],
+  "dort rechts / dort links": ["Die Toilette ist dort links.", "The toilet is over there on the left."],
+  "vorne": ["Im Kino sitze ich gern vorne.", "At the cinema I like sitting at the front."],
+  "da vorne": ["Da vorne ist die Haltestelle.", "The stop is up there in front."],
+  "hinten": ["Der Garten ist hinten.", "The garden is at the back."],
+  "neben": ["Die Bank ist neben der Post.", "The bank is next to the post office."],
+  "daneben": ["Das ist die Küche und daneben ist das Bad.", "This is the kitchen and next to it is the bathroom."],
+  "nebenan": ["Meine Freundin wohnt nebenan.", "My friend lives next door."],
+  "da drüben": ["Siehst du das Café da drüben?", "Do you see the café over there?"],
+  "zwischen": ["Die Sportfans können zwischen Windsurfen und Kitesurfen auswählen. Und für die Kulturfans haben wir eine Stadtführung organisiert – mit oder ohne Rad.", "The sports fans can choose between windsurfing and kitesurfing. And for the culture fans we've organized a city tour – with or without a bike."],
+
+  // ---- A1.2 · Personalpronomen (blanks, so the example doesn't give the answer away)
+  "ich → Akk. / Dat.": ["Er sieht ___. / Er hilft ___.", "He sees me. / He helps me."],
+  "du → Akk. / Dat.": ["Ich begrüße ___. / Ich helfe ___.", "I greet you. / I help you."],
+  "er → Akk. / Dat.": ["Ich sehe ___. / Ich helfe ___.", "I see him. / I help him."],
+  "sie (she) → Akk. / Dat.": ["Ich sehe ___. / Ich helfe ___.", "I see her. / I help her."],
+  "es → Akk. / Dat.": ["Das Kind? Ich sehe ___. / Ich helfe ___.", "The child? I see it. / I help it."],
+  "wir → Akk. / Dat.": ["Er sieht ___. / Er hilft ___.", "He sees us. / He helps us."],
+  "ihr → Akk. / Dat.": ["Ich begrüße ___ heute im Live-Chat. / Ich helfe ___.", "Today I welcome you (all) to the live chat. / I help you (all)."],
+  "sie (they) → Akk. / Dat.": ["Ich sehe ___. / Ich helfe ___.", "I see them. / I help them."],
+  "Sie (formal) → Akk. / Dat.": ["Ich begrüße ___. / Ich helfe ___.", "I welcome you (formal). / I help you (formal)."],
+
+  // ---- A1.2 · dieser, diese, dieses (blanks)
+  "dieser (m.) → Nom. / Akk. / Dat.": ["___ Sprung war genial. / Ich erinnere mich an ___ Sprung. / Von ___ Sprung erzähle ich gern.", "That jump was brilliant. / I remember that jump. / I like talking about that jump."],
+  "diese (f.) → Nom. / Akk. / Dat.": ["___ Stadt ist schön. / Ich mag ___ Stadt. / Ich wohne in ___ Stadt.", "This city is beautiful. / I like this city. / I live in this city."],
+  "dieses (n.) → Nom. / Akk. / Dat.": ["___ Haus ist alt. / Ich kaufe ___ Haus. / Ich wohne in ___ Haus.", "This house is old. / I'm buying this house. / I live in this house."],
+  "diese (Pl.) → Nom. / Akk. / Dat.": ["___ Schuhe sind neu. / Ich mag ___ Schuhe. / Mit ___ Schuhen laufe ich gern.", "These shoes are new. / I like these shoes. / I like walking in these shoes."],
+
+  // ---- A1.2 · Gefallen
+  "gefallen": ["Das Zimmer gefällt mir sehr.", "I like the room a lot."],
+  "Wie gefällt dir …? / Wie gefällt Ihnen …?": ["Wie gefällt dir die neue Wohnung?", "How do you like the new apartment?"],
+  "Es gefällt mir.": ["Wie findest du das Kleid? – Es gefällt mir.", "What do you think of the dress? – I like it."],
+  "Es gefällt mir nicht.": ["Das Hemd ist teuer und es gefällt mir nicht.", "The shirt is expensive and I don't like it."],
+  "Es gefällt mir sehr gut.": ["Wie gefällt dir Berlin? – Es gefällt mir sehr gut.", "How do you like Berlin? – I like it very much."],
+  "Das gefällt mir nicht so gut.": ["Die Farbe? Das gefällt mir nicht so gut.", "The color? I don't really like it."],
+  "Das gefällt mir überhaupt nicht.": ["Diese Musik? Das gefällt mir überhaupt nicht.", "This music? I don't like it at all."],
+
+  // ---- A1.2 · Tagesablauf
+  "aufwachen": ["Ich wache jeden Tag um sieben Uhr auf.", "I wake up at seven o'clock every day."],
+  "aufstehen": ["Am Wochenende stehe ich spät auf.", "On the weekend I get up late."],
+  "sich die Zähne putzen": ["Ich putze mir zweimal am Tag die Zähne.", "I brush my teeth twice a day."],
+  "der Zahn, die Zähne": ["Mir tut ein Zahn weh.", "One of my teeth hurts."],
+  "sich anziehen": ["Ich ziehe mich schnell an.", "I get dressed quickly."],
+  "anziehen": ["Zieh eine Jacke an, es ist kalt!", "Put on a jacket, it's cold!"],
+  "ausziehen": ["Bitte zieh die Schuhe aus.", "Please take your shoes off."],
+  "zur Arbeit fahren / gehen": ["Ich fahre mit dem Bus zur Arbeit.", "I take the bus to work."],
+  "nach Hause kommen": ["Wann kommst du nach Hause?", "When are you coming home?"],
+  "einkaufen": ["Ich kaufe nach der Arbeit ein.", "I go grocery shopping after work."],
+  "einkaufen gehen / shoppen gehen": ["Am Samstag gehen wir shoppen.", "On Saturday we're going shopping."],
+  "aufräumen": ["Ich muss heute mein Zimmer aufräumen.", "I have to tidy my room today."],
+  "sauber machen / putzen": ["Am Samstag putze ich die Wohnung.", "On Saturday I clean the apartment."],
+  "abwaschen": ["Wer wäscht heute ab?", "Who's washing up today?"],
+  "abtrocknen": ["Ich wasche ab und du trocknest ab.", "I'll wash and you dry."],
+  "anrufen": ["Ich rufe dich heute Abend an.", "I'll call you tonight."],
+  "aufmachen": ["Kannst du bitte das Fenster aufmachen?", "Can you open the window, please?"],
+  "zumachen": ["Mach bitte die Tür zu!", "Please close the door!"],
+  "ausmachen": ["Mach bitte das Licht aus.", "Please turn off the light."],
+  "geschlossen": ["Am Sonntag sind die Geschäfte geschlossen.", "On Sundays the shops are closed."],
+  "schlafen gehen / ins Bett gehen": ["Ich bin müde. Ich gehe ins Bett.", "I'm tired. I'm going to bed."],
+  "einschlafen": ["Das Baby schläft schnell ein.", "The baby falls asleep quickly."],
+  "Ich stehe nicht gerne früh auf.": ["Mein Kurs beginnt um acht, aber ich stehe nicht gerne früh auf.", "My course starts at eight, but I don't like getting up early."],
+  "Hausaufgaben machen": ["Nach dem Kurs mache ich meine Hausaufgaben.", "After the course I do my homework."],
+  "warten (auf + Akk.)": ["Ich warte auf den Bus.", "I'm waiting for the bus."],
+
+  // ---- A1.2 · Zeit
+  "Wie spät ist es? / Wie viel Uhr ist es?": ["Entschuldigung, wie spät ist es? – Es ist drei Uhr.", "Excuse me, what time is it? – It's three o'clock."],
+  "Es ist halb zehn.": ["Schnell, es ist schon halb zehn!", "Quick, it's already half past nine!"],
+  "von … bis … Uhr": ["Ich arbeite von neun bis fünf Uhr.", "I work from nine to five o'clock."],
+  "vor (+ Dat.)": ["Vor dem Essen wasche ich mir die Hände.", "Before eating I wash my hands."],
+  "nach (+ Dat.)": ["Nach der Arbeit gehe ich ins Fitnessstudio.", "After work I go to the gym."],
+  "bis": ["Der Laden ist bis 20 Uhr geöffnet.", "The shop is open until 8 pm."],
+  "früh": ["Ich stehe jeden Tag früh auf.", "I get up early every day."],
+  "spät": ["Es ist schon spät. Ich gehe nach Hause.", "It's already late. I'm going home."],
+  "später": ["Ich rufe dich später an.", "I'll call you later."],
+  "gestern": ["Gestern war ich im Kino.", "Yesterday I was at the cinema."],
+  "morgen": ["Morgen habe ich frei.", "Tomorrow I have the day off."],
+  "der Morgen": ["Am Morgen trinke ich Kaffee.", "In the morning I drink coffee."],
+  "Welcher Tag ist heute?": ["Welcher Tag ist heute? – Heute ist Mittwoch.", "What day is it today? – Today is Wednesday."],
+  "der Samstag": ["Am Samstag gehe ich schwimmen.", "On Saturday I'm going swimming."],
+  "Bis Samstag!": ["Wir sehen uns am Wochenende. Bis Samstag!", "We'll see each other at the weekend. See you on Saturday!"],
+  "jeden Tag": ["Ich lerne jeden Tag Deutsch.", "I study German every day."],
+  "täglich": ["Der Zug fährt täglich um acht Uhr.", "The train leaves daily at eight."],
+  "wöchentlich": ["Wir treffen uns wöchentlich.", "We meet weekly."],
+  "monatlich": ["Die Miete zahle ich monatlich.", "I pay the rent monthly."],
+  "einmal pro Woche / einmal in der Woche": ["Ich gehe einmal pro Woche schwimmen.", "I go swimming once a week."],
+  "zweimal pro Monat / zweimal im Monat": ["Wir gehen zweimal im Monat essen.", "We eat out twice a month."],
+  "alle zwei Wochen": ["Ich rufe meine Oma alle zwei Wochen an.", "I call my grandma every two weeks."],
+  "jeden Sommer": ["Jeden Sommer fahren wir ans Meer.", "Every summer we go to the sea."],
+  "letztes Jahr": ["Letztes Jahr war ich in Deutschland.", "Last year I was in Germany."],
+  "zuerst / zunächst": ["Zuerst frühstücke ich, dann dusche ich.", "First I have breakfast, then I shower."],
+  "danach": ["Wir essen und danach gehen wir spazieren.", "We eat and afterwards we go for a walk."],
+  "am Ende / zum Schluss": ["Zum Schluss sagen wir alle Tschüss.", "At the end we all say bye."],
+  "pünktlich": ["Der Zug kommt pünktlich an.", "The train arrives on time."],
+  "Sei pünktlich!": ["Der Film beginnt um acht. Sei pünktlich!", "The film starts at eight. Be on time!"],
+  "frei sein": ["Bist du am Freitag frei?", "Are you free on Friday?"],
+  "die Zeit": ["Ich habe heute keine Zeit.", "I have no time today."],
+  "wieder": ["Wann sehen wir uns wieder?", "When will we see each other again?"],
+  "schon": ["Bist du schon fertig?", "Are you finished already?"],
+  "mit … Jahren": ["Mit 18 Jahren bin ich das erste Mal gesprungen.", "At 18 I jumped for the first time."],
+  "bereits": ["Freddy Jung hat in den letzten 20 Jahren bereits über 19 000 Sprünge gemacht.", "In the last 20 years, Freddy Jung has already done more than 19,000 jumps."],
+  "in den letzten … Jahren": ["Freddy Jung hat in den letzten 20 Jahren bereits über 19 000 Sprünge gemacht.", "In the last 20 years, Freddy Jung has already done more than 19,000 jumps."],
+  "gerade": ["Ich esse gerade. Ich rufe dich später an.", "I'm eating right now. I'll call you later."],
+  "normalerweise / gewöhnlich": ["Normalerweise trinke ich Tee, aber heute Kaffee.", "Normally I drink tea, but today coffee."],
+  "selten": ["Ich gehe nur selten ins Kino.", "I rarely go to the cinema."],
+
+  // ---- A1.2 · Wetter & Jahreszeiten
+  "Wie ist das Wetter?": ["Wie ist das Wetter in Berlin? – Es regnet.", "How's the weather in Berlin? – It's raining."],
+  "regnen": ["Hier regnet es sehr oft.", "It rains very often here."],
+  "Es regnet.": ["Es regnet. Nimm einen Regenschirm mit!", "It's raining. Take an umbrella!"],
+  "der Regen": ["Nach dem Regen kommt die Sonne.", "After the rain comes the sun."],
+  "Es schneit.": ["Schau mal, es schneit!", "Look, it's snowing!"],
+  "der Schnee": ["Die Kinder spielen im Schnee.", "The children are playing in the snow."],
+  "Die Sonne scheint.": ["Die Sonne scheint. Wir gehen in den Park!", "The sun is shining. Let's go to the park!"],
+  "Es ist sonnig.": ["Heute ist es sonnig und warm.", "Today it's sunny and warm."],
+  "warm": ["Im Sommer ist es hier sehr warm.", "In summer it's very warm here."],
+  "kalt": ["Mir ist kalt. Mach bitte das Fenster zu.", "I'm cold. Please close the window."],
+  "kühl": ["Am Abend wird es kühl.", "In the evening it gets cool."],
+  "wolkig": ["Morgen ist es wolkig, aber trocken.", "Tomorrow it'll be cloudy but dry."],
+  "der Wind, die Winde": ["Der Wind ist heute sehr stark.", "The wind is very strong today."],
+  "windig": ["Am Meer ist es oft windig.", "It's often windy at the sea."],
+  "der Nebel": ["Am Morgen gibt es viel Nebel.", "There's a lot of fog in the morning."],
+  "das Gewitter": ["Heute Abend kommt ein Gewitter.", "A thunderstorm is coming tonight."],
+  "der Regenbogen": ["Nach dem Regen sehen wir einen Regenbogen.", "After the rain we see a rainbow."],
+  "die Temperatur": ["In der Nacht fällt die Temperatur.", "At night the temperature drops."],
+  "der Grad": ["Heute ist es 25 Grad warm.", "Today it's 25 degrees."],
+  "Die Temperatur liegt zwischen 15 und 22 Grad.": ["Das Wetter morgen: Die Temperatur liegt zwischen 15 und 22 Grad.", "Tomorrow's weather: the temperature is between 15 and 22 degrees."],
+  "die Jahreszeit, die Jahreszeiten": ["Welche Jahreszeit magst du am liebsten?", "Which season do you like best?"],
+  "der Frühling": ["Im Frühling blühen die Blumen.", "In spring the flowers bloom."],
+  "der Herbst": ["Im Herbst werden die Blätter bunt.", "In autumn the leaves turn colorful."],
+  "der Norden": ["Hamburg liegt im Norden von Deutschland.", "Hamburg is in the north of Germany."],
+  "der Süden": ["München liegt im Süden.", "Munich is in the south."],
+  "der Westen": ["Köln liegt im Westen von Deutschland.", "Cologne is in the west of Germany."],
+  "der Osten": ["Dresden liegt im Osten.", "Dresden is in the east."],
+
+  // ---- A1.2 · Feiern & Freizeit
+  "die Einladung": ["Danke für die Einladung!", "Thanks for the invitation!"],
+  "einladen": ["Er lädt mich zu seiner Party ein.", "He's inviting me to his party."],
+  "der Geburtstag": ["Wann hast du Geburtstag?", "When is your birthday?"],
+  "Herzlichen Glückwunsch!": ["Herzlichen Glückwunsch zum Geburtstag!", "Happy birthday!"],
+  "das Geschenk, die Geschenke": ["Das Geschenk ist für dich.", "The present is for you."],
+  "schenken": ["Ich schenke meiner Mutter Blumen.", "I'm giving my mother flowers."],
+  "der Spaß": ["Die Party hat viel Spaß gemacht.", "The party was a lot of fun."],
+  "feiern": ["Am Samstag feiern wir meinen Geburtstag.", "On Saturday we're celebrating my birthday."],
+  "der Gastgeber / die Gastgeberin": ["Die Gastgeberin hat ein tolles Essen gekocht.", "The host cooked a great meal."],
+  "mitbringen": ["Soll ich etwas mitbringen? – Ja, einen Salat.", "Should I bring something? – Yes, a salad."],
+  "mitnehmen": ["Nimm einen Regenschirm mit!", "Take an umbrella with you!"],
+  "mitkommen": ["Wir gehen ins Kino. Kommst du mit?", "We're going to the cinema. Are you coming along?"],
+  "Lass uns gehen!": ["Es ist schon spät. Lass uns gehen!", "It's already late. Let's go!"],
+  "das Herz": ["Mein Herz schlägt sehr schnell.", "My heart is beating very fast."],
+  "herzlich": ["Herzlich willkommen in Berlin!", "A warm welcome to Berlin!"],
+  "der Traum, die Träume": ["Ein Haus am Meer ist mein Traum.", "A house by the sea is my dream."],
+  "die Traumfrau": ["Er hat seine Traumfrau gefunden.", "He found his dream woman."],
+  "aufregend": ["Die erste Reise allein war sehr aufregend.", "The first trip alone was very exciting."],
+  "malen": ["Meine Tochter malt gern Tiere.", "My daughter likes painting animals."],
+  "gar nicht so gut": ["Wie war der Film? – Gar nicht so gut.", "How was the film? – Not that good at all."],
+  "der Lieblingssport": ["Mein Lieblingssport ist BJJ.", "My favorite sport is BJJ."],
+  "die Lieblingsmusik": ["Meine Lieblingsmusik ist Rock.", "My favorite music is rock."],
+  "das Lieblingslied": ["Das ist mein Lieblingslied!", "That's my favorite song!"],
+  "das Lied, die Lieder": ["Wir singen ein altes deutsches Lied.", "We're singing an old German song."],
+  "der Song, die Songs": ["Der neue Song ist überall im Radio.", "The new song is everywhere on the radio."],
+  "die Hochzeit": ["Die Hochzeit ist im Juli.", "The wedding is in July."],
+  "die Freundschaft, die Freundschaften": ["Unsere Freundschaft ist mir sehr wichtig.", "Our friendship is very important to me."],
+
+  // ---- A1.2 · Nützliche Sätze
+  "noch immer / immer noch": ["Ich kann mich noch immer gut an diesen Sprung erinnern.", "I can still remember that jump well."],
+  "noch": ["Ich möchte noch ein Bier, bitte.", "I'd like one more beer, please."],
+  "doch": ["Kommst du nicht mit? – Doch!", "Aren't you coming? – Yes, I am!"],
+  "Es ist doch gefährlich.": ["Es ist doch auch sehr gefährlich, oder?", "It's surely really dangerous too, isn't it?"],
+  "…, oder?": ["Es ist doch auch sehr gefährlich, oder?", "It's really dangerous too, isn't it?"],
+  "Geht das?": ["Ich will einen Tandemsprung machen. Geht das?", "I want to do a tandem jump. Is that possible?"],
+  "einmal": ["Ich will unbedingt einmal fliegen!", "I really want to fly at least once!"],
+  "Schade, das geht leider nicht.": ["Kommst du am Freitag? – Schade, das geht leider nicht.", "Are you coming on Friday? – Too bad, unfortunately that's not possible."],
+  "in Ordnung (sein)": ["Treffen wir uns um acht? – In Ordnung!", "Shall we meet at eight? – Alright!"],
+  "ganz genau": ["Du meinst, wir sollen früher gehen? – Ganz genau.", "You mean we should leave earlier? – Exactly."],
+  "vielleicht": ["Vielleicht regnet es morgen.", "Maybe it'll rain tomorrow."],
+  "Ich bin nicht sicher.": ["Ist der Laden heute offen? – Ich bin nicht sicher.", "Is the shop open today? – I'm not sure."],
+  "ziemlich gut": ["Dein Deutsch ist schon ziemlich gut!", "Your German is already pretty good!"],
+  "ziemlich kalt": ["Heute ist es ziemlich kalt.", "It's pretty cold today."],
+  "ziemlich schlecht": ["Ich habe ziemlich schlecht geschlafen.", "I slept pretty badly."],
+  "einige": ["Einige Freunde kommen heute Abend.", "A few friends are coming tonight."],
+  "andere": ["Haben Sie das auch in einer anderen Farbe?", "Do you have this in a different color too?"],
+  "Ich habe einen Fehler gemacht.": ["Entschuldigung, ich habe einen Fehler gemacht.", "Sorry, I made a mistake."],
+  "der Fehler, die Fehler": ["In deinem Text sind nur zwei Fehler.", "There are only two mistakes in your text."],
+  "wenn": ["Wenn es regnet, bleibe ich zu Hause.", "If it rains, I stay at home."],
+  "wenn ja, …": ["Hast du Zeit? Wenn ja, ruf mich an.", "Do you have time? If so, call me."],
+
+  // ---- A1.2 · Alltag
+  "der Handschuh, die Handschuhe": ["Im Winter trage ich Handschuhe.", "In winter I wear gloves."],
+  "der Bart, die Bärte": ["Mein Vater hat einen langen Bart.", "My father has a long beard."],
+  "der Rücken": ["Nach dem Training tut mir der Rücken weh.", "After training my back hurts."],
+  "der Bildschirm": ["Ich sitze den ganzen Tag vor dem Bildschirm.", "I sit in front of the screen all day."],
+  "der Laden, die Läden": ["Der Laden an der Ecke hat bis 22 Uhr auf.", "The shop on the corner is open until 10 pm."],
+  "das Geschäft, die Geschäfte": ["In der Stadt gibt es viele Geschäfte.", "There are many shops in town."],
+  "der Buchladen": ["Im Buchladen kaufe ich ein Wörterbuch.", "At the bookstore I buy a dictionary."],
+  "der Verkäufer, - / die Verkäuferin, -nen": ["Die Verkäuferin hilft mir sehr freundlich.", "The shop assistant helps me very kindly."],
+  "der Kollege, -n / die Kollegin, -nen": ["Mein Kollege kommt aus Spanien.", "My colleague is from Spain."],
+  "die Fremdsprache, die Fremdsprachen": ["Deutsch ist meine zweite Fremdsprache.", "German is my second foreign language."],
+  "der Spitzname": ["Er heißt Thomas, aber sein Spitzname ist Tommi.", "His name is Thomas, but his nickname is Tommi."],
+  "die Unterschrift": ["Hier fehlt noch Ihre Unterschrift.", "Your signature is still missing here."],
+  "die Lösung": ["Wir finden bestimmt eine Lösung.", "We'll surely find a solution."],
+  "gesund": ["Obst und Gemüse sind gesund.", "Fruit and vegetables are healthy."],
+  "die Gesundheit": ["Sport ist gut für die Gesundheit.", "Sport is good for your health."],
+  "das Gefühl, die Gefühle": ["Ich kann es nur empfehlen. Es ist ein super Gefühl!", "I highly recommend it. It's a great feeling!"],
+  "probieren / ausprobieren": ["Niemals möchte ich das probieren!!!", "I would never want to try that!!!"],
+  "gefährlich": ["Es ist doch auch sehr gefährlich, oder?", "It's really dangerous too, isn't it?"],
+  "sicher": ["Fallschirmspringen ist sehr sicher.", "Skydiving is very safe."],
+  "der Unfall, die Unfälle": ["Es passieren fast nie Unfälle.", "There are almost never any accidents."],
+  "passieren": ["Es passieren fast nie Unfälle.", "Accidents almost never happen."],
+  "fröhlich": ["Die Kinder sind heute sehr fröhlich.", "The children are very cheerful today."],
+  "traurig": ["Warum bist du so traurig?", "Why are you so sad?"],
+  "allein": ["Ich wohne allein.", "I live alone."],
+  "trocken": ["Die Wäsche ist schon trocken.", "The laundry is already dry."],
+  "meinen, hat gemeint": ["Was meinst du damit?", "What do you mean by that?"],
+  "werden": ["Mein Bruder wird nächste Woche 30.", "My brother turns 30 next week."],
+  "bekommen": ["Ich habe ein Geschenk bekommen.", "I got a present."],
+  "ansehen": ["Wir sehen uns heute Abend einen Film an.", "We're watching a film tonight."],
+  "anfangen mit (+ Dat.)": ["Mit 18 Jahren habe ich mit dem Studium angefangen.", "At 18 I started university."],
+  "lieben": ["Ich liebe dich.", "I love you."],
+  "geliebt": ["Er hat sie sehr geliebt.", "He loved her very much."],
+  "liegen": ["Das Buch liegt auf dem Tisch.", "The book is lying on the table."],
+  "benutzen": ["Darf ich dein Handy benutzen?", "May I use your phone?"],
+  "rechnen": ["Mein Sohn kann schon gut rechnen.", "My son is already good at arithmetic."],
+
+  // ---- A2.1 · Reisen & Unterwegs
+  "der Bahnhof, die Bahnhöfe": ["Wir treffen uns um zehn am Bahnhof.", "We're meeting at the station at ten."],
+  "die Bahn, die Bahnen": ["Die Bahn hat heute Verspätung.", "The train is late today."],
+  "die Fahrkarte": ["Ich kaufe eine Fahrkarte nach Hamburg.", "I'm buying a ticket to Hamburg."],
+  "die Ankunft": ["Die Ankunft ist um 15 Uhr.", "The arrival is at 3 pm."],
+  "ankommen": ["Wann kommt der Zug in Berlin an?", "When does the train arrive in Berlin?"],
+  "die Abfahrt": ["Die Abfahrt ist um 8:10 Uhr.", "Departure is at 8:10."],
+  "abfahren": ["Der Bus fährt in fünf Minuten ab.", "The bus leaves in five minutes."],
+  "einsteigen": ["Bitte schnell einsteigen!", "Please get on quickly!"],
+  "aussteigen": ["Wir müssen an der nächsten Haltestelle aussteigen.", "We have to get off at the next stop."],
+  "zu Fuß": ["Ich gehe zu Fuß zur Arbeit.", "I walk to work."],
+  "die Landkarte": ["Auf der Landkarte ist das Dorf ganz klein.", "On the map the village is really small."],
+  "die Wanderkarte": ["Ohne Wanderkarte finden wir den Weg nicht.", "We won't find the path without a hiking map."],
+  "besuchen": ["Am Wochenende besuche ich meine Eltern.", "On the weekend I'm visiting my parents."],
+  "besichtigen": ["In Köln besichtigen wir den Dom.", "In Cologne we're visiting the cathedral."],
+  "reisen": ["Ich reise gern mit dem Zug.", "I like travelling by train."],
+  "der Urlaub": ["Im August mache ich Urlaub in Italien.", "In August I'm going on holiday in Italy."],
+  "die Ferien (Pl.)": ["In den Ferien fahren die Kinder zur Oma.", "In the holidays the kids go to grandma's."],
+  "die Vereinigten Staaten (Pl.)": ["Mein Cousin wohnt in den Vereinigten Staaten.", "My cousin lives in the United States."],
+  "das Meer, die Meere": ["Im Sommer schwimmen wir im Meer.", "In summer we swim in the sea."],
+  "die Küste, die Küsten": ["Wir machen Urlaub an der Küste.", "We're on holiday on the coast."],
+  "tauchen": ["Im Urlaub möchte ich tauchen lernen.", "On holiday I want to learn to dive."],
+  "Ski fahren": ["Im Winter fahren wir in den Alpen Ski.", "In winter we go skiing in the Alps."],
+  "Schlittschuh laufen": ["Im Winter laufen wir auf dem See Schlittschuh.", "In winter we ice-skate on the lake."],
+  "spazieren gehen": ["Nach dem Essen gehen wir spazieren.", "After the meal we go for a walk."],
+  "dort gibt es …": ["Kennst du den Park? Dort gibt es einen schönen See.", "Do you know the park? There's a beautiful lake there."],
+  "das Tier, die Tiere": ["Im Zoo gibt es viele Tiere.", "There are many animals at the zoo."],
+  "das Zelt, die Zelte": ["Wir schlafen im Zelt.", "We're sleeping in a tent."],
+  "Am schönsten ist …": ["Am schönsten ist der Sonnenuntergang am Meer.", "The nicest thing is the sunset at the sea."],
+  "am meisten": ["Was hat dir am meisten gefallen?", "What did you like most?"],
+  "draußen": ["Die Kinder spielen draußen.", "The children are playing outside."],
+  "verbringen": ["Ich verbringe das Wochenende bei meinen Eltern.", "I'm spending the weekend at my parents'."],
+  "das Schwimmbad": ["Im Sommer gehen wir oft ins Schwimmbad.", "In summer we often go to the swimming pool."],
+  "die Badehose": ["Ich habe meine Badehose vergessen!", "I forgot my swimming trunks!"],
+  "der Badeanzug": ["Sie kauft einen neuen Badeanzug.", "She's buying a new swimsuit."],
+  "das Handtuch, die Handtücher": ["Vergiss dein Handtuch nicht!", "Don't forget your towel!"],
+  "der Jogginganzug": ["Zu Hause trage ich gern meinen Jogginganzug.", "At home I like wearing my tracksuit."],
+  "der Besuch": ["Danke für deinen Besuch!", "Thanks for your visit!"],
+  "zu Besuch kommen": ["Am Wochenende kommt meine Schwester zu Besuch.", "My sister is coming to visit on the weekend."],
+  "abholen": ["Ich hole dich um sechs vom Bahnhof ab.", "I'll pick you up from the station at six."],
+  "begleiten": ["Ich begleite dich nach Hause.", "I'll walk you home."],
+  "das Fundbüro, die Fundbüros": ["Ich habe meine Tasche verloren. Ich gehe zum Fundbüro.", "I lost my bag. I'm going to the lost property office."],
+  "verloren": ["Ich habe meinen Schlüssel verloren.", "I've lost my key."],
+  "abgeben": ["Ich gebe die Tasche im Fundbüro ab.", "I'm handing the bag in at the lost property office."],
+  "die Sicht": ["Bei Nebel ist die Sicht sehr schlecht.", "In fog the visibility is very poor."],
+  "Die Bewohner sind wie eine Familie.": ["Unser Haus ist klein. Die Bewohner sind wie eine Familie.", "Our building is small. The residents are like a family."],
+  "verschieden": ["Die Geschwister sind sehr verschieden.", "The siblings are very different."],
+
+  // ---- A2.1 · Beruf & Lernen
+  "unterrichten": ["Sie unterrichtet Deutsch an einer Schule.", "She teaches German at a school."],
+  "übersetzen": ["Kannst du mir den Brief übersetzen?", "Can you translate the letter for me?"],
+  "der Übersetzer / die Übersetzerin": ["Sie arbeitet als Übersetzerin für Englisch.", "She works as an English translator."],
+  "die Ausbildung": ["Er macht eine Ausbildung als Koch.", "He's training to be a cook."],
+  "der Bereich": ["Ich arbeite im Bereich Marketing.", "I work in the field of marketing."],
+  "die Stelle": ["Ich suche eine neue Stelle.", "I'm looking for a new job."],
+  "der Krankenpfleger / die Krankenpflegerin": ["Der Krankenpfleger bringt mir Wasser.", "The nurse brings me water."],
+  "der Zahnarzt, die Zahnärzte / die Zahnärztin, -nen": ["Ich habe morgen einen Termin beim Zahnarzt.", "I have a dentist appointment tomorrow."],
+  "der Polizist / die Polizistin": ["Die Polizistin hilft dem Mann.", "The police officer helps the man."],
+  "die Polizei": ["Ruf die Polizei!", "Call the police!"],
+  "der Geschäftsmann / die Geschäftsfrau": ["Mein Onkel ist Geschäftsmann.", "My uncle is a businessman."],
+  "der Anwalt / die Anwältin": ["Ich brauche einen Anwalt.", "I need a lawyer."],
+  "der Friseur / die Friseurin": ["Ich gehe morgen zum Friseur.", "I'm going to the hairdresser tomorrow."],
+  "das Krankenhaus": ["Nach dem Unfall war er zwei Tage im Krankenhaus.", "After the accident he was in hospital for two days."],
+  "der Profi, die Profis": ["Freddy hat über 19 000 Sprünge gemacht. Er ist DER Profi.", "Freddy has done more than 19,000 jumps. He is THE pro."],
+  "Ich bin arbeitslos und auf Arbeitssuche.": ["Meine Firma ist geschlossen. Ich bin arbeitslos und auf Arbeitssuche.", "My company closed. I'm unemployed and looking for a job."],
+  "die Arbeitssuche": ["Die Arbeitssuche dauert oft lange.", "Looking for a job often takes a long time."],
+  "das Büro, die Büros": ["Ich bin bis fünf Uhr im Büro.", "I'm at the office until five."],
+  "die Sitzung": ["Die Sitzung beginnt um zehn Uhr.", "The meeting starts at ten."],
+  "dauern": ["Wie lange dauert der Film?", "How long does the film last?"],
+  "schicken": ["Ich schicke dir die Fotos per E-Mail.", "I'll send you the photos by email."],
+  "die Aufgabe": ["Macht bitte Aufgabe 3 auf Seite 20.", "Please do exercise 3 on page 20."],
+  "ausfüllen": ["Bitte füllen Sie das Formular aus.", "Please fill out the form."],
+  "auswählen": ["Wählen Sie bitte eine Farbe aus.", "Please choose a color."],
+  "teilnehmen (an + Dat.)": ["Ich nehme an einem Deutschkurs teil.", "I'm taking part in a German course."],
+  "das Hörverstehen": ["Das Hörverstehen ist für mich am schwierigsten.", "Listening comprehension is the hardest for me."],
+  "die Aussprache": ["Deine Aussprache ist sehr gut.", "Your pronunciation is very good."],
+  "der Gesprächspartner / die Gesprächspartnerin": ["Fragen Sie Ihre Gesprächspartnerin nach ihrem Hobby.", "Ask your speaking partner about her hobby."],
+  "verbessern": ["Ich möchte mein Deutsch verbessern.", "I want to improve my German."],
+  "der / die Ersti": ["Die Erstis haben heute ihren ersten Tag an der Uni.", "The freshmen have their first day at university today."],
+  "das Prozent": ["Die Jacke kostet heute 30 Prozent weniger.", "The jacket costs 30 percent less today."],
+  "die Geschichte": ["Mein Opa erzählt eine lustige Geschichte.", "My grandpa tells a funny story."],
+  "die Bewegung": ["Bewegung ist wichtig für die Gesundheit.", "Exercise is important for your health."],
+  "die Bedingung": ["Ich komme mit, aber unter einer Bedingung.", "I'll come along, but on one condition."],
+  "der Kursteilnehmer, - / die Kursteilnehmerin, -nen": ["In unserem Kurs sind zwölf Kursteilnehmer.", "There are twelve participants in our course."],
+  "die Schulzeit": ["In meiner Schulzeit habe ich viel Fußball gespielt.", "In my school days I played a lot of football."],
+  "das Formular, die Formulare": ["Für den Antrag brauche ich dieses Formular.", "I need this form for the application."],
+  "herunterladen": ["Ich lade die App herunter.", "I'm downloading the app."],
+
+  // ---- A2.1 · Meinung & Gespräch
+  "um … Uhr": ["Abfahrt: Freitag 15. Juli um 7 Uhr am Firmenparkplatz mit einem Bus. Rückfahrt: um 19 Uhr.", "Departure: Friday, July 15 at 7 am from the company parking lot by bus. Return trip: at 7 pm."],
+  "am Freitag / am Firmenparkplatz": ["Abfahrt: Freitag 15. Juli um 7 Uhr am Firmenparkplatz mit einem Bus. Rückfahrt: um 19 Uhr.", "Departure: Friday, July 15 at 7 am from the company parking lot by bus. Return trip: at 7 pm."],
+  "bis spätestens …": ["Wir freuen uns auf einen schönen Tag mit Ihnen und bitten um Ihre Anmeldung bis spätestens 15. Juni bei Frau Lang.", "We look forward to a lovely day with you and ask for your registration by June 15 at the latest with Ms Lang."],
+  "nach Norderney / an die Nordsee": ["Dieses Jahr geht unser Firmenausflug nach Norderney an die Nordsee. Wir freuen uns auf einen Tag mit Ihnen allen.", "This year our company outing goes to Norderney on the North Sea. We look forward to a day with all of you."],
+  "die Stadtführung, die Stadtführungen": ["Die Sportfans können zwischen Windsurfen und Kitesurfen auswählen. Und für die Kulturfans haben wir eine Stadtführung organisiert – mit oder ohne Rad.", "The sports fans can choose between windsurfing and kitesurfing. And for the culture fans we've organized a city tour – with or without a bike."],
+  "Wechselpräpositionen": ["Das Buch liegt auf dem Tisch. Ich lege das Buch auf den Tisch.", "The book is lying on the table. I put the book on the table."],
+  "an (Wo? + Dat. / Wohin? + Akk.)": ["Das Bild hängt an der Wand. Ich hänge das Bild an die Wand.", "The picture hangs on the wall. I hang the picture on the wall."],
+  "auf (Wo? + Dat. / Wohin? + Akk.)": ["Das Buch liegt auf dem Tisch. Ich lege das Buch auf den Tisch.", "The book is lying on the table. I put the book on the table."],
+  "in (Wo? + Dat. / Wohin? + Akk.)": ["Ich bin in der Küche. Ich gehe in die Küche.", "I'm in the kitchen. I'm going into the kitchen."],
+  "neben (Wo? + Dat. / Wohin? + Akk.)": ["Die Lampe steht neben dem Sofa. Ich stelle die Lampe neben das Sofa.", "The lamp is next to the sofa. I put the lamp next to the sofa."],
+  "vor (Wo? + Dat. / Wohin? + Akk.)": ["Das Auto steht vor dem Haus. Ich fahre das Auto vor das Haus.", "The car is parked in front of the house. I drive the car in front of the house."],
+  "hinter (Wo? + Dat. / Wohin? + Akk.)": ["Der Ball liegt hinter dem Schrank. Der Ball rollt hinter den Schrank.", "The ball is behind the cupboard. The ball rolls behind the cupboard."],
+  "über (Wo? + Dat. / Wohin? + Akk.)": ["Die Lampe hängt über dem Tisch. Ich hänge die Lampe über den Tisch.", "The lamp hangs above the table. I hang the lamp above the table."],
+  "unter (Wo? + Dat. / Wohin? + Akk.)": ["Die Katze schläft unter dem Tisch. Die Katze läuft unter den Tisch.", "The cat is sleeping under the table. The cat runs under the table."],
+  "zwischen (Wo? + Dat. / Wohin? + Akk.)": ["Der Tisch steht zwischen dem Sofa und dem Fenster. Ich stelle den Tisch zwischen das Sofa und das Fenster.", "The table is between the sofa and the window. I put the table between the sofa and the window."],
+  "Dativ → Akkusativ: die Artikel": ["Das Buch liegt auf dem Tisch. Ich lege das Buch auf den Tisch. Die Jacke hängt an der Tür. Ich hänge die Jacke an die Tür.", "The book is lying on the table. I put the book on the table. The jacket hangs on the door. I hang the jacket on the door."],
+  "liegen – legen · stehen – stellen · sitzen – setzen": ["Das Buch liegt auf dem Tisch. Ich lege das Buch auf den Tisch.", "The book is lying on the table. I put the book on the table."],
+  "dazwischen": ["Das Sofa steht links, das Fenster rechts – dazwischen steht ein Tisch.", "The sofa is on the left, the window on the right – there's a table in between."],
+  "mitten in (+ Dat.)": ["Unser Hotel liegt mitten in der Stadt.", "Our hotel is in the middle of the city."],
+  "entweder … oder …": ["Wir können entweder windsurfen oder kitesurfen.", "We can either windsurf or kitesurf."],
+  "weder … noch …": ["Ich mag weder Windsurfen noch Kitesurfen.", "I like neither windsurfing nor kitesurfing."],
+  "sowohl … als auch …": ["Sowohl Peter als auch Robert organisieren den Firmenausflug.", "Both Peter and Robert are organizing the company outing."],
+  "der Unterschied zwischen … und …": ["Was ist der Unterschied zwischen Windsurfen und Kitesurfen?", "What's the difference between windsurfing and kitesurfing?"],
+  "Na ja, es geht.": ["Kannst du gut surfen? – Na ja, es geht.", "Can you surf well? – Well, so-so."],
+  "Kannst du (gut) …?": ["Kannst du gut surfen? – Ja, sehr gut. / Ja, ein bisschen. / Na ja, es geht. / Leider nicht.", "Can you surf well? – Yes, very well. / Yes, a little. / Well, so-so. / Unfortunately not."],
+  "Nein, leider nicht.": ["Kannst du surfen? – Nein, leider nicht.", "Can you surf? – No, unfortunately not."],
+  "Wie geht's? – Es geht.": ["Wie geht's? – Es geht. Ich bin ein bisschen müde.", "How are you? – So-so. I'm a bit tired."],
+  "das Angebot, die Angebote": ["Hallo Lukas. Hast du die Einladung zum Firmenausflug schon gelesen? – Ja, habe ich. Dieses Jahr gibt es tolle Angebote. Ich freue mich schon.", "Hello Lukas. Have you already read the invitation to the company outing? – Yes, I have. This year there are great options. I'm already looking forward to it."],
+  "die Einladung zum Firmenausflug": ["Hallo Lukas. Hast du die Einladung zum Firmenausflug schon gelesen? – Ja, habe ich. Dieses Jahr gibt es tolle Angebote. Ich freue mich schon.", "Hello Lukas. Have you already read the invitation to the company outing? – Yes, I have. This year there are great options. I'm already looking forward to it."],
+  "Ich freue mich schon.": ["Hallo Lukas. Hast du die Einladung zum Firmenausflug schon gelesen? – Ja, habe ich. Dieses Jahr gibt es tolle Angebote. Ich freue mich schon.", "Hello Lukas. Have you already read the invitation to the company outing? – Yes, I have. This year there are great options. I'm already looking forward to it."],
+  "Immer Akkusativ: durch · für · gegen · ohne · um": ["Das Geschenk ist für dich. Wir gehen durch den Park. Ich trinke Kaffee ohne Zucker.", "The present is for you. We walk through the park. I drink coffee without sugar."],
+  "Immer Dativ: aus · bei · mit · nach · seit · von · zu": ["Ich komme aus der Türkei. Ich wohne bei meiner Oma. Ich fahre mit dem Bus zur Arbeit.", "I come from Turkey. I live at my grandma's. I take the bus to work."],
+  "Kontraktionen: am · im · zum · zur · vom · beim · ins · ans": ["Die Einladung zum Firmenausflug ist da. Der Ausflug beginnt am Freitag.", "The invitation to the company outing is here. The outing starts on Friday."],
+  "da- / wo- + Präposition": ["Freust du dich auf den Ausflug? – Ja, ich freue mich schon darauf. – Worauf genau? – Auf den Tag am Meer.", "Are you looking forward to the outing? – Yes, I'm already looking forward to it. – To what exactly? – To the day by the sea."],
+  "denken an (+ Akk.)": ["Ich denke oft an dich.", "I often think of you."],
+  "sich interessieren für (+ Akk.)": ["Ich interessiere mich für Musik und Sprachen.", "I'm interested in music and languages."],
+  "sprechen mit (+ Dat.) / über (+ Akk.)": ["Ich spreche mit meinem Chef über das Projekt.", "I'm talking to my boss about the project."],
+  "fragen nach (+ Dat.)": ["Ich frage nach dem Weg zum Bahnhof.", "I'm asking for directions to the station."],
+  "träumen von (+ Dat.)": ["Er träumt von einem Haus am Meer.", "He dreams of a house by the sea."],
+  "Angst haben vor (+ Dat.)": ["Ich habe Angst vor Spinnen.", "I'm afraid of spiders."],
+  "bitten um (+ Akk.)": ["Wir freuen uns auf einen schönen Tag mit Ihnen und bitten um Ihre Anmeldung bis spätestens 15. Juni bei Frau Lang.", "We look forward to a lovely day with you and ask for your registration by June 15 at the latest with Ms Lang."],
+  "danken für (+ Akk.)": ["Ich danke dir für deine Hilfe.", "Thank you for your help."],
+  "einladen zu (+ Dat.)": ["Ich lade dich zu meinem Geburtstag ein.", "I'm inviting you to my birthday."],
+  "sich entscheiden für (+ Akk.)": ["Er entscheidet sich für das Kitesurfen.", "He decides on kitesurfing."],
+  "sich vorbereiten auf (+ Akk.)": ["Ich bereite mich auf die Prüfung vor.", "I'm preparing for the exam."],
+  "gratulieren zu (+ Dat.)": ["Ich gratuliere dir zum Geburtstag.", "Happy birthday to you."],
+  "finden": ["Ich finde meinen Schlüssel nicht. Ich finde den Film gut.", "I can't find my key. I think the film is good."],
+  "Wie findest du …? – Ich finde …": ["Wie findest du den Firmenausflug? – Ich finde ihn super.", "What do you think of the company outing? – I think it's great."],
+  "Ja, finde ich auch.": ["Dieses Jahr gibt es tolle Angebote. Ich freue mich schon. – Ja, finde ich auch. Was möchtest du machen?", "This year there are great options. I'm already looking forward to it. – Yes, I think so too. What would you like to do?"],
+  "Finde ich nicht.": ["Der Film war langweilig. – Finde ich nicht! Ich fand ihn spannend.", "The film was boring. – I don't think so! I found it exciting."],
+  "finden – fand – hat gefunden": ["Ich habe meinen Schlüssel endlich gefunden.", "I finally found my key."],
+  "Habe ich. / Weiß ich. / Finde ich auch.": ["Hast du die Einladung zum Firmenausflug schon gelesen? – Ja, habe ich. Dieses Jahr gibt es tolle Angebote. – Ja, finde ich auch.", "Have you already read the invitation to the company outing? – Yes, I have. This year there are great options. – Yes, I think so too."],
+  "mindestens / höchstens": ["Ich mache jedes Jahr mindestens einmal einen Surfurlaub. Aber Kitesurfen habe ich noch nie ausprobiert. Das wird bestimmt toll.", "Every year I go on a surfing holiday at least once. But I've never tried kitesurfing. That will definitely be great."],
+  "bestimmt": ["Ich mache jedes Jahr mindestens einmal einen Surfurlaub. Aber Kitesurfen habe ich noch nie ausprobiert. Das wird bestimmt toll.", "Every year I go on a surfing holiday at least once. But I've never tried kitesurfing. That will definitely be great."],
+  "jeden Tag / jede Woche / jedes Jahr": ["Ich mache jedes Jahr mindestens einmal einen Surfurlaub. Aber Kitesurfen habe ich noch nie ausprobiert. Das wird bestimmt toll.", "Every year I go on a surfing holiday at least once. But I've never tried kitesurfing. That will definitely be great."],
+  "noch nie": ["Ich mache jedes Jahr mindestens einmal einen Surfurlaub. Aber Kitesurfen habe ich noch nie ausprobiert. Das wird bestimmt toll.", "Every year I go on a surfing holiday at least once. But I've never tried kitesurfing. That will definitely be great."],
+  "Das wird bestimmt toll.": ["Ich mache jedes Jahr mindestens einmal einen Surfurlaub. Aber Kitesurfen habe ich noch nie ausprobiert. Das wird bestimmt toll.", "Every year I go on a surfing holiday at least once. But I've never tried kitesurfing. That will definitely be great."],
+  "Hallo, ihr zwei!": ["Hallo, ihr zwei! Wie geht's euch? – Gut, danke!", "Hi, you two! How are you? – Fine, thanks!"],
+  "Na, …?": ["Hallo Marion. – Hallo ihr zwei! Na, was macht ihr beim Firmenausflug? – Wir wollen Kitesurfen ausprobieren.", "Hello Marion. – Hi you two! So, what are you doing at the company outing? – We want to try out kitesurfing."],
+  "bei + Dat.: beim Firmenausflug": ["Hallo Marion. – Hallo ihr zwei! Na, was macht ihr beim Firmenausflug? – Wir wollen Kitesurfen ausprobieren.", "Hello Marion. – Hi you two! So, what are you doing at the company outing? – We want to try out kitesurfing."],
+  "Dativ Plural: Nomen + -n": ["Ja, sehr gut. Ich tanze schon seit über zehn Jahren.", "Yes, very well. I've been dancing for more than ten years already."],
+  "seit + Dat.": ["Ja, sehr gut. Ich tanze schon seit über zehn Jahren.", "Yes, very well. I've been dancing for more than ten years already."],
+  "schon seit": ["Ja, sehr gut. Ich tanze schon seit über zehn Jahren.", "Yes, very well. I've been dancing for more than ten years already."],
+  "seit · vor · für": ["Ich tanze seit zehn Jahren. Ich habe vor zehn Jahren getanzt. Ich bleibe für zehn Tage.", "I've been dancing for ten years. I danced ten years ago. I'm staying for ten days."],
+  "weil + gern": ["Herr Augustin wandert oft, weil er gern in der Natur ist.", "Mr Augustin often goes hiking because he likes being out in nature."],
+  "denken": ["Ich denke oft an dich.", "I often think of you."],
+  "glauben": ["Ich glaube, er kommt heute nicht.", "I believe he isn't coming today."],
+  "Was denkst du?": ["Das rote oder das blaue Hemd? Was denkst du?", "The red or the blue shirt? What do you think?"],
+  "Denkst du, wir sollten …?": ["Es regnet. Denkst du, wir sollten zu Hause bleiben?", "It's raining. Do you think we should stay at home?"],
+  "Stimmt das?": ["Du ziehst nach Berlin? Stimmt das?", "You're moving to Berlin? Is that true?"],
+  "Das stimmt.": ["Deutsch ist schwer! – Das stimmt.", "German is hard! – That's right."],
+  "Unsinn! / Quatsch!": ["Du bist zu alt für Sport? Quatsch!", "You're too old for sport? Nonsense!"],
+  "Ich kann es nur empfehlen.": ["Ich kann es nur empfehlen. Es ist ein super Gefühl!", "I highly recommend it. It's a great feeling!"],
+  "duzen": ["Im Deutschkurs duzen wir uns alle.", "In the German course we all say 'du' to each other."],
+  "siezen": ["Den Chef siezen wir.", "We address the boss with 'Sie'."],
+  "Du kannst mich duzen.": ["Ich heiße Anna. Du kannst mich duzen.", "My name is Anna. You can call me 'du'."],
+  "der Ratschlag, die Ratschläge": ["Danke für deinen Ratschlag!", "Thanks for your advice!"],
+  "der Tipp, die Tipps": ["Hast du einen Tipp für mich?", "Do you have a tip for me?"],
+  "Da ist nichts zu machen.": ["Der Zug ist weg. Da ist nichts zu machen.", "The train is gone. Nothing can be done."],
+  "sorgen für (+ Akk.)": ["Sie sorgt für ihre kranke Mutter.", "She takes care of her sick mother."],
+  "Glück haben": ["Du hast Glück, der Bus kommt gerade!", "You're lucky, the bus is just coming!"],
+  "glücklich": ["Ich bin sehr glücklich hier.", "I'm very happy here."],
+  "als": ["Als ich klein war, hatte ich einen Hund.", "When I was little, I had a dog."],
+  "aufzeigen": ["Der Lehrer zeigt die Fehler auf.", "The teacher points out the mistakes."],
+  "kompliziert": ["Die deutsche Grammatik ist manchmal kompliziert.", "German grammar is sometimes complicated."],
+  "schwer": ["Der Koffer ist sehr schwer.", "The suitcase is very heavy."],
+  "leicht": ["Die Prüfung war leicht.", "The exam was easy."],
+  "spannend": ["Das Fußballspiel war sehr spannend.", "The football match was very exciting."],
+  "praktisch": ["Ein Rucksack ist sehr praktisch.", "A backpack is very practical."],
+  "komisch": ["Das Essen riecht komisch.", "The food smells strange."],
+  "bekannt": ["Der Kölner Dom ist sehr bekannt.", "Cologne Cathedral is very famous."],
+  "unbedingt": ["Ich will unbedingt einmal fliegen!", "I really want to fly at least once!"],
+  "anstrengend sein": ["Die Arbeit im Garten ist anstrengend.", "Working in the garden is exhausting."],
+  "immer besser": ["Dein Deutsch wird immer besser.", "Your German is getting better and better."],
+  "immer besser werden": ["Mit viel Übung wird man immer besser.", "With lots of practice you get better and better."],
+  "dieses Buch / jenes Buch": ["Dieses Buch kenne ich, aber jenes nicht.", "I know this book, but not that one."],
+
+  // ---- A2.1 · Einkaufen & Hochzeit
+  "die Käsesorte, die Käsesorten": ["Im Supermarkt gibt es viele Käsesorten.", "There are many kinds of cheese in the supermarket."],
+  "der Emmentaler": ["Ich möchte 200 Gramm Emmentaler, bitte.", "I'd like 200 grams of Emmental, please."],
+  "der Bergkäse": ["Der Bergkäse kommt aus den Alpen.", "The mountain cheese comes from the Alps."],
+  "die Plastikfolie": ["Der Käse ist in Plastikfolie.", "The cheese is in plastic wrap."],
+  "das Kühlregal": ["Die Milch steht im Kühlregal.", "The milk is in the refrigerated section."],
+  "das Holzregal": ["Im Keller steht ein altes Holzregal.", "There's an old wooden shelf in the basement."],
+  "das Etikett, die Etiketten": ["Auf dem Etikett steht der Preis.", "The price is on the label."],
+  "das Karohemd": ["Er trägt gern Karohemden.", "He likes wearing checked shirts."],
+  "der Helm, die Helme": ["Beim Fahrradfahren trage ich immer einen Helm.", "I always wear a helmet when cycling."],
+  "der Müll": ["Kannst du bitte den Müll rausbringen?", "Can you take the trash out, please?"],
+  "die Mülltonne": ["Die Mülltonne steht vor dem Haus.", "The bin is in front of the house."],
+  "der Hügel, die Hügel": ["Hinter dem Dorf ist ein kleiner Hügel.", "There's a small hill behind the village."],
+  "der Zaun, die Zäune": ["Der Hund springt über den Zaun.", "The dog jumps over the fence."],
+  "die Erde": ["Die Erde im Garten ist sehr trocken.", "The soil in the garden is very dry."],
+  "das Paar": ["Anna und Tom sind ein schönes Paar.", "Anna and Tom are a lovely couple."],
+  "die Braut": ["Die Braut trägt ein weißes Kleid.", "The bride is wearing a white dress."],
+  "der Bräutigam": ["Der Bräutigam ist sehr nervös.", "The groom is very nervous."],
+  "das Brautkleid": ["Das Brautkleid ist wunderschön.", "The wedding dress is beautiful."],
+  "der Blumenstrauß": ["Ich kaufe einen Blumenstrauß für meine Mutter.", "I'm buying a bouquet of flowers for my mother."],
+  "der Strauß": ["Die Braut wirft den Strauß.", "The bride throws the bouquet."],
+  "gewinnen": ["Wer hat das Spiel gewonnen?", "Who won the game?"],
+  "der Sieger / die Siegerin": ["Die Siegerin bekommt einen Preis.", "The winner gets a prize."],
+  "selbst": ["Das habe ich selbst gemacht.", "I made that myself."],
+  "basteln": ["Die Kinder basteln Sterne aus Papier.", "The children are making stars out of paper."],
+  "selbst gebastelt": ["Die Karte ist selbst gebastelt.", "The card is handmade."],
+  "reingehen": ["Es ist kalt. Lass uns reingehen!", "It's cold. Let's go inside!"],
+  "rausgehen": ["Ich gehe kurz raus.", "I'm just stepping outside."],
+  "reinkommen": ["Komm doch rein!", "Come on in!"],
+
+  // ---- A2.2
+  "die Weide, die Weiden": ["Die Pferde stehen auf der Weide.", "The horses are in the pasture."],
+  "die Heide": ["Im August blüht die Heide lila.", "In August the heath blooms purple."],
+  "aufpassen": ["Pass auf, das Auto!", "Watch out, the car!"],
+  "auf Kinder aufpassen": ["Heute Abend passe ich auf die Kinder von meiner Schwester auf.", "Tonight I'm looking after my sister's children."],
+  "vorbereiten": ["Ich bereite mich auf die Prüfung vor.", "I'm preparing for the exam."],
+  "abgeschlossen": ["Die Tür ist abgeschlossen.", "The door is locked."],
+  "der Schulabschluss": ["Nach dem Schulabschluss möchte ich studieren.", "After finishing school I want to go to university."],
+  "stattfinden": ["Das Konzert findet im Park statt.", "The concert takes place in the park."],
+  "die Abteilung": ["Er arbeitet in der Marketing-Abteilung.", "He works in the marketing department."],
+  "entscheiden": ["Ich kann mich nicht entscheiden.", "I can't decide."],
+  "das Ereignis, die Ereignisse": ["Die Hochzeit war ein großes Ereignis.", "The wedding was a big event."],
+  "berichten": ["Die Zeitung berichtet über den Unfall.", "The newspaper reports on the accident."],
+  "der Führerschein": ["Ich mache gerade den Führerschein.", "I'm getting my driving licence right now."],
+  "treten": ["Er tritt den Ball ins Tor.", "He kicks the ball into the goal."],
+  "betreten": ["Bitte betreten Sie den Rasen nicht.", "Please keep off the grass."],
+  "verpassen": ["Schnell, sonst verpassen wir den Zug!", "Quick, or we'll miss the train!"],
+  "ärgerlich": ["Das ist wirklich ärgerlich!", "That's really annoying!"],
+  "durch (+ Akk.)": ["Wir gehen durch den Park.", "We're walking through the park."],
+  "wegen (+ Gen.)": ["Wegen des Regens bleiben wir zu Hause.", "Because of the rain we're staying at home."],
+  "an … vorbei (+ Dat.)": ["Gehen Sie an der Kirche vorbei.", "Go past the church."],
+  "bis zu (+ Dat.)": ["Gehen Sie bis zur Ampel.", "Go as far as the traffic light."],
+  "gegenüber von (+ Dat.)": ["Die Apotheke ist gegenüber vom Bahnhof.", "The pharmacy is opposite the station."],
+  "der Essensstand, die Essensstände": ["Am Essensstand gibt es Bratwurst.", "There's bratwurst at the food stand."],
+  "die Zuckerwatte": ["Die Kinder essen rosa Zuckerwatte.", "The children are eating pink cotton candy."],
+  "das Karussell": ["Mein Sohn fährt gern Karussell.", "My son likes riding the carousel."],
+  "der Autoscooter": ["Komm, wir fahren Autoscooter!", "Come on, let's go on the bumper cars!"],
+  "das Riesenrad": ["Vom Riesenrad sieht man die ganze Stadt.", "From the Ferris wheel you can see the whole city."],
+  "die Achterbahn": ["Ich habe Angst vor der Achterbahn.", "I'm scared of the roller coaster."],
+  "das Bierzelt": ["Im Bierzelt spielt eine Band.", "A band is playing in the beer tent."],
+  "der Lebkuchen": ["Auf dem Weihnachtsmarkt kaufe ich Lebkuchen.", "At the Christmas market I buy gingerbread."],
+  "die gebrannten Mandeln (Pl.)": ["Die gebrannten Mandeln riechen so gut!", "The candied almonds smell so good!"],
+  "die Losbude": ["An der Losbude habe ich einen Teddy gewonnen.", "I won a teddy at the raffle stall."],
+
+  // ---- B1.1
+  "sich ärgern (über + Akk.)": ["Ich ärgere mich über den Regen.", "I'm annoyed about the rain."],
+  "sich erinnern (an + Akk.)": ["Ich kann mich noch immer gut an diesen Sprung erinnern.", "I can still remember that jump well."],
+  "sich unterhalten (mit + Dat. / über + Akk.)": ["Wir unterhalten uns über das Projekt.", "We are chatting about the project."],
+  "sich freuen auf (+ Akk.)": ["Ich freue mich auf den Urlaub.", "I'm looking forward to the holiday."],
+  "sich freuen über (+ Akk.)": ["Ich freue mich über das Geschenk.", "I'm happy about the present."],
+  "sich verabschieden": ["Ich muss mich jetzt verabschieden. Tschüss!", "I have to say goodbye now. Bye!"],
+  "sich langweilen": ["Ohne Handy langweilt er sich.", "Without his phone he gets bored."],
+  "sich kümmern um (+ Akk.)": ["Wer kümmert sich um den Hund?", "Who's looking after the dog?"],
+  "gestresst von (+ Dat.) sein": ["Ich bin gestresst von der Arbeit.", "I'm stressed by work."],
+  "pflegen": ["Sie pflegt ihre alte Mutter.", "She takes care of her elderly mother."],
+  "bedienen": ["Welcher Kellner bedient uns heute?", "Which waiter is serving us today?"],
+  "beschützen": ["Der Hund beschützt das Haus.", "The dog guards the house."],
+  "die Sicherheit": ["Sicherheit ist beim Fallschirmspringen sehr wichtig.", "Safety is very important in skydiving."],
+  "genehmigen": ["Mein Chef hat den Urlaub genehmigt.", "My boss approved the holiday."],
+  "der Antrag, die Anträge": ["Ich stelle einen Antrag auf ein Visum.", "I'm applying for a visa."],
+  "der Beamte / die Beamtin": ["Die Beamtin prüft meinen Pass.", "The official checks my passport."],
+  "leer": ["Der Kühlschrank ist leer.", "The fridge is empty."],
+  "leeren": ["Kannst du bitte den Mülleimer leeren?", "Can you empty the bin, please?"],
+  "der Hundekot": ["Bitte nehmen Sie den Hundekot mit!", "Please pick up after your dog!"],
+  "Ich bin nicht eingeladen.": ["Gehst du zu Leas Party? – Nein, ich bin nicht eingeladen.", "Are you going to Lea's party? – No, I'm not invited."],
+  "der Nehmer": ["Der Arbeitnehmer bekommt sein Gehalt vom Arbeitgeber.", "The employee gets his salary from the employer."],
+  "anschießen": ["Der Jäger hat das Reh nur angeschossen.", "The hunter only wounded the deer."],
+
+  // ---- B1.2 · Redewendungen
+  "einen Blick auf etwas (Akk.) werfen": ["Kannst du kurz einen Blick auf meinen Text werfen?", "Can you take a quick look at my text?"],
+  "Bock auf etwas haben": ["Ich habe voll Bock auf BJJ heute Abend.", "I'm totally up for BJJ tonight."],
+  "Ich habe voll Bock auf BJJ heute Abend.": ["Kommst du mit ins Training? – Klar! Ich habe voll Bock auf BJJ heute Abend.", "Are you coming to training? – Sure! I'm totally up for BJJ tonight."],
+  "Null Bock!": ["Hausaufgaben machen? Null Bock!", "Doing homework? Can't be bothered!"],
+  "Bescheid sagen": ["Sag mir einfach Bescheid, wenn du fertig bist.", "Just let me know when you're done."],
+  "Bescheid wissen": ["Weiß Tom schon Bescheid? – Ja, ich habe es ihm gesagt.", "Does Tom know already? – Yes, I told him."],
+  "Sag mir einfach Bescheid, wenn du fertig bist.": ["Ich warte im Café. Sag mir einfach Bescheid, wenn du fertig bist.", "I'll wait in the café. Just let me know when you're done."],
+  "Ich habe ein Buch über BJJ gelesen.": ["Ich habe ein Buch über BJJ gelesen. Es war sehr interessant.", "I read a book about BJJ. It was very interesting."],
+  "Wir unterhalten uns über das Projekt.": ["Komm bitte später wieder. Wir unterhalten uns gerade über das Projekt.", "Please come back later. We're chatting about the project right now."],
+
+  // ---- Unregelmäßige Verben (the others share keys with the cards above)
+  "tragen": ["Sie trägt heute ein rotes Kleid.", "She's wearing a red dress today."],
+  "waschen": ["Er wäscht am Samstag sein Auto.", "He washes his car on Saturday."],
+  "fahren": ["Fährst du mit dem Zug oder mit dem Auto?", "Are you going by train or by car?"],
+  "schlafen": ["Psst, das Baby schläft noch.", "Shh, the baby is still sleeping."],
+  "essen": ["Was isst du zum Frühstück?", "What do you eat for breakfast?"],
+  "sprechen": ["Sprichst du Deutsch? – Ja, ein bisschen.", "Do you speak German? – Yes, a little."],
+  "helfen": ["Hilfst du mir bitte?", "Will you help me, please?"],
+  "empfehlen": ["Ich kann es nur empfehlen. Es ist ein super Gefühl!", "I highly recommend it. It's a great feeling!"],
+  "lesen": ["Sie liest jeden Abend ein Buch.", "She reads a book every evening."],
+  "sehen": ["Siehst du den Regenbogen?", "Do you see the rainbow?"],
+};
+
+// Cards that come from the Freddy live-chat text show the whole passage, not just one sentence.
+const PASSAGES = {
+  intro: ["Ich begrüße euch heute im Live-Chat mit unserem Fallschirmsprung-Experten Freddy Jung. Freddy Jung hat in den letzten 20 Jahren bereits über 19 000 Sprünge gemacht. Er ist DER Profi.",
+          "Today I welcome you (all) to the live chat with our skydiving expert Freddy Jung. In the last 20 years, Freddy Jung has already done more than 19,000 jumps. He is THE pro."],
+  firstJump: ["Mit 18 Jahren bin ich das erste Mal gesprungen. Ich kann mich noch immer gut an diesen Sprung erinnern. Er war genial!",
+              "At 18 I jumped for the first time. I can still remember that jump well. It was brilliant!"],
+  tom: ["Ich will einen Tandemsprung machen. Ich will unbedingt einmal fliegen! Geht das?",
+        "I want to do a tandem jump. I really want to fly at least once! Is that possible?"],
+  recommend: ["Ich kann es nur empfehlen. Es ist ein super Gefühl!",
+              "I highly recommend it. It's a great feeling!"],
+  never: ["Niemals möchte ich das probieren!!! Es ist doch auch sehr gefährlich, oder?",
+          "I would never want to try that!!! It's surely really dangerous too, isn't it?"],
+  safe: ["Fallschirmspringen ist nicht gefährlich. Es passieren fast nie Unfälle. Fallschirmspringen ist sehr sicher.",
+         "Skydiving isn't dangerous. There are almost never any accidents. Skydiving is very safe."],
+};
+const FROM_TEXT = {
+  "begrüßen (+ Akk.)": "intro", "in den letzten … Jahren": "intro", "bereits": "intro", "der Profi, die Profis": "intro",
+  "das erste Mal": "firstJump", "mit … Jahren": "firstJump", "noch immer / immer noch": "firstJump",
+  "sich erinnern (an + Akk.)": "firstJump", "genial": "firstJump",
+  "wollen": "tom", "unbedingt": "tom", "einmal": "tom", "Geht das?": "tom",
+  "Ich kann es nur empfehlen.": "recommend", "empfehlen": "recommend", "können": "recommend", "das Gefühl, die Gefühle": "recommend",
+  "niemals": "never", "möchten": "never", "probieren / ausprobieren": "never", "Es ist doch gefährlich.": "never",
+  "…, oder?": "never", "gefährlich": "never",
+  "fast": "safe", "der Unfall, die Unfälle": "safe", "passieren": "safe", "sicher": "safe",
+};
+for (const [key, p] of Object.entries(FROM_TEXT)) EXAMPLES[key] = PASSAGES[p];
+
+const $ = id => document.getElementById(id);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+
+let deFirst = store.get("deFirst", true);
+let current = null;   // { name, cards } being studied
+let queue = [], missed = new Set(), total = 0, doneCount = 0, flipped = false;
+
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const allCards = set => set.topics.flatMap(t => t.cards);
+function colorize(de) {
+  const m = de.match(/^(der|die|das)\b/);
+  return m ? `<span class="${m[1]}">${esc(de)}</span>` : esc(de);
+}
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function show(id) { for (const s of ["home", "study", "done", "browse", "artikel", "praep"]) $(s).classList.toggle("hidden", s !== id); }
+function renderDir() { $("dirBtn").textContent = deFirst ? "Showing: Deutsch → English" : "Showing: English → Deutsch"; }
+
+function renderHome() {
+  const everything = { name: "Alle Karten", desc: "Every card from every set, mixed",
+    topics: [{ name: "Alle", cards: SETS.flatMap(allCards) }] };
+  $("setGrid").innerHTML = "";
+  $("setGrid").appendChild(artikelTile());
+  $("setGrid").appendChild(praepTile());
+  for (const set of [...SETS, everything]) {
+    const cards = allCards(set);
+    const t = document.createElement("div");
+    t.className = "tile";
+    t.innerHTML = `<div class="head"><div><h3>${esc(set.name)} <span class="muted" style="font-size:.7em;font-weight:normal">${cards.length} cards</span></h3>
+      <div class="desc">${esc(set.desc)}</div></div>
+      <div class="actions"><button class="primary">Study all</button><button>Browse</button></div></div>`;
+    const [studyBtn, browseBtn] = t.querySelectorAll("button");
+    studyBtn.onclick = () => startSet({ name: set.name, cards });
+    browseBtn.onclick = () => browseSet(set);
+    if (set.topics.length > 1) {
+      const chips = document.createElement("div");
+      chips.className = "chips";
+      for (const topic of set.topics) {
+        const c = document.createElement("button");
+        c.className = "chip";
+        c.innerHTML = `${esc(topic.name)} <span>${topic.cards.length}</span>`;
+        c.onclick = () => startSet({ name: `${set.name} · ${topic.name}`, cards: topic.cards });
+        chips.appendChild(c);
+      }
+      t.appendChild(chips);
+    }
+    $("setGrid").appendChild(t);
+  }
+  show("home");
+}
+
+function startSet(deck) {
+  current = deck;
+  queue = shuffle([...deck.cards]);
+  missed = new Set();
+  total = queue.length;
+  doneCount = 0;
+  $("studyTitle").textContent = deck.name;
+  show("study");
+  renderCard();
+}
+
+function renderCard() {
+  if (!queue.length) return finish();
+  const [de, en, note] = queue[0];
+  flipped = false;
+  $("front").innerHTML = deFirst ? colorize(de) : esc(en);
+  $("backMain").innerHTML = deFirst ? esc(en) : colorize(de);
+  $("backNote").textContent = note || "";
+  // Before flipping, show the example in the front side's language so it doesn't give the answer away
+  const ex = EXAMPLES[de];
+  $("exFront").classList.add("hidden");
+  $("exFrontText").textContent = ex ? (deFirst ? ex[0] : ex[1]) : "";
+  $("exBackDe").textContent = ex ? ex[0] : "";
+  $("exBackEn").textContent = ex ? ex[1] : "";
+  $("exBack").classList.toggle("hidden", !ex);
+  $("exBtn").classList.toggle("hidden", !ex);
+  $("back").classList.add("hidden");
+  $("answerBtns").classList.add("hidden");
+  $("counter").textContent = `${doneCount} / ${total}`;
+  $("progress").style.width = (doneCount / total * 100) + "%";
+}
+
+function flip() {
+  if (flipped || !queue.length) return;
+  flipped = true;
+  $("exFront").classList.add("hidden");
+  $("exBtn").classList.add("hidden");
+  $("back").classList.remove("hidden");
+  $("answerBtns").classList.remove("hidden");
+}
+
+function toggleExample() {
+  if (flipped || !queue.length || !EXAMPLES[queue[0][0]]) return;
+  $("exFront").classList.toggle("hidden");
+}
+
+function answer(knew) {
+  if (!flipped) return;
+  const card = queue.shift();
+  if (knew) {
+    doneCount++;
+  } else {
+    missed.add(card);
+    // Show it again a few cards later
+    queue.splice(Math.min(3, queue.length), 0, card);
+  }
+  renderCard();
+}
+
+function finish() {
+  $("progress").style.width = "100%";
+  $("doneText").textContent = missed.size
+    ? `You finished all ${total} cards. You needed a second try on ${missed.size}.`
+    : `You finished all ${total} cards on the first try. Super!`;
+  $("missedBtn").classList.toggle("hidden", missed.size === 0);
+  show("done");
+}
+
+function browseSet(set) {
+  $("browseTitle").textContent = set.name;
+  $("browseBody").innerHTML = set.topics.map(topic =>
+    `<h4>${esc(topic.name)}</h4><table><tbody>` +
+    topic.cards.map(([de, en, note]) => {
+      const ex = EXAMPLES[de];
+      return `<tr><td><b>${colorize(de)}</b>${ex ? `<div class="ex">${esc(ex[0])}<br><i>${esc(ex[1])}</i></div>` : ""}</td>` +
+        `<td>${esc(en)}${note ? `<div class="note">${esc(note)}</div>` : ""}</td></tr>`;
+    }).join("") +
+    `</tbody></table>`).join("");
+  show("browse");
+}
+
+// ---------- Präpositionen üben ----------
+// [category, sentence with ___, options, answer, why, English]
+const PREP_CATS = ["Zeit", "Ort & Richtung", "Wechsel (Wo? / Wohin?)", "Akkusativ & Dativ", "Verben + Präposition", "Kontraktionen", "da- / wo-"];
+const PREP = [
+  // ---- Zeit
+  ["Zeit", "Der Bus fährt ___ 7 Uhr ab.", ["um", "am", "im"], "um", "um + clock time.", "The bus leaves at 7 o'clock."],
+  ["Zeit", "Der Ausflug beginnt ___ Freitag.", ["am", "um", "im"], "am", "am + day of the week (am = an dem).", "The outing starts on Friday."],
+  ["Zeit", "___ Juli fahren wir ans Meer.", ["Im", "Am", "Um"], "Im", "im + month (im = in dem).", "In July we're going to the sea."],
+  ["Zeit", "___ Sommer ist es hier sehr warm.", ["Im", "Am", "Um"], "Im", "im + season.", "In summer it's very warm here."],
+  ["Zeit", "Wir treffen uns ___ Wochenende.", ["am", "im", "um"], "am", "am Wochenende, am Morgen, am Abend: fixed with am.", "We're meeting on the weekend."],
+  ["Zeit", "Ich arbeite nie ___ der Nacht.", ["in", "am", "um"], "in", "Exception: in der Nacht (but am Tag).", "I never work at night."],
+  ["Zeit", "Bitte melden Sie sich ___ spätestens 15. Juni an.", ["bis", "um", "am"], "bis", "bis spätestens = by … at the latest (a deadline).", "Please register by June 15 at the latest."],
+  ["Zeit", "Ich arbeite von Montag ___ Freitag.", ["bis", "zu", "nach"], "bis", "von … bis … = from … to …", "I work from Monday to Friday."],
+  ["Zeit", "Ich wohne ___ drei Jahren in Berlin. (Ich wohne noch dort.)", ["seit", "vor", "in"], "seit", "seit + Dativ = since / for, and it's still going on.", "I've been living in Berlin for three years."],
+  ["Zeit", "Ich habe ___ drei Jahren in Berlin gewohnt. (Jetzt nicht mehr.)", ["vor", "seit", "für"], "vor", "vor + Dativ = ago.", "I lived in Berlin three years ago."],
+  ["Zeit", "Der Zug kommt ___ zehn Minuten an.", ["in", "seit", "vor"], "in", "in + Dativ = in (a time from now).", "The train arrives in ten minutes."],
+  ["Zeit", "___ dem Essen gehe ich spazieren.", ["Nach", "Seit", "Um"], "Nach", "nach + Dativ = after.", "After the meal I go for a walk."],
+  ["Zeit", "Wir fahren ___ zwei Wochen in den Urlaub.", ["für", "seit", "vor"], "für", "für + Akkusativ = for (a planned duration).", "We're going on holiday for two weeks."],
+  ["Zeit", "___ 18 Jahren bin ich das erste Mal gesprungen.", ["Mit", "Bei", "Seit"], "Mit", "mit + age: Mit 18 Jahren = at 18.", "At 18 I jumped for the first time."],
+  ["Zeit", "Wir kommen ___ 7 Uhr. (ungefähr)", ["gegen", "um", "seit"], "gegen", "gegen + time = around, about.", "We'll come around 7 o'clock."],
+
+  // ---- Ort & Richtung
+  ["Ort & Richtung", "Ich fahre ___ Berlin.", ["nach", "in", "zu"], "nach", "Cities and countries without an article: nach (Wohin?).", "I'm going to Berlin."],
+  ["Ort & Richtung", "Ich komme ___ Berlin.", ["aus", "von", "bei"], "aus", "aus = from (origin).", "I come from Berlin."],
+  ["Ort & Richtung", "Wir fahren ___ die Türkei.", ["in", "nach", "zu"], "in", "Countries with an article (die Türkei) take in + Akkusativ.", "We're going to Turkey."],
+  ["Ort & Richtung", "Ich gehe heute ___ Arzt.", ["zum", "beim", "vom"], "zum", "People, Wohin?: zu (zum = zu dem).", "I'm going to the doctor today."],
+  ["Ort & Richtung", "Ich bin gerade ___ Arzt.", ["beim", "zum", "vom"], "beim", "People, Wo?: bei (beim = bei dem).", "I'm at the doctor's right now."],
+  ["Ort & Richtung", "Ich komme gerade ___ Arzt.", ["vom", "beim", "zum"], "vom", "People, Woher?: von (vom = von dem).", "I'm just coming from the doctor's."],
+  ["Ort & Richtung", "Am Freitag fahren wir ___ Nordsee.", ["an die", "in die", "nach der"], "an die", "Sea, coast, lake: an + Akkusativ (Wohin?).", "On Friday we're going to the North Sea."],
+  ["Ort & Richtung", "Wir sind jetzt ___ Hause.", ["zu", "nach", "in"], "zu", "zu Hause = at home (Wo?).", "We're at home now."],
+  ["Ort & Richtung", "Ich gehe jetzt ___ Hause.", ["nach", "zu", "in"], "nach", "nach Hause = (going) home (Wohin?).", "I'm going home now."],
+  ["Ort & Richtung", "Meine Großeltern wohnen ___ Land (nicht in der Stadt).", ["auf dem", "in dem", "an dem"], "auf dem", "auf dem Land = in the countryside (fixed phrase).", "My grandparents live in the countryside."],
+  ["Ort & Richtung", "Ich fahre jeden Tag ___ Bus zur Arbeit.", ["mit dem", "in dem", "auf dem"], "mit dem", "Transport: mit + Dativ.", "I take the bus to work every day."],
+  ["Ort & Richtung", "Wir gehen ___ Fuß.", ["zu", "mit", "per"], "zu", "zu Fuß = on foot.", "We're walking."],
+  ["Ort & Richtung", "Norderney ist eine Insel. Wir fahren ___ Norderney.", ["nach", "an", "zu"], "nach", "Islands by name: nach (Wohin?), auf (Wo?).", "We're going to Norderney."],
+  ["Ort & Richtung", "Wir bleiben eine Woche ___ Norderney.", ["auf", "in", "an"], "auf", "Islands by name, Wo?: auf Norderney.", "We're staying on Norderney for a week."],
+  ["Ort & Richtung", "Sie wohnt ___ ihrer Oma.", ["bei", "zu", "mit"], "bei", "bei = at someone's place.", "She lives at her grandma's."],
+  ["Ort & Richtung", "Heute Abend gehe ich ___ meiner Oma.", ["zu", "bei", "nach"], "zu", "zu + person = going to someone.", "Tonight I'm going to my grandma's."],
+
+  // ---- Wechsel (Wo? / Wohin?)
+  ["Wechsel (Wo? / Wohin?)", "Das Buch liegt auf ___ Tisch.", ["dem", "den"], "dem", "liegen = Wo? (at rest) → Dativ.", "The book is lying on the table."],
+  ["Wechsel (Wo? / Wohin?)", "Ich lege das Buch auf ___ Tisch.", ["den", "dem"], "den", "legen = Wohin? (movement) → Akkusativ.", "I put the book on the table."],
+  ["Wechsel (Wo? / Wohin?)", "Wir sind an ___ Nordsee.", ["der", "die"], "der", "Wo? → Dativ (die Nordsee → der Nordsee).", "We're at the North Sea."],
+  ["Wechsel (Wo? / Wohin?)", "Wir fahren an ___ Nordsee.", ["die", "der"], "die", "Wohin? → Akkusativ.", "We're going to the North Sea."],
+  ["Wechsel (Wo? / Wohin?)", "Ich bin in ___ Küche.", ["der", "die"], "der", "Wo? → Dativ.", "I'm in the kitchen."],
+  ["Wechsel (Wo? / Wohin?)", "Ich gehe in ___ Küche.", ["die", "der"], "die", "Wohin? → Akkusativ.", "I'm going into the kitchen."],
+  ["Wechsel (Wo? / Wohin?)", "Die Lampe hängt über ___ Tisch.", ["dem", "den"], "dem", "hängen (hat gehangen) = Wo? → Dativ.", "The lamp hangs above the table."],
+  ["Wechsel (Wo? / Wohin?)", "Er stellt den Tisch zwischen ___ Sofa und das Fenster.", ["das", "dem"], "das", "stellen = Wohin? → Akkusativ (das Sofa).", "He puts the table between the sofa and the window."],
+  ["Wechsel (Wo? / Wohin?)", "Du kannst zwischen ___ Sportprogramm und einem Kulturprogramm wählen.", ["einem", "ein"], "einem", "A choice with zwischen is always Dativ.", "You can choose between a sports program and a cultural program."],
+  ["Wechsel (Wo? / Wohin?)", "Das Auto steht vor ___ Haus.", ["dem", "das"], "dem", "stehen = Wo? → Dativ.", "The car is parked in front of the house."],
+  ["Wechsel (Wo? / Wohin?)", "Er legt das Handy neben ___ Teller.", ["den", "dem"], "den", "legen = Wohin? → Akkusativ (der Teller → den Teller).", "He puts the phone next to the plate."],
+  ["Wechsel (Wo? / Wohin?)", "Die Katze schläft unter ___ Bett.", ["dem", "das"], "dem", "schlafen = Wo? → Dativ.", "The cat is sleeping under the bed."],
+  ["Wechsel (Wo? / Wohin?)", "Sie hängt die Jacke an ___ Tür.", ["die", "der"], "die", "hängen (hängte) with an object = Wohin? → Akkusativ.", "She hangs the jacket on the door."],
+  ["Wechsel (Wo? / Wohin?)", "Wir treffen uns vor ___ Kino.", ["dem", "das"], "dem", "sich treffen = Wo? → Dativ (the meeting place).", "We're meeting in front of the cinema."],
+  ["Wechsel (Wo? / Wohin?)", "Ich setze mich auf ___ Stuhl.", ["den", "dem"], "den", "sich setzen = Wohin? → Akkusativ.", "I sit down on the chair."],
+
+  // ---- Akkusativ & Dativ
+  ["Akkusativ & Dativ", "Ich gehe durch ___ Park.", ["den", "dem"], "den", "durch always takes the Akkusativ.", "I walk through the park."],
+  ["Akkusativ & Dativ", "Das Geschenk ist für ___.", ["mich", "mir"], "mich", "für always takes the Akkusativ.", "The present is for me."],
+  ["Akkusativ & Dativ", "Er kommt ohne ___ Freundin.", ["seine", "seiner"], "seine", "ohne always takes the Akkusativ (feminine: seine).", "He's coming without his girlfriend."],
+  ["Akkusativ & Dativ", "Wir sitzen um ___ Tisch.", ["den", "dem"], "den", "um always takes the Akkusativ.", "We're sitting around the table."],
+  ["Akkusativ & Dativ", "Ich bin gegen ___ Idee.", ["die", "der"], "die", "gegen always takes the Akkusativ.", "I'm against the idea."],
+  ["Akkusativ & Dativ", "Die Einladung gilt für ___ Mitarbeiter.", ["alle", "allen"], "alle", "für + Akkusativ plural: alle.", "The invitation is for all employees."],
+  ["Akkusativ & Dativ", "Ich fahre mit ___ Bus.", ["dem", "den"], "dem", "mit always takes the Dativ.", "I'm going by bus."],
+  ["Akkusativ & Dativ", "Das ist ein Geschenk von ___ Mutter.", ["meiner", "meine"], "meiner", "von always takes the Dativ (feminine: meiner).", "This is a gift from my mother."],
+  ["Akkusativ & Dativ", "Ich komme aus ___ Türkei.", ["der", "die"], "der", "aus always takes the Dativ (die Türkei → der Türkei).", "I come from Turkey."],
+  ["Akkusativ & Dativ", "Sie wohnt bei ___ Eltern.", ["ihren", "ihre"], "ihren", "bei + Dativ; plural Dativ: ihren.", "She lives with her parents."],
+  ["Akkusativ & Dativ", "Nach ___ Arbeit gehe ich schwimmen.", ["der", "die"], "der", "nach always takes the Dativ.", "After work I go swimming."],
+  ["Akkusativ & Dativ", "Ich lerne seit ___ Jahr Deutsch.", ["einem", "ein"], "einem", "seit always takes the Dativ.", "I've been learning German for a year."],
+
+  // ---- Verben + Präposition
+  ["Verben + Präposition", "Ich freue mich ___ den Ausflug nächste Woche.", ["auf", "über", "an"], "auf", "sich freuen auf + Akk. = to look forward to (future).", "I'm looking forward to the outing next week."],
+  ["Verben + Präposition", "Ich freue mich ___ das Geschenk. Es ist wunderschön!", ["über", "auf", "für"], "über", "sich freuen über + Akk. = to be happy about (now / past).", "I'm happy about the present. It's beautiful!"],
+  ["Verben + Präposition", "Ich warte ___ den Bus.", ["auf", "für", "an"], "auf", "warten auf + Akk.", "I'm waiting for the bus."],
+  ["Verben + Präposition", "Ich erinnere mich gern ___ den Urlaub.", ["an", "auf", "über"], "an", "sich erinnern an + Akk.", "I like remembering the holiday."],
+  ["Verben + Präposition", "Ich ärgere mich ___ den Regen.", ["über", "auf", "an"], "über", "sich ärgern über + Akk.", "I'm annoyed about the rain."],
+  ["Verben + Präposition", "Ich spreche ___ meinem Chef.", ["mit", "über", "für"], "mit", "sprechen mit + Dat. = to talk to someone.", "I'm talking to my boss."],
+  ["Verben + Präposition", "Wir sprechen ___ das Wetter.", ["über", "mit", "bei"], "über", "sprechen über + Akk. = to talk about something.", "We're talking about the weather."],
+  ["Verben + Präposition", "Ich interessiere mich ___ Musik.", ["für", "an", "auf"], "für", "sich interessieren für + Akk.", "I'm interested in music."],
+  ["Verben + Präposition", "Wer kümmert sich ___ den Hund?", ["um", "für", "auf"], "um", "sich kümmern um + Akk.", "Who's taking care of the dog?"],
+  ["Verben + Präposition", "Pass bitte ___ die Kinder auf!", ["auf", "an", "über"], "auf", "aufpassen auf + Akk.", "Please look after the children!"],
+  ["Verben + Präposition", "Ich nehme ___ einem Deutschkurs teil.", ["an", "in", "bei"], "an", "teilnehmen an + Dat.", "I'm taking part in a German course."],
+  ["Verben + Präposition", "Mit 18 habe ich ___ dem Studium angefangen.", ["mit", "an", "zu"], "mit", "anfangen mit + Dat.", "At 18 I started university."],
+  ["Verben + Präposition", "Er träumt ___ einem Haus am Meer.", ["von", "an", "über"], "von", "träumen von + Dat.", "He dreams of a house by the sea."],
+  ["Verben + Präposition", "Ich habe Angst ___ Spinnen.", ["vor", "von", "für"], "vor", "Angst haben vor + Dat.", "I'm afraid of spiders."],
+  ["Verben + Präposition", "Ich frage dich ___ dem Weg.", ["nach", "für", "auf"], "nach", "fragen nach + Dat.", "I'm asking you for directions."],
+  ["Verben + Präposition", "Wir bitten ___ Ihre Anmeldung.", ["um", "für", "auf"], "um", "bitten um + Akk. (from your email).", "We ask for your registration."],
+  ["Verben + Präposition", "Ich danke dir ___ deine Hilfe.", ["für", "an", "um"], "für", "danken für + Akk.", "Thank you for your help."],
+  ["Verben + Präposition", "Ich lade dich ___ meinem Geburtstag ein.", ["zu", "an", "auf"], "zu", "einladen zu + Dat.", "I'm inviting you to my birthday."],
+  ["Verben + Präposition", "Ich verabschiede mich ___ meinen Freunden.", ["von", "mit", "an"], "von", "sich verabschieden von + Dat.", "I'm saying goodbye to my friends."],
+  ["Verben + Präposition", "Er entscheidet sich ___ das Kitesurfen.", ["für", "an", "auf"], "für", "sich entscheiden für + Akk.", "He decides on kitesurfing."],
+  ["Verben + Präposition", "Ich gratuliere dir ___ Geburtstag.", ["zum", "am", "im"], "zum", "gratulieren zu + Dat. (zum = zu dem).", "Happy birthday to you."],
+  ["Verben + Präposition", "Ich bereite mich ___ die Prüfung vor.", ["auf", "für", "an"], "auf", "sich vorbereiten auf + Akk.", "I'm preparing for the exam."],
+
+  // ---- Kontraktionen
+  ["Kontraktionen", "Wir gehen ___ Kino.", ["ins", "im", "am"], "ins", "in das = ins (Wohin?).", "We're going to the cinema."],
+  ["Kontraktionen", "Wir sind ___ Kino.", ["im", "ins", "am"], "im", "in dem = im (Wo?).", "We're at the cinema."],
+  ["Kontraktionen", "Ich fahre ___ Meer.", ["ans", "am", "im"], "ans", "an das = ans (Wohin?).", "I'm going to the sea."],
+  ["Kontraktionen", "Wir sind ___ Meer.", ["am", "ans", "im"], "am", "an dem = am (Wo?).", "We're at the sea."],
+  ["Kontraktionen", "Die Einladung ___ Firmenausflug ist da.", ["zum", "zur", "beim"], "zum", "zu dem = zum (der Firmenausflug is masculine).", "The invitation to the company outing is here."],
+  ["Kontraktionen", "Ich gehe ___ Bahnhof.", ["zum", "zur", "ins"], "zum", "zu dem = zum (der Bahnhof).", "I'm going to the train station."],
+  ["Kontraktionen", "Ich gehe ___ Post.", ["zur", "zum", "ins"], "zur", "zu der = zur (die Post).", "I'm going to the post office."],
+  ["Kontraktionen", "Kommst du ___ Party?", ["zur", "zum", "ins"], "zur", "zu der = zur (die Party).", "Are you coming to the party?"],
+  ["Kontraktionen", "Ich fahre ___ Arbeit.", ["zur", "zum", "ins"], "zur", "zu der = zur (die Arbeit).", "I'm going to work."],
+
+  // ---- da- / wo-
+  ["da- / wo-", "Freust du dich auf die Reise? – Ja, ich freue mich ___.", ["darauf", "dafür", "daran"], "darauf", "sich freuen auf → darauf (for things).", "Are you looking forward to the trip? – Yes, I'm looking forward to it."],
+  ["da- / wo-", "___ wartest du? – Auf den Bus.", ["Worauf", "Wofür", "Woran"], "Worauf", "warten auf → worauf? (question about a thing).", "What are you waiting for? – For the bus."],
+  ["da- / wo-", "Viele haben Angst vor Prüfungen. – Ich habe auch Angst ___.", ["davor", "dafür", "dazu"], "davor", "Angst haben vor → davor (for things).", "Many people are afraid of exams. – I'm afraid of them too."],
+  ["da- / wo-", "Interessierst du dich für Kitesurfen? – Ja, ich interessiere mich ___.", ["dafür", "darüber", "dazu"], "dafür", "sich interessieren für → dafür.", "Are you interested in kitesurfing? – Yes, I'm interested in it."],
+  ["da- / wo-", "Auf wen wartest du? – Ich warte ___ meine Freundin.", ["auf", "darauf", "worauf"], "auf", "For people use the preposition + noun, not darauf.", "Who are you waiting for? – I'm waiting for my girlfriend."],
+];
+
+function praepTile() {
+  const groups = [{ name: "Alle", items: PREP }, ...PREP_CATS.map(c => ({ name: c, items: PREP.filter(q => q[0] === c) }))];
+  const t = document.createElement("div");
+  t.className = "tile artikel-tile";
+  t.innerHTML = `<div class="head"><div><h3>Präpositionen üben <span class="muted" style="font-size:.7em;font-weight:normal">${PREP.length} questions</span></h3>
+    <div class="desc">Pick the right preposition or article. You see why after each answer.</div></div></div>`;
+  const chips = document.createElement("div");
+  chips.className = "chips";
+  for (const g of groups) {
+    const c = document.createElement("button");
+    c.className = "chip";
+    c.innerHTML = `${esc(g.name)} <span>${g.items.length}</span>`;
+    c.onclick = () => startPrep({ name: `Präpositionen · ${g.name}`, items: g.items });
+    chips.appendChild(c);
+  }
+  t.appendChild(chips);
+  return t;
+}
+
+let pDeck = null, pQueue = [], pMissed = new Set(), pTotal = 0, pDoneCount = 0, pAnswered = false, pOpts = [];
+
+function startPrep(deck) {
+  pDeck = deck;
+  pQueue = shuffle([...deck.items]);
+  pMissed = new Set();
+  pTotal = pQueue.length;
+  pDoneCount = 0;
+  $("pTitle").textContent = deck.name;
+  $("pPlay").classList.remove("hidden");
+  $("pDone").classList.add("hidden");
+  show("praep");
+  renderPrep();
+}
+
+function renderPrep() {
+  if (!pQueue.length) return finishPrep();
+  pAnswered = false;
+  const item = pQueue[0];
+  pOpts = shuffle([...item[2]]);
+  $("pSentence").textContent = item[1].replace("___", "_____");
+  $("pCard").className = "card";
+  $("pResult").classList.add("hidden");
+  $("pNextWrap").classList.add("hidden");
+  const box = $("pOptions");
+  box.innerHTML = "";
+  pOpts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.innerHTML = `<span class="k">${i + 1}</span>${esc(o)}`;
+    b.onclick = () => answerPrep(o);
+    box.appendChild(b);
+  });
+  $("pCounter").textContent = `${pDoneCount} / ${pTotal}`;
+  $("pProgress").style.width = (pDoneCount / pTotal * 100) + "%";
+}
+
+function answerPrep(opt) {
+  if (pAnswered || !pQueue.length) return;
+  pAnswered = true;
+  const [, q, , ans, why, en] = pQueue[0];
+  const right = opt === ans;
+  $("pCard").className = "card " + (right ? "right" : "wrong");
+  $("pVerdict").className = "verdict " + (right ? "right" : "wrong");
+  $("pVerdict").textContent = right ? "✓ Richtig!" : `✗ Falsch – it's "${ans}"`;
+  $("pFull").textContent = q.replace("___", ans);
+  $("pEn").textContent = en;
+  $("pWhy").textContent = "💡 " + why;
+  $("pResult").classList.remove("hidden");
+  $("pNextWrap").classList.remove("hidden");
+  [...$("pOptions").children].forEach((b, i) => {
+    if (pOpts[i] === ans) b.classList.add("is-right");
+    else if (pOpts[i] === opt) b.classList.add("is-wrong");
+    b.disabled = true;
+  });
+  if (!right) pMissed.add(pQueue[0]);
+}
+
+function nextPrep() {
+  if (!pAnswered) return;
+  const item = pQueue.shift();
+  if ($("pCard").classList.contains("wrong")) pQueue.splice(Math.min(4, pQueue.length), 0, item);
+  else pDoneCount++;
+  renderPrep();
+}
+
+function finishPrep() {
+  $("pProgress").style.width = "100%";
+  $("pDoneText").textContent = pMissed.size
+    ? `You got through all ${pTotal} questions. ${pMissed.size} needed a second try.`
+    : `All ${pTotal} questions right on the first try. Wunderbar!`;
+  $("pMissedBtn").classList.toggle("hidden", pMissed.size === 0);
+  $("pPlay").classList.add("hidden");
+  $("pDone").classList.remove("hidden");
+}
+
+$("pNext").onclick = nextPrep;
+$("pBack").onclick = $("pHome").onclick = renderHome;
+$("pRestart").onclick = () => startPrep(pDeck);
+$("pMissedBtn").onclick = () => startPrep({ name: pDeck.name, items: [...pMissed] });
+
+// ---------- Artikel üben ----------
+// Pull single nouns ("der Mann, die Männer" -> der / Mann) out of the flashcards.
+function nounsFrom(cards) {
+  const out = [], seen = new Set();
+  for (const [de, en] of cards) {
+    if (de.includes("(Pl.)")) continue;
+    const m = de.match(/^(der|die|das) ([A-ZÄÖÜ][A-Za-zÄÖÜäöüß]*)/);
+    if (!m || seen.has(m[2])) continue;
+    seen.add(m[2]);
+    out.push({ art: m[1], noun: m[2], full: de, en });
+  }
+  return out;
+}
+
+// Endings that (almost) always tell you the gender
+const RULES = [
+  [/(ung|heit|keit|schaft|ion|tät)$/, "die", "Nouns ending in -ung, -heit, -keit, -schaft, -ion, -tät are always die."],
+  [/(chen|lein)$/, "das", "Nouns ending in -chen or -lein are always das."],
+  [/(ling|ismus)$/, "der", "Nouns ending in -ling or -ismus are der."],
+];
+// Only show a rule when it really applies (der Kuchen ends in -chen but isn't a diminutive)
+const ruleFor = n => RULES.find(([re, art]) => re.test(n.noun) && art === n.art);
+
+function artikelTile() {
+  const groups = [{ name: "Alle", cards: SETS.flatMap(allCards) }, ...SETS.map(s => ({ name: s.name, cards: allCards(s) }))]
+    .map(g => ({ name: g.name, nouns: nounsFrom(g.cards) }))
+    .filter(g => g.nouns.length);
+  const t = document.createElement("div");
+  t.className = "tile artikel-tile";
+  t.innerHTML = `<div class="head"><div><h3>Artikel üben <span class="muted" style="font-size:.7em;font-weight:normal">${groups[0].nouns.length} nouns</span></h3>
+    <div class="desc">der, die or das? Pick the article for each noun.</div></div></div>`;
+  const chips = document.createElement("div");
+  chips.className = "chips";
+  for (const g of groups) {
+    const c = document.createElement("button");
+    c.className = "chip";
+    c.innerHTML = `${esc(g.name)} <span>${g.nouns.length}</span>`;
+    c.onclick = () => startArtikel({ name: `Artikel · ${g.name}`, nouns: g.nouns });
+    chips.appendChild(c);
+  }
+  t.appendChild(chips);
+  return t;
+}
+
+let aDeck = null, aQueue = [], aMissed = new Set(), aTotal = 0, aDoneCount = 0, aAnswered = false;
+
+function startArtikel(deck) {
+  aDeck = deck;
+  aQueue = shuffle([...deck.nouns]);
+  aMissed = new Set();
+  aTotal = aQueue.length;
+  aDoneCount = 0;
+  $("aTitle").textContent = deck.name;
+  $("aPlay").classList.remove("hidden");
+  $("aDone").classList.add("hidden");
+  show("artikel");
+  renderArtikel();
+}
+
+function renderArtikel() {
+  if (!aQueue.length) return finishArtikel();
+  aAnswered = false;
+  $("aNoun").textContent = aQueue[0].noun;
+  $("aCard").className = "card";
+  $("aResult").classList.add("hidden");
+  $("aBtns").classList.remove("hidden");
+  $("aNextWrap").classList.add("hidden");
+  $("aCounter").textContent = `${aDoneCount} / ${aTotal}`;
+  $("aProgress").style.width = (aDoneCount / aTotal * 100) + "%";
+}
+
+function answerArtikel(art) {
+  if (aAnswered || !aQueue.length) return;
+  aAnswered = true;
+  const n = aQueue[0], right = art === n.art;
+  $("aCard").className = "card " + (right ? "right" : "wrong");
+  $("aVerdict").className = "verdict " + (right ? "right" : "wrong");
+  $("aVerdict").textContent = right ? "✓ Richtig!" : `✗ Falsch – it's ${n.art}`;
+  $("aFull").innerHTML = colorize(n.full);
+  $("aMeaning").textContent = n.en;
+  const rule = ruleFor(n);
+  $("aRule").textContent = rule ? "💡 " + rule[2] : "";
+  $("aRule").classList.toggle("hidden", !rule);
+  $("aResult").classList.remove("hidden");
+  $("aBtns").classList.add("hidden");
+  $("aNextWrap").classList.remove("hidden");
+  if (!right) aMissed.add(n);
+}
+
+function nextArtikel() {
+  if (!aAnswered) return;
+  const n = aQueue.shift();
+  if ($("aCard").classList.contains("wrong")) aQueue.splice(Math.min(4, aQueue.length), 0, n);
+  else aDoneCount++;
+  renderArtikel();
+}
+
+function finishArtikel() {
+  $("aProgress").style.width = "100%";
+  $("aDoneText").textContent = aMissed.size
+    ? `You got through all ${aTotal} nouns. You got ${aMissed.size} wrong at least once.`
+    : `All ${aTotal} nouns right on the first try. Wunderbar!`;
+  $("aMissedBtn").classList.toggle("hidden", aMissed.size === 0);
+  $("aPlay").classList.add("hidden");
+  $("aDone").classList.remove("hidden");
+}
+
+for (const b of document.querySelectorAll("#aBtns button")) b.onclick = () => answerArtikel(b.dataset.art);
+$("aNext").onclick = nextArtikel;
+$("aBack").onclick = $("aHome").onclick = renderHome;
+$("aRestart").onclick = () => startArtikel(aDeck);
+$("aMissedBtn").onclick = () => startArtikel({ name: aDeck.name, nouns: [...aMissed] });
+
+$("card").onclick = flip;
+$("exBtn").onclick = toggleExample;
+$("againBtn").onclick = () => answer(false);
+$("gotBtn").onclick = () => answer(true);
+$("backBtn").onclick = $("homeBtn").onclick = $("browseBack").onclick = renderHome;
+$("restartBtn").onclick = () => startSet(current);
+$("missedBtn").onclick = () => startSet({ name: current.name, cards: [...missed] });
+$("dirBtn").onclick = () => { deFirst = !deFirst; store.set("deFirst", deFirst); renderDir(); if (!$("study").classList.contains("hidden")) renderCard(); };
+document.addEventListener("keydown", e => {
+  if (!$("praep").classList.contains("hidden")) {
+    if (e.code === "Space" || e.key === "Enter") { e.preventDefault(); nextPrep(); }
+    else if (/^[1-9]$/.test(e.key)) { const o = pOpts[Number(e.key) - 1]; if (o !== undefined) answerPrep(o); }
+    return;
+  }
+  if (!$("artikel").classList.contains("hidden")) {
+    const art = { "1": "der", "2": "die", "3": "das" }[e.key];
+    if (art) answerArtikel(art);
+    else if (e.code === "Space" || e.key === "Enter") { e.preventDefault(); nextArtikel(); }
+    return;
+  }
+  if ($("study").classList.contains("hidden")) return;
+  if (e.key === "e" || e.key === "E") toggleExample();
+  else if (e.code === "Space" || e.key === "Enter") { e.preventDefault(); flip(); }
+  else if (e.key === "1" || e.key === "ArrowLeft") answer(false);
+  else if (e.key === "2" || e.key === "ArrowRight") answer(true);
+});
+
+renderDir();
+renderHome();
+</script>

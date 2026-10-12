@@ -1,0 +1,546 @@
+pause	break
+neu	new
+hier	here
+Stadt	city
+Fertig!	ready, finished, completed
+buchstabieren	spell
+Morgen	tomorrow
+der Morgen	morning
+Natürlich	of course
+einfach	easy
+schwierig	hard
+kennenlernen	greeting
+oft	often
+kennen	know
+geben	to give
+begleiten	to accompany
+wichtig	important
+treffen	to meet
+zeigen	to show
+schauen	to look
+die Flasche	bottle
+die Tasche	bag
+das Handy	cell phone
+der Stift	pen
+der Rücksack	backpack
+die Tasse, die Tassen	cup
+die Brille, die Brillen	glasses
+die Sonbrille	sunglasses
+bleiben	to stay
+kaufen	to buy
+suchen	to look for, to search
+kochen	to cook, to boil
+arbeiten	to work
+auch	also
+gern	to like
+billig	cheap, (bad quality)
+günstig	cheap, favorable (cheap but good quality)
+teuer	expensive
+lecker	delicious
+schmeken	to taste/be tasty, to taste good
+zahlen	ödemek
+alt	old
+das Eis	ice, ice cream
+der Bahnhof	train station
+die Bahn, die Bahnen	train
+nett	nice
+der Sohn	son
+klugg	smart
+die Frau	woman, wife
+die Tochter	daughter
+der Mann, die Männer	husband
+dir Schwester	sister
+der Junge	boy
+Bis bald	See you soon
+Bis später	See you later
+Es tut mir leid	I'm sorry
+mehr	more
+brauchen	to need
+Rechnung	bill, check
+die Speisekarte	menu
+heiß	hot
+dann	then
+die Zahl, die Zahlen	number
+Zahlen	to pay
+viele	many
+Wie viele?	How many?
+Einladung	invitation
+Geburstag	birthday
+zu	to, at, in, for
+von	from, of
+das Geschenk	gift
+schenken	to give (a gift)
+spaß	fun
+herz	hearth
+herzlich	warm, hearthy, sincere, friendly
+Glückwunsch	Congratulations
+auch	also
+Traum	dream, ideal
+Traumfrau	dream woman
+geben	to give
+teuer	expensive
+aufregend	exciting
+meine Süße	my sweetheart, my sweetie
+kennenlernen	to get to know
+Fundbüro, das, -s	lost property office
+da	there
+da drüben	over there
+verloren	lost
+abgeben	to hand in, deliver, hand over, return, leave
+brauchen	to need
+aber	but
+nehmen	to take
+keine Ahnung	no idea
+mögen	to like
+ganz genau	exactly
+Fahrrad	bicycle
+nehmen	to take
+Fahrkarte	ticket
+backen	to bake
+die Küche	kitchen
+der Koch, die Köchin	cook, chef
+kochen	to cook
+der Kuchen	cake
+gewinnen	to win
+das Fleisch	meat
+das Schweinenfleisch	pork
+das Rindfleisch	beef (sığır eti)
+das Lammfleisch	lamb meat (kuzu eti) yenecek et de budur
+das Hünchen (auch: das Hähnchen)	chicken
+die Ente	duck
+das Schinken	ham (domuz jambonu)
+können	can
+wollen	to want
+malen	to paint
+ein bisschen	a little bit
+gar nicht so gut	Not (at all) well.(worse than nicht so gut) (yarrak gibi)
+toll	great
+der Nachttisch	bedside table (komodin)
+der Nachtisch	dessert
+es gibt	there is, there are
+Rüchrei	scrambled eggs
+die Wurst	sausage
+die Bratwurst	bratwurst
+Saverkraut	
+denn	because
+aber	but
+auch	also
+die Semmel	bread roll
+die Breze(Bayern), Brezel	pretzel
+mit	with
+ohne	without
+der Kelner, die Kelnerin	waiter
+der Gast, die Gäste	guest/guests
+Bedingung	condition
+Bedienung	waiter/waitress
+etwas	something
+alles	everything
+nichts	nothing
+zusammen	together (hesap öderken kullanabilirsin)
+getrennt	separate (hesap öderken kullanabilirsin)
+Trinkgeld	tip
+Schtimmt so!	keep the change
+möchten	to want, would like (more polite than wollen)
+nie	never
+manchmal	sometimes
+bestellen	to order (in a restaurant)
+bezahlen	to pay
+am liebsten	most of all (superlative form of gern, used when you say what you like the most out of several options)
+geschlossen	closed
+die Ferien (pl)	vacation (generally of students), holidays
+dann	then
+aufräumen	to tidy up
+aufstehen	to get up
+Ankunft	arrival
+ankommen	to arrive
+Abfahrt	departure
+abfahren	to depart
+aufwachen	to wake up
+aufmachen	to open, to open up
+einschlafen	to fall asleep, to go to sleep
+einkaufen	to shop/buy
+einladen	to invite
+abholen	to pick up, to collect
+abwaschen	to wash up (dishes)
+abtrocknen	to dry the dishes
+anziehen	to put on clothes
+auswählen	to choose
+ausfüllen	to fill out
+Gastgeber	host
+Gast	guest
+Wohngemeinschaft (WG)	shared apartment
+feiern	to celebrate (also used instead of hang out)
+mitbringen	to bring along
+mitnehmen	to take along
+mitkommen	to come along
+abwaschen	to wash the dishes (or car)
+teilnehmen	to participate, to take part
+viel	much, a lot
+wenig	a little
+lieben	to love
+geliebt
+leben	to live
+zu Fuß	by foot
+Prozent	percent
+Ersti	freshman
+allein	alone
+spazieren	walk, stroll
+Landkarte	map
+die Wanderkarte	hiking map
+besichtigen	to visit
+verheiratet	married
+unterrichten	to teach
+übersetzen	to translate
+Übersetzer/Übersetzerin	translator
+Verkaufer/Verkauferin	salesperson
+sorgen	to take care of someone, something / to worry
+Ausbildung	education
+waschen	to wash
+Bereich	area, field, sector, range, region
+Stelle	job, position, place, spot
+sollen	should
+sagen	to say
+Ratschlag	advice
+Tipp	tip, advice
+der Rücken	back of body (sırt)
+gerade	just, straight, exactly
+faul	lazy
+Leute	people
+rechnen	to calculate
+die Bewegung	movement
+benutzen	to use
+trocken	dry
+leider	unfortunately
+Lass (Lassen) uns gehen!	Let's go!
+liegen	to lie, be located
+schlecht	bad
+süss	sweet, cute
+nichts zu danken (Response to "Danke")	Don't mention it. (Ne demek), No need to thank (Teşekküre gerek yok)
+nichts zu machen	nothing to do
+Gern geschehen (Response to "Danke")	my pleasure, you are welcome
+tut mir leid	I'm sorry
+geben	to give
+Ich habe einen Fehler gemacht	I made a mistake
+Fehler	mistake
+Vereinigten Staaten	United States
+in Ordnung sein	to be OK, to be in order
+in Ordnung	ok, alright
+gestern	yesterday
+zuerst, zunächst	first
+danach	after that, afterwards
+später	later
+am Ende/zum Schluss	in the end, finally
+duzen	to call someone 'du', to address with the familiar 'du'
+spät	late
+schlect	bad
+siezen	to call someone 'Sie', to use the polite form of address
+Du kannst mich duzen.	You can say "you" to me, You can call me informally
+Eltern	parents
+Geschwister	siblings
+der Opa	grandpa
+die Oma	grandma
+Wie bitte?	I beg your pardon?
+wiederholen	to repeat
+geboren	to be born
+wohnen	to live
+geschieden	divorced, separated
+ledig	single, unmarried
+die Lösung	solution
+wenn	if, when
+wenn ja, ...	if yes, if so, ...
+die Unterschrift	signature
+der Spitzname	nickname, username
+der Nachbar, die Nachbarin	neighbor
+der Laden	shop, store
+das Geschäft	store, business
+einkaufen gehen, shoppen gehen	to go shopping
+gesund	healthy
+die Gesundheit	health, well-being
+die Birne	pear
+die Erdbeere	strawberry
+die Traube	grape
+die Gurke	cucumber
+die Kirche	church
+schmecken	to taste
+schmeken nach + Dat	to taste like
+Ich habe Hunger	I'm hungry
+Nahrungsmittel	food products
+das Kuchen	cake
+der Joghurt	yogurt
+der Käse	cheese
+der Reis	rice
+das Ei	egg
+das Fleisch	meat
+der Fisch	fish
+durstig	thirsty
+Bist du durstig?/Hast du Durst?	Are you thirsty?
+die Getränke	drinks
+das Bier, die Biere	beer, beers
+der Wein	wine
+doch	...
+noch; Bist du noch in der Universität?, Ich möchte noch ein Bier, bitte.	still, more; Are you still at the university?, I would like another / one more beer, please.
+Zeit	time
+die Birne	pear
+Stück Kuchen	a piece of cake, a slice of cake
+Wie viel kostet das?, Was kostet das?	How much does it cost?
+Das kostet ... = Das macht ...	That costs ...
+der Preis	price
+das Hähnchen	chicken (more common to use for food)
+das Huhn	chicken (more common to use for aninal)
+immer	always
+manchmal	sometimes, occasionally, at times
+zusammen	together
+getrennt	separated, seperatley, seperate checks
+schnell	fast, quick; quickly
+nie	never
+niemand	nobody, no one
+der Kellner/die Kellnerin	waiter/waitress
+dürfen, darf, durfte, hat gedurft	to be allowed to, may
+Darf es was zum Trinken sein?	("was" is short for "etwas") May it be something to drink?, Can I get you something to drink?
+für mich	for me
+Kommt gleich. / Kommt sofort	Coming right up.
+Speisen	meals, food
+die Speisekarte	menu
+sofort, gleich	immediately, right away
+bestellen	to order (food)
+bereit	ready, prepared
+Sind Sie bereit zu bestellen?	Are you ready to order?
+das Sauerkraut	sauerkraut (pickled cabbage)
+backen	to bake
+die Nachspiese, der Nachtisch	dessert
+der Tisch	table, desk
+Rechnung	bill, check
+bekommen	to get, receive
+köstlich/lecker	delicious
+Bargeld	cash
+Ich zahle Bar.	I pay in cash., I'll pay in cash.
+Stimmt so.	keep the change (actually means "thats right")
+wieder	again, once more
+die Geschichte	history; story
+die Gäste	guests
+etwas zum Trinken / etwas zum Essen	something to drink / something to eat
+ein Glas Weißwein	a glass of white wine
+das Bier vom Fass	draft beer, beer on tap
+kommt gleich	comes right away
+das Trinkgeld	tip (for waiter/waitress)
+War alles in Ordnung?	Was everything okay?, Was everything alright?
+Alles ist in Ordnung.	everything is fine
+Können wir bitte die Rechnung bekommen?	Can we get the bill please?
+die Wohnung	apartment, flat
+das Badezimmer, das Bad	bathroom
+baden	to bathe
+links	left, to the left, on the left
+links von	to the left of, left from
+hinten	at the back, behind, back, to the back
+rechts	right, to the right, on the right
+dort	there, over there
+dort rechts/links	there to the right/left
+neben	beside, next to
+vorne	front, in front of, ahead
+da vorne	there in the front, ahead
+hässlich	ugly, nasty, hideous
+dunkel	dark
+hell	light (adj.), bright
+der Flur	corridor, hallway
+zu	too (with adjective or adverb)
+vielleicht	maybe, perhaps
+Ja, gerne.	Yes, gladly
+bestellen	to order (food)
+das Erdgeschoss (E.G.)	ground floor
+der Stock	floor
+der erste Stock	first floor (above ground floor)
+der zweite Stock	second floor
+der dritte Stock	third floor
+der Dachboden	attic
+der Garten	garden
+der Balkon	balcony
+die Garage	garage
+die Treppe	stairs
+der Keller	basement; cellar
+der Schrank	closet, cabinet, cupboard
+der Couchtisch	coffee table
+der Teppich	carpet
+das Bett, -en	bed
+der Fernseher	TV
+der Stuhl	chair
+das Regal	shelf, bookshelf, bookcase
+das Bild	picture, image
+Wie gefält dir...? / We gefält Ihnen...?	How do you like...?
+Es gefällt mir.	I like it (it pleases me)
+Es gefällt mir nicht.	I don't like it.
+Es gefällt mir sehr (gut).	I like it very much.
+Das gefällt mir nicht so gut.	I don't really like it.
+Das gefällt mir überhaupt nicht.	I don't like it at all.
+gefallen	to like, to please
+das Gebaüde	building
+der Herd	stove
+der Kühlschrank	fridge, refrigerator
+die Spüle	kitchen sink
+die Washmaschine	washing machine
+die Dusche	shower
+die Badewanne	bathtub
+das Waschbecken	bathroom sink
+der Spiegel	mirror
+daneben/nebenan	next to
+noch	still, yet (daha, hala, henüz)
+Noch einmal, bitte!	One more time, please.
+kühl	cool (temperature)
+gelb	yellow
+sein	his
+ihr	her
+der Zahn, die Zähne	tooth, teeth
+sich die Zähne putzen	to brush one's teeth
+sich aniehen	get dressed
+bis	until, by, up to
+aufräumen	to tidy up/to clean up
+der Besuch	the visit
+zu Besuch kommen	to come for a visit
+zur Arbeit fahren/gehen	to go to work
+nach Hause kommen	to come home
+Wie spät ist es?	What time is it?
+Es ist halb zehn/ Es ist neun Uhr dreißig	It is 9:30
+Wie viel Uhr ist es?	What time is it?
+vor	before, in front of
+von ... bis ... Uhr	from... to... o'clock
+nach	after
+schlafen gehen, ins Bett gehen	to go to bed
+jeden Sommer	every summer
+das Meer	sea, ocean
+Welcher Tag ist heute?	What day is today?
+Samstag	Saturday
+Welcher Tag war gestern?	What day was yesterday?
+Welcher Tag ist morgen?	What day is tomorrow?
+aus	from, out of
+Urlaub	vacation, holiday
+aufmachen	to open
+zumachen	to close
+anrufen	to call (on the phone)
+früh	early
+Ich stehe nicht gerne früh auf.	I don't like to get up early.
+der Herbst	autumn
+der Frühling	spring
+die Jahreszeit, -en	season
+einmal pro Woche / einmal in der Woche	once a week
+zweimal pro Monat / zweimal im Monat	twice a month
+täglich	daily
+jeden Tag	every day
+wöchentlich	weekly
+monatlich	monthly
+alle zwei Wochen	every two weeks
+regnen	to rain
+Sei pünktlich!	Be punctual / Don't be late
+Bis Samstag.	Until saturday! / See you Saturday!
+fragen	to ask
+frei sein	to be free
+pünktlich	punctual
+toll	great, awesome, fantastic
+sollen	should
+Wie ist das Wetter?	How's the weather?
+es regnet	It's raining
+der Regen	rain
+Es schneit. (schneien)	It's snowing
+der Schnee	snow
+Die Sonne scheint.	The sun is shining
+Es ist sonnig	It is sunny
+warm	warm
+kalt	cold
+die Wolke	cloud
+wolkig	cloudy
+der Wind, die Winde	wind, winds
+windig	windy
+der Nebel	fog
+das Gewitter	thunderstorm
+der Regenbogen	rainbow🌈
+die Temperatur	temperature
+das Grad	degree (temperature)
+es ist 20 Grad	It is 20 degrees (Celsius)
+der Norden	north
+der Süden	south
+der Westen	west
+der Osten	east
+zwischen	between
+Die temperatur ist zwischen 15 und 22 Grad.	The temprature is between 15 and 22 degrees.
+einige	some, a few
+besuchen	to visit
+nehmen	to take
+reisen	to travel
+aufziegen	to show, point out
+gemütlich	comfortable, cozy
+die Küste, die Küsten	coast, shore, seaside
+tauchen	to dive
+am meisten ...	most, mostly, most of all
+Ski fahren	to ski
+Schlittschuhlaufen	to ice skate
+dort gibt es	there is/are
+Tiere	animals
+Zelt	tent
+Am schönsten ist,	The nicest thing is,
+reisen	to travel
+einige	some, a few
+draußen	outside, outdoors
+verbringen	to spend time
+letztes Jahr	last year
+müde	tired, sleepy
+Hausaufgaben machen	to do homework
+tragen	to wear
+warten	to wait
+andere	other, another, different
+der Jogginganzug (comes from anziehen)	jogging suit
+Welche Farbe ist das?	What color is that?
+Ich bin nicht sicher.	I'm not sure
+das Schwimmbad	swimming pool
+die Badehose	swimming trunks
+der Badeanzug	swimsuit
+das Handtuch	towel
+der Lieblingssport	favorite sport
+die Lieblingsmusik	favorite music
+das Lieblingslied	favorite song
+ziemlich gut	pretty good
+ziemlich schlecht	pretty bad
+kompliziert	complicated, complex
+schwer	difficult, heavy
+leicht	easy, light
+Aufgabe	assignment
+einsteigen	to board, to get on, binmek
+austeigen	to get off, inmek
+spannend	exciting, thrilling
+langweilig	boring, dull
+praktisch	practical, functional, handy
+denken	to think
+glauben	to believe
+Stimmt das?	Is that right?
+Was denkst du?	What do you think?
+Denkst du, wir sollen...	Do you think we should...?
+Das stimmt.	That's right.
+Unsinn!/Quatsch!	nonsense, rubbish
+der Krankenpfleger, die Krankenpflegerin(or Krankenschwester)	male nurse, female nurse
+der Zahnartz, die Zahnärtze/ die Zahnärtzin,nen	dentist
+der Polizist, die Polizistin	police officer
+Polizei	police (force) (not person, but institution or organization)
+der Geschäftsmann/die Geschäftsfrau	businessman/businesswoman
+der Anwalt, die Anwältin	lawyer
+Der Frisor/Die Frisorin	hairdresser
+das Krankenhaus	hospital
+als	when, as, while
+der Verkäufer, die Verkäuferin	salesman/saleswoman
+Ich bin arbeitslos und auf Arbeitssuche.	I am unemployed and looking for a job.
+Arbeitssuche	job search
+Glück haben	to have luck
+glüklich	happy, lucky
+gut, besser, am besten	good, better, best
+verbessern	to improve
+verschieden	different, various
+auswählen	to choose
+verbringen	to spend time
+vielleicht	maybe, perhaps
+das Hörverstehen	listening comprehension
+die Aussprache	pronunciation
+der Gesprächpartner, - / die Gesprächpartnerin, -nen	speaking partner
+kennen	to know (a person)
+jemanden	someone (accusative)
+jemand	someone, somebody
+das Büro, die Büros	office
+die Sitzung	meeting, session
+dauern	to last, to take
+schon	already, yet
+schicken	to send

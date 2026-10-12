@@ -1,0 +1,11 @@
+tragen	trage, trägst, trägt, tragen, tragt, tragen
+waschen	wasche, wäschst, wäscht, waschen, wascht, waschen
+fahren	fahre, fährst, fährt, fahren, fahrt, fahren
+schlafen	schlafe, schläfst, schläft, schlafen, schlaft, schlafen
+treten	trete, trittst, tritt, treten, tretet, treten
+essen	esse, isst, isst, essen, esst, essen
+sprechen	spreche, sprichst, spricht, sprechen, sprecht, sprechen
+geben	gebe, gibst, gibt, geben, gebt, geben
+helfen	helfe, hilfst, hilft, helfen, helft, helfen
+lesen	lese, liest, liest, lesen, lest, lesen
+sehen	sehe, siehst, sieht, sehen, seht, sehen

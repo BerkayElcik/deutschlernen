@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>German Notes</title>
+<style>
+  body { font-family: Georgia, serif; max-width: 760px; margin: 40px auto; padding: 0 16px; background: #faf8f4; color: #222; line-height: 1.6; }
+  h1 { margin-bottom: 10px; }
+  .tabs { display: flex; gap: 6px; border-bottom: 3px solid #d4a017; margin-bottom: 20px; }
+  .tabs button { font: inherit; font-size: 1.05em; padding: 8px 18px; border: 1px solid #e2ddd0; border-bottom: none; border-radius: 8px 8px 0 0; background: #f3efe4; color: #555; cursor: pointer; }
+  .tabs button.active { background: #d4a017; border-color: #d4a017; color: #222; font-weight: bold; }
+  .page { display: none; }
+  .page.active { display: block; }
+  .card { background: #fff; border: 1px solid #e2ddd0; border-left: 5px solid #d4a017; border-radius: 6px; padding: 14px 18px; margin: 18px 0; }
+  .card h2 { margin: 0 0 6px; font-size: 1.3em; color: #8a5a00; }
+  .grammar .card { border-left-color: #7aa800; }
+  .grammar .card h2 { color: #4f6e00; }
+  .meaning { font-weight: bold; }
+  .example { background: #f3efe4; padding: 8px 12px; border-radius: 4px; margin-top: 8px; }
+  .example b { color: #b03a00; }
+  .label { color: #777; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.05em; }
+  .rule { background: #eef6dc; border-radius: 4px; padding: 8px 12px; margin: 10px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #d6d0c0; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #f3efe4; }
+  td.verb { font-weight: bold; color: #b03a00; }
+  td.weil { font-weight: bold; color: #4f6e00; }
+  .table-scroll { overflow-x: auto; }
+  .akk { color: #b03a00; font-weight: bold; }
+  .dat { color: #4f6e00; font-weight: bold; }
+  .chunk { background: #f3efe4; padding: 1px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<h1>German Notes</h1>
+
+<div class="tabs">
+  <button data-page="wortschatz">Wortschatz</button>
+  <button data-page="grammatik">Grammatik</button>
+  <button data-page="praepositionen">Präpositionen</button>
+</div>
+
+<!-- ============ WORTSCHATZ ============ -->
+<section class="page" id="wortschatz">
+
+<div class="card">
+  <h2>das erste Mal</h2>
+  <div class="meaning">the first time</div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Mit 18 Jahren bin ich <b>das erste Mal</b> gesprungen.<br>
+    <i>At 18 I jumped for the first time.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>sich erinnern an + Akkusativ</h2>
+  <div class="meaning">to remember (something)</div>
+  <p>Reflexive verb: ich erinnere <b>mich</b>, du erinnerst <b>dich</b>. After <i>an</i> use the accusative case.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich kann <b>mich</b> noch immer gut <b>an diesen Sprung</b> erinnern.<br>
+    <i>I can still remember that jump well.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>noch immer / immer noch</h2>
+  <div class="meaning">still (continuing until now)</div>
+  <p>Literally "still always". Both word orders are correct.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich kann mich <b>noch immer</b> gut an diesen Sprung erinnern.<br>
+    <i>I can still remember that jump well.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>unbedingt</h2>
+  <div class="meaning">absolutely, at all costs</div>
+  <p>Adds strong emphasis to a wish or a need.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich will <b>unbedingt</b> einmal fliegen!<br>
+    <i>I absolutely want to fly once!</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Geht das?</h2>
+  <div class="meaning">Is that possible?</div>
+  <p>Literally "Goes that?". Related: <i>Das geht nicht</i> = that's not possible.</p>
+  <p>Yes/no question, so the verb comes <b>first</b>: <i><b>Geht</b> das? <b>Kommst</b> du mit?</i></p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich will einen Tandemsprung machen. <b>Geht das?</b><br>
+    <i>I want to do a tandem jump. Is that possible?</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Ich kann es nur empfehlen.</h2>
+  <div class="meaning">I highly recommend it. / I can't recommend it enough.</div>
+  <p><b>nur empfehlen</b> does NOT mean "only recommend" in the sense of "just a little".
+     It means "the only thing I can do is recommend it": a <b>strong</b> recommendation.
+     Very common in reviews: <i>Das Restaurant kann ich nur empfehlen!</i></p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    <b>Ich kann es nur empfehlen.</b> Es ist ein super Gefühl!<br>
+    <i>I highly recommend it. It's a great feeling!</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>empfehlen + Dativ (person) + Akkusativ (thing)</h2>
+  <div class="meaning">to recommend</div>
+  <p>Irregular: ich empfehle · du <b>empfiehlst</b> · er <b>empfiehlt</b> · Präteritum: empfahl · Perfekt: hat <b>empfohlen</b></p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Ich empfehle <b>dir</b> <b>das Buch</b>.<br>
+    <i>I recommend the book to you.</i> (dir = Dativ, das Buch = Akkusativ)<br><br>
+    Ich kann <b>es</b> nur empfehlen.<br>
+    <i>I highly recommend it.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>das Gefühl, die Gefühle</h2>
+  <div class="meaning">feeling</div>
+  <p>From the verb <i>fühlen</i> (to feel).</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Es ist ein super <b>Gefühl</b>!<br>
+    <i>It's a great feeling!</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>niemals / nie</h2>
+  <div class="meaning">never</div>
+  <p><i>niemals</i> is a stronger form of <i>nie</i>, like "never ever".</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    <b>Niemals</b> möchte ich das probieren!<br>
+    <i>I would never want to try that!</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>probieren / ausprobieren</h2>
+  <div class="meaning">to try (out); to taste</div>
+  <p><i>probieren</i> is also used for tasting food. <i>ausprobieren</i> = to try out something new.<br>
+     <i>ausprobieren</i> is separable: ich probiere … <b>aus</b> · Perfekt: hat <b>ausprobiert</b>.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Niemals möchte ich das <b>probieren</b>!<br>
+    <i>I would never want to try that!</i><br><br>
+    <b>Probier</b> mal den Kuchen!<br>
+    <i>Try the cake!</i><br><br>
+    Ich möchte Kitesurfen <b>ausprobieren</b>. Und du?<br>
+    <i>I'd like to try out kitesurfing. And you?</i><br><br>
+    Kitesurfen habe ich noch nie <b>ausprobiert</b>.<br>
+    <i>I've never tried kitesurfing.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>doch (softening word)</h2>
+  <div class="meaning">surely, after all, you know</div>
+  <p>Here <i>doch</i> does not mean "yes". It says "this is obvious, you surely agree". Germans use it all the time in speech.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Es ist <b>doch</b> auch sehr gefährlich, oder?<br>
+    <i>It's surely really dangerous too, isn't it?</i><br><br>
+    Das weißt du <b>doch</b>!<br>
+    <i>You know that (of course)!</i><br><br>
+    Komm <b>doch</b> mit!<br>
+    <i>Come along! (friendly: why don't you come along?)</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>gefährlich / die Gefahr</h2>
+  <div class="meaning">dangerous / danger</div>
+  <p>die Gefahr + <i>-lich</i> = gefährlich. More words built like this: der Freund → freundlich, das Herz → herzlich.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Es ist doch auch sehr <b>gefährlich</b>, oder?<br>
+    <i>It's really dangerous too, isn't it?</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>…, oder?</h2>
+  <div class="meaning">…, right? / …, isn't it?</div>
+  <p>Put <i>oder?</i> after a statement to ask the other person to agree. Very common in speech.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Es ist doch auch sehr gefährlich, <b>oder?</b><br>
+    <i>It's really dangerous too, isn't it?</i><br><br>
+    Das ist teuer, <b>oder?</b><br>
+    <i>That's expensive, isn't it?</i><br><br>
+    Du kommst morgen, <b>oder?</b><br>
+    <i>You're coming tomorrow, right?</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>fast = almost (false friend!)</h2>
+  <div class="meaning">almost, nearly</div>
+  <p><i>fast</i> does NOT mean "fast". Fast = <i>schnell</i>.<br>
+     fast nie = almost never · fast immer = almost always · fast alle = almost everyone</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Es passieren <b>fast nie</b> Unfälle.<br>
+    <i>There are almost never any accidents.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>der Unfall, die Unfälle</h2>
+  <div class="meaning">accident</div>
+  <p>Plural with umlaut: a → ä.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Es passieren fast nie <b>Unfälle</b>.<br>
+    <i>There are almost never any accidents.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>passieren (ist passiert)</h2>
+  <div class="meaning">to happen</div>
+  <p>Perfekt with <b>sein</b>: Was <b>ist</b> passiert? = What happened?</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Es <b>passieren</b> fast nie Unfälle.<br>
+    <i>Accidents almost never happen.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>sicher</h2>
+  <div class="meaning">safe; sure</div>
+  <p>Ich bin nicht sicher. = I'm not sure. · die Sicherheit = safety</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Fallschirmspringen ist sehr <b>sicher</b>.<br>
+    <i>Skydiving is very safe.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>um + Uhrzeit</h2>
+  <div class="meaning">at (a time)</div>
+  <p>Question: <i>Um wie viel Uhr?</i> = At what time?</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Abfahrt: Freitag 15. Juli <b>um 7 Uhr</b> am Firmenparkplatz mit einem Bus. Rückfahrt: <b>um 19 Uhr</b>.<br>
+    <i>Departure: Friday, July 15 at 7 am from the company parking lot by bus. Return trip: at 7 pm.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>am + Tag / Ort</h2>
+  <div class="meaning">on (a day) · at (a place)</div>
+  <p><i>am</i> = <i>an dem</i>. Days: am Freitag, am Montag. Parts of the day: am Morgen, am Abend (but: in der Nacht).</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Abfahrt: Freitag 15. Juli um 7 Uhr <b>am Firmenparkplatz</b> mit einem Bus.<br>
+    <i>Departure: Friday, July 15 at 7 am from the company parking lot by bus.</i><br><br>
+    Der Firmenausflug beginnt <b>am Freitag</b> um 7 Uhr.<br>
+    <i>The company outing starts on Friday at 7 am.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>bis spätestens …</h2>
+  <div class="meaning">by … at the latest</div>
+  <p><i>bis</i> = until, by · <i>spätestens</i> = at the latest. Together they give a deadline.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Wir bitten um Ihre Anmeldung <b>bis spätestens 15. Juni</b> bei Frau Lang.<br>
+    <i>We ask for your registration by June 15 at the latest with Ms Lang.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>nach Norderney / an die Nordsee</h2>
+  <div class="meaning">to Norderney / to the North Sea (direction: Wohin?)</div>
+  <p><b>nach</b> + city, country or island without an article: nach Berlin, nach Deutschland, nach Norderney.<br>
+     <b>an</b> + Akkusativ for a sea, a coast or a river: an die Nordsee, an die Küste, an den Rhein.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Dieses Jahr geht unser Firmenausflug <b>nach Norderney</b> <b>an die Nordsee</b>.<br>
+    <i>This year our company outing goes to Norderney on the North Sea.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>die Stadtführung, die Stadtführungen</h2>
+  <div class="meaning">guided city tour</div>
+  <p>die Stadt (city) + die Führung (tour). The last part decides the article.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Und für die Kulturfans haben wir eine <b>Stadtführung</b> organisiert – mit oder ohne Rad.<br>
+    <i>And for the culture fans we've organized a city tour – with or without a bike.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>seit + Dativ</h2>
+  <div class="meaning">since / for (it started in the past and is still going on)</div>
+  <p><b>Use the present tense</b> where English says "I have been …-ing". <i>seit</i> always takes the Dativ.</p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>✓ Right</th><th>✗ Wrong</th></tr>
+    <tr><td>Ich <b>tanze</b> seit zehn Jahren.</td><td>Ich habe seit zehn Jahren getanzt.</td></tr>
+    <tr><td>Ich <b>wohne</b> seit 2020 hier.</td><td>Ich habe seit 2020 hier gewohnt.</td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ja, sehr gut. Ich tanze schon <b>seit</b> über zehn Jahren.<br>
+    <i>Yes, very well. I've been dancing for more than ten years already.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>schon seit</h2>
+  <div class="meaning">already for / already since</div>
+  <p><i>schon</i> = already. It stresses how long something has been going on.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich tanze <b>schon seit</b> über zehn Jahren.<br>
+    <i>I've been dancing for more than ten years already.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>seit vs. vor vs. für</h2>
+  <div class="table-scroll">
+  <table>
+    <tr><th></th><th>Meaning</th><th>Example</th></tr>
+    <tr><td><b>seit</b> + Dat.</td><td>since / for: still going on</td><td>Ich tanze <b>seit</b> zehn Jahren.<br><i>I've been dancing for ten years (and I still do).</i></td></tr>
+    <tr><td><b>vor</b> + Dat.</td><td>ago: it's over</td><td>Ich habe <b>vor</b> zehn Jahren getanzt.<br><i>I danced ten years ago.</i></td></tr>
+    <tr><td><b>für</b> + Akk.</td><td>for: a planned duration</td><td>Ich bleibe <b>für</b> zehn Tage.<br><i>I'm staying for ten days.</i></td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Na, …?</h2>
+  <div class="meaning">So…? / Well…? (a friendly, informal opener)</div>
+  <p><i>na</i> has no direct translation. It makes a question or a greeting sound relaxed. It isn't a question word and doesn't change the grammar.</p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>German</th><th>Feels like</th></tr>
+    <tr><td><b>Na</b>, was macht ihr?</td><td>So, what are you up to?</td></tr>
+    <tr><td><b>Na</b>, wie geht's?</td><td>So, how's it going?</td></tr>
+    <tr><td><b>Na</b>, alles klar?</td><td>Hey, everything okay?</td></tr>
+    <tr><td><b>Na ja</b>, es geht.</td><td>Well, so-so.</td></tr>
+    <tr><td><b>Na klar!</b></td><td>Of course!</td></tr>
+    <tr><td><b>Na gut.</b></td><td>Well, okay.</td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Example (your dialogue)</span><br>
+    Hallo ihr zwei! <b>Na</b>, was macht ihr beim Firmenausflug?<br>
+    <i>Hi you two! So, what are you doing at the company outing?</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>bei + Dativ: beim Firmenausflug</h2>
+  <div class="meaning">at / during (an event or an activity)</div>
+  <p><b>beim = bei + dem.</b> <i>bei</i> always takes the Dativ, and <i>der Firmenausflug</i> is masculine (<i>dem</i>).</p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>German</th><th>Meaning</th></tr>
+    <tr><td><b>beim</b> Firmenausflug</td><td>at (during) the company outing</td></tr>
+    <tr><td><b>beim</b> Essen</td><td>while eating, at the meal</td></tr>
+    <tr><td><b>beim</b> Sport</td><td>while doing sports</td></tr>
+  </table>
+  </div>
+  <div class="rule">
+    <b>zu vs. bei:</b><br>
+    die Einladung <b>zum</b> Firmenausflug = the invitation <i>to</i> the outing<br>
+    Was macht ihr <b>beim</b> Firmenausflug? = what do you do <i>at / during</i> the outing
+  </div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Was macht ihr <b>beim</b> Firmenausflug?<br>
+    <i>What are you doing at the company outing?</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Hallo, ihr zwei!</h2>
+  <div class="meaning">Hi, you two!</div>
+  <p><b>ihr</b> = you (several people, informal). <i>zwei</i> says how many. It's the plural of <i>du</i>.<br>
+     Same pattern: <i>ihr beiden</i> (you both) · <i>ihr drei</i> (you three) · <i>Hallo zusammen!</i> (hello everyone!)</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Hallo, <b>ihr zwei</b>! Wie geht's euch? – Gut, danke!<br>
+    <i>Hi, you two! How are you? – Fine, thanks!</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>mindestens / höchstens</h2>
+  <div class="meaning">at least / at most</div>
+  <p><i>mindestens</i> sets a minimum: it could be more, but not less. <i>höchstens</i> sets a maximum.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Ich mache jedes Jahr <b>mindestens</b> einmal einen Surfurlaub.<br>
+    <i>Every year I go on a surfing holiday at least once.</i><br><br>
+    Ich esse <b>höchstens</b> zweimal pro Woche Fleisch.<br>
+    <i>I eat meat at most twice a week.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>jedes Jahr, jeden Tag, jede Woche</h2>
+  <div class="meaning">every year, every day, every week</div>
+  <p><i>jeder / jede / jedes</i> takes the same endings as <i>dieser</i>. For a time expression it is Akkusativ and needs <b>no preposition</b>.</p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Gender</th><th>Nominativ</th><th>Akkusativ (time)</th></tr>
+    <tr><td>der Tag (m.)</td><td>jeder Tag</td><td><b>jeden</b> Tag</td></tr>
+    <tr><td>die Woche (f.)</td><td>jede Woche</td><td><b>jede</b> Woche</td></tr>
+    <tr><td>das Jahr (n.)</td><td>jedes Jahr</td><td><b>jedes</b> Jahr</td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich mache <b>jedes Jahr</b> mindestens einmal einen Surfurlaub.<br>
+    <i>Every year I go on a surfing holiday at least once.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>bestimmt</h2>
+  <div class="meaning">surely, definitely, I'm sure</div>
+  <p>Shows that the speaker is confident about something: an assumption more than a fact.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Das wird <b>bestimmt</b> toll.<br>
+    <i>That will definitely be great.</i><br><br>
+    Er kommt <b>bestimmt</b>.<br>
+    <i>He'll surely come.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Das wird bestimmt toll.</h2>
+  <div class="meaning">That will definitely be great.</div>
+  <p><b>werden</b> here is the future: "will be / is going to be". German often uses the present for the future
+     (<i>Morgen gehe ich schwimmen</i>). With <i>werden</i> the speaker is <b>predicting or assuming</b>, and <i>bestimmt</i> strengthens it.</p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>ich werde</th><th>wir werden</th></tr>
+    <tr><td>du wirst</td><td>ihr werdet</td></tr>
+    <tr><td>er / sie / es <b>wird</b></td><td>sie / Sie werden</td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Aber Kitesurfen habe ich noch nie ausprobiert. Das <b>wird</b> bestimmt toll.<br>
+    <i>But I've never tried kitesurfing. That will definitely be great.</i><br><br>
+    Es <b>wird</b> bestimmt regnen.<br>
+    <i>It will surely rain.</i><br><br>
+    Das <b>wird</b> schwer.<br>
+    <i>That will be hard.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>noch nie</h2>
+  <div class="meaning">never (so far), not yet ever</div>
+  <p><i>noch nie</i> = "never up to now", usually with the Perfekt. <i>nie</i> = never in general.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Kitesurfen habe ich <b>noch nie</b> ausprobiert.<br>
+    <i>I've never tried kitesurfing.</i><br><br>
+    Ich war <b>noch nie</b> in Berlin.<br>
+    <i>I've never been to Berlin.</i><br><br>
+    Ich trinke <b>nie</b> Kaffee.<br>
+    <i>I never drink coffee. (in general)</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>finden (to find / to think)</h2>
+  <div class="meaning">finden has several meanings.</div>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Meaning</th><th>Example</th></tr>
+    <tr><td><b>to find</b> (discover, come across)</td><td>Ich <b>finde</b> meinen Schlüssel nicht.<br><i>I can't find my key.</i></td></tr>
+    <tr><td><b>to find</b> (a way, a place)</td><td>Wie <b>finde</b> ich den Bahnhof?<br><i>How do I find the station?</i></td></tr>
+    <tr><td><b>to think / to have an opinion</b></td><td>Ich <b>finde</b> den Film gut.<br><i>I think the film is good.</i></td></tr>
+    <tr><td><b>to like</b> (with gut / schön / toll)</td><td>Ich <b>finde</b> die Wohnung schön.<br><i>I like the apartment.</i></td></tr>
+    <tr><td><b>to consider something to be …</b> (+ Akk. + adjective)</td><td>Ich <b>finde</b> den Test schwer.<br><i>I find the test hard.</i></td></tr>
+    <tr><td><b>to think that …</b> (+ dass)</td><td>Ich <b>finde</b>, dass das eine gute Idee ist.<br><i>I think it's a good idea.</i></td></tr>
+  </table>
+  </div>
+  <p><span class="label">In compounds, a new meaning each time</span></p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Verb</th><th>Meaning</th></tr>
+    <tr><td><b>stattfinden</b></td><td>to take place: <i>Das Konzert findet im Park statt.</i></td></tr>
+    <tr><td><b>erfinden</b></td><td>to invent</td></tr>
+    <tr><td><b>empfinden</b></td><td>to feel, to sense</td></tr>
+    <tr><td><b>sich befinden</b></td><td>to be located (formal): <i>Das Hotel befindet sich in der Stadt.</i></td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Wie findest du …? – Ich finde …</h2>
+  <div class="meaning">What do you think of …? – I think …</div>
+  <p>This is how you ask for and give an opinion. <i>finden</i> takes a direct object (Akkusativ): <i>den Film → ihn</i>.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    <b>Wie findest du</b> den Firmenausflug? – <b>Ich finde</b> ihn super.<br>
+    <i>What do you think of the company outing? – I think it's great.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>finden: finde, findest, findet · fand · hat gefunden</h2>
+  <div class="meaning">irregular verb</div>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Präsens</th><th>Präteritum</th><th>Perfekt</th></tr>
+    <tr><td>ich finde · du findest · er findet<br>wir finden · ihr findet · sie finden</td><td>fand</td><td>hat <b>gefunden</b></td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich habe meinen Schlüssel endlich <b>gefunden</b>.<br>
+    <i>I finally found my key.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Ja, finde ich auch. / Finde ich nicht.</h2>
+  <div class="meaning">Yes, I think so too. / I don't think so.</div>
+  <p>It's a shortened sentence: <i>Das</i> is left out, so the verb comes first. Full version: <i>Das finde ich auch.</i></p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>German</th><th>Meaning</th></tr>
+    <tr><td>Finde ich auch.</td><td>I think so too.</td></tr>
+    <tr><td>Finde ich nicht.</td><td>I don't think so. / I disagree.</td></tr>
+    <tr><td>Das finde ich auch.</td><td>I think that too.</td></tr>
+    <tr><td>Ich auch.</td><td>Me too.</td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Example (your dialogue)</span><br>
+    – Dieses Jahr gibt es tolle Angebote. Ich freue mich schon.<br>
+    – Ja, <b>finde ich auch</b>. Was möchtest du machen?<br>
+    <i>– This year there are great options. I'm already looking forward to it. – Yes, I think so too. What would you like to do?</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>das Angebot, die Angebote</h2>
+  <div class="meaning">offer, deal, option</div>
+  <p>From <i>anbieten</i> (to offer). The meaning depends on the context:</p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Context</th><th>Meaning</th></tr>
+    <tr><td>in a shop</td><td>a special offer, a deal (das Sonderangebot)</td></tr>
+    <tr><td>in a program or event</td><td>the options / activities on offer</td></tr>
+    <tr><td>in a job</td><td>a job offer (das Jobangebot)</td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    – Hallo Lukas. Hast du die Einladung zum Firmenausflug schon gelesen?<br>
+    – Ja, habe ich. Dieses Jahr gibt es tolle <b>Angebote</b>. Ich freue mich schon.<br>
+    <i>– Hello Lukas. Have you already read the invitation to the company outing? – Yes, I have. This year there are great options. I'm already looking forward to it.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Ich freue mich schon.</h2>
+  <div class="meaning">I'm already looking forward to it.</div>
+  <p><b>Which one: <i>freuen auf</i> or <i>freuen über</i>? → <i>auf</i></b>, because the outing is in the <b>future</b>.<br>
+     <i>sich freuen auf</i> + Akkusativ = to look forward to (future)<br>
+     <i>sich freuen über</i> + Akkusativ = to be happy about (now or past)<br>
+     The <i>auf …</i> part is left out because it's clear from the context. Full version:
+     <i>Ich freue mich schon <b>auf den Ausflug</b>.</i> or <i>Ich freue mich schon <b>darauf</b>.</i></p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>ich freue <b>mich</b></th><th>wir freuen <b>uns</b></th></tr>
+    <tr><td>du freust <b>dich</b></td><td>ihr freut <b>euch</b></td></tr>
+    <tr><td>er / sie freut <b>sich</b></td><td>sie / Sie freuen <b>sich</b></td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Ich freue mich <b>schon</b>. <i>I'm already looking forward to it.</i><br>
+    Ich freue mich <b>auf</b> den Ausflug. <i>I'm looking forward to the outing.</i><br>
+    Ich freue mich <b>über</b> das Geschenk. <i>I'm happy about the present.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>die Einladung zum Firmenausflug</h2>
+  <div class="meaning">the invitation to the company outing</div>
+  <p><b>zu + Dativ</b> (zu always takes the Dativ). <i>zum</i> = <i>zu dem</i>, because <i>der Firmenausflug</i> is masculine.<br>
+     Verb: <i>einladen zu</i> + Dativ = to invite to: <i>Ich lade dich zu meinem Geburtstag ein.</i></p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Hast du die Einladung <b>zum</b> Firmenausflug schon gelesen?<br>
+    <i>Have you already read the invitation to the company outing?</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Na ja, es geht.</h2>
+  <div class="meaning">Well, it's so-so. / It's okay (but not great).</div>
+  <p><b>na ja</b> = well… (hesitating) · <b>es geht</b> = literally "it goes". A lukewarm answer: not "yes, very well", but not a clear "no" either.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Kannst du gut surfen? – <b>Na ja, es geht.</b><br>
+    <i>Can you surf well? – Well, so-so.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Kannst du (gut) …? and the answers</h2>
+  <div class="meaning">Can you (well) …? Answers from "yes" to "no":</div>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Answer</th><th>Meaning</th></tr>
+    <tr><td>Natürlich.</td><td>Of course.</td></tr>
+    <tr><td>Ja, sehr gut.</td><td>Yes, very well.</td></tr>
+    <tr><td>Ja, gut.</td><td>Yes, well.</td></tr>
+    <tr><td>Ja, ein bisschen.</td><td>Yes, a little.</td></tr>
+    <tr><td>Na ja, es geht.</td><td>Well, so-so.</td></tr>
+    <tr><td>Leider nicht. / Nein, leider nicht.</td><td>Unfortunately not.</td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    <b>Kannst du</b> gut surfen? – Ja, sehr gut.<br>
+    <i>Can you surf well? – Yes, very well.</i><br><br>
+    <b>Könnt ihr</b> gut surfen? – Natürlich.<br>
+    <i>Can you (all) surf well? – Of course.</i><br><br>
+    Ich kann gut surfen.<br>
+    <i>I can surf well.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Nein, leider nicht.</h2>
+  <div class="meaning">No, unfortunately not.</div>
+  <p>A polite, soft "no". <i>leider</i> = unfortunately.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Kannst du surfen? – <b>Nein, leider nicht.</b><br>
+    <i>Can you surf? – No, unfortunately not.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Wie geht's? – Es geht.</h2>
+  <div class="meaning">How are you? – So-so.</div>
+  <p><b>Es geht</b> alone is lukewarm. For "good" you need <i>gut</i>: <i>Es geht mir gut.</i> / <i>Gut, danke.</i></p>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Answer</th><th>Meaning</th></tr>
+    <tr><td>Super! / Sehr gut!</td><td>Great! / Very well!</td></tr>
+    <tr><td>Gut, danke. / Es geht mir gut.</td><td>Fine, thanks.</td></tr>
+    <tr><td><b>Es geht.</b></td><td>So-so.</td></tr>
+    <tr><td>Nicht so gut.</td><td>Not so well.</td></tr>
+    <tr><td>Schlecht.</td><td>Bad.</td></tr>
+  </table>
+  </div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Wie geht's? – <b>Es geht.</b> Ich bin ein bisschen müde.<br>
+    <i>How are you? – So-so. I'm a bit tired.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Is <i>Es geht</i> pessimistic?</h2>
+  <div class="meaning">Not really pessimistic, but not positive either.</div>
+  <p>Your intuition isn't far off, because <i>es geht</i> literally means "it goes", and "it goes" sounds fine. But in answer to <i>Wie geht's?</i> it means <b>"so-so, okay, not great"</b>.</p>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Answer</th><th>Feels like</th></tr>
+    <tr><td>Super! / Sehr gut!</td><td>great</td></tr>
+    <tr><td>Gut, danke.</td><td>fine</td></tr>
+    <tr><td><b>Es geht.</b></td><td><b>so-so, nothing special</b></td></tr>
+    <tr><td>Nicht so gut.</td><td>not so well</td></tr>
+    <tr><td>Schlecht.</td><td>bad</td></tr>
+  </table>
+  </div>
+
+  <div class="rule">
+    <b>Neutral to slightly flat.</b> It's like "I'm okay" or "can't complain" in English. It's not "I'm in a bad mood", but it's not a "yes, I'm doing well" either.<br><br>
+    <b>Often a hint that something is a bit off</b>, a little tired or stressed. A German listener may ask back: <i>Was ist los?</i> (What's up?) or <i>Warum, was ist passiert?</i><br><br>
+    <b>It's only "good" if you add <i>gut</i>:</b> <i>Es geht mir gut</i> = I'm doing well. <i>Es geht</i> alone is not.<br><br>
+    <b>The same goes for ability, as in your exercise:</b> <i>Kannst du gut surfen? – Es geht.</i> = I can, but not that well.
+  </div>
+
+  <div class="example">
+    <span class="label">One exception</span><br>
+    <b><i>Geht das?</i> – <i>Es geht.</i></b> (Is that possible? – It works / it's possible.)<br>
+    Here it's a neutral "yes", not lukewarm. The tone depends on the question.
+  </div>
+</div>
+
+<div class="card">
+  <h2>zwischen … und …</h2>
+  <div class="meaning">between … and …</div>
+  <p>Used for a choice between two things and for position. In a choice (<i>wählen / auswählen zwischen</i>) it takes the <b>Dativ</b>.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Die Sportfans können <b>zwischen</b> Windsurfen <b>und</b> Kitesurfen auswählen.<br>
+    <i>The sports fans can choose between windsurfing and kitesurfing.</i><br><br>
+    Die Mitarbeiter können <b>zwischen einem</b> Sportprogramm <b>und einem</b> Kulturprogramm wählen.<br>
+    <i>The employees can choose between a sports program and a cultural program.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>dazwischen</h2>
+  <div class="meaning">in between (them)</div>
+  <p>da + zwischen = "between them".</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Das Sofa steht links, das Fenster rechts – <b>dazwischen</b> steht ein Tisch.<br>
+    <i>The sofa is on the left, the window on the right – there's a table in between.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>mitten in / mitten auf (+ Dativ)</h2>
+  <div class="meaning">in the middle of</div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Unser Hotel liegt <b>mitten in</b> der Stadt.<br>
+    <i>Our hotel is in the middle of the city.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>entweder … oder …</h2>
+  <div class="meaning">either … or …</div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Wir können <b>entweder</b> windsurfen <b>oder</b> kitesurfen.<br>
+    <i>We can either windsurf or kitesurf.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>weder … noch …</h2>
+  <div class="meaning">neither … nor …</div>
+  <p>No extra <i>nicht</i> needed: <i>weder … noch</i> is already negative.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich mag <b>weder</b> Windsurfen <b>noch</b> Kitesurfen.<br>
+    <i>I like neither windsurfing nor kitesurfing.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>sowohl … als auch …</h2>
+  <div class="meaning">both … and …</div>
+  <div class="example">
+    <span class="label">Example</span><br>
+    <b>Sowohl</b> Peter <b>als auch</b> Robert organisieren den Firmenausflug.<br>
+    <i>Both Peter and Robert are organizing the company outing.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>der Unterschied zwischen … und …</h2>
+  <div class="meaning">the difference between … and …</div>
+  <p>der Unterschied, die Unterschiede</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Was ist <b>der Unterschied zwischen</b> Windsurfen <b>und</b> Kitesurfen?<br>
+    <i>What's the difference between windsurfing and kitesurfing?</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>einmal vs. das erste Mal</h2>
+  <div class="meaning">einmal = once, at some point · das erste Mal = the first time</div>
+  <p><i>einmal</i> is about doing something at least once (in your life). <i>das erste Mal</i> is about the first of several times.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Ich will unbedingt <b>einmal</b> fliegen!<br>
+    <i>I really want to fly at least once!</i><br><br>
+    Mit 18 Jahren bin ich <b>das erste Mal</b> gesprungen.<br>
+    <i>At 18 I jumped for the first time.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>mit … Jahren</h2>
+  <div class="meaning">at the age of …</div>
+  <p>German uses <i>mit</i> for age. In speech <i>Jahren</i> is often left out: <i>mit 18</i>.</p>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    <b>Mit 18 Jahren</b> bin ich das erste Mal gesprungen.<br>
+    <i>At 18 I jumped for the first time.</i><br><br>
+    <b>Mit 18 Jahren</b> habe ich mit dem Studium angefangen.<br>
+    <i>At 18 I started university.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>genial</h2>
+  <div class="meaning">brilliant, awesome</div>
+  <p>Colloquial. In everyday speech it doesn't mean "genius-like".</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich kann mich noch immer gut an diesen Sprung erinnern. Er war <b>genial</b>!<br>
+    <i>I can still remember that jump well. It was brilliant!</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>anfangen mit + Dativ</h2>
+  <div class="meaning">to start (with) something</div>
+  <p>Separable verb: ich fange <b>mit</b> dem Studium <b>an</b>. Perfekt: hat an<b>ge</b>fangen.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Mit 18 Jahren habe ich <b>mit dem Studium angefangen</b>.<br>
+    <i>At 18 I started university.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>in den letzten … Jahren</h2>
+  <div class="meaning">in the last … years</div>
+  <p><i>in</i> + Dativ. In the dative plural the noun gets an extra <b>-n</b>: die Jahre → in den Jahre<b>n</b>.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Freddy Jung hat <b>in den letzten 20 Jahren</b> bereits über 19 000 Sprünge gemacht.<br>
+    <i>In the last 20 years, Freddy Jung has already done more than 19,000 jumps.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>bereits = schon</h2>
+  <div class="meaning">already</div>
+  <p>Same meaning as <i>schon</i>, a bit more formal.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Freddy Jung hat in den letzten 20 Jahren <b>bereits</b> über 19 000 Sprünge gemacht.<br>
+    <i>Freddy Jung has already done more than 19,000 jumps in the last 20 years.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>der Profi, die Profis</h2>
+  <div class="meaning">professional, pro</div>
+  <p>Short for <i>der Professional</i>.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Er ist DER <b>Profi</b>.<br>
+    <i>He is THE pro.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>begrüßen + Akkusativ</h2>
+  <div class="meaning">to greet, to welcome (someone)</div>
+  <p>The person you greet is in the accusative: ich begrüße <b>dich</b> / <b>euch</b> / <b>Sie</b>.</p>
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich begrüße <b>euch</b> heute im Live-Chat mit unserem Fallschirmsprung-Experten Freddy Jung.<br>
+    <i>Today I welcome you (all) to the live chat with our skydiving expert Freddy Jung.</i>
+  </div>
+</div>
+
+</section>
+
+<!-- ============ GRAMMATIK ============ -->
+<section class="page grammar" id="grammatik">
+
+<div class="card">
+  <h2>Nebensatz mit <i>weil</i> (subordinate clause with "because")</h2>
+  <div class="meaning">weil = because. It gives a reason and answers the question <i>Warum?</i> (Why?)</div>
+
+  <div class="rule">
+    <b>Rule 1:</b> In the main clause, the verb is in <b>position 2</b>.<br>
+    <b>Rule 2:</b> In the <i>weil</i> clause, the conjugated verb goes to the <b>end</b>.<br>
+    <b>Rule 3:</b> Put a <b>comma</b> before <i>weil</i>.<br>
+    <b>Rule 4:</b> With a modal verb (möchten, wollen, können…), the <b>modal comes last</b>, after the infinitive: <i>… weil er einmal fliegen <b>möchte</b>.</i>
+  </div>
+
+  <div class="example">
+    <span class="label">Question and answer</span><br>
+    Warum ist Fallschirmspringen teuer?<br>
+    Fallschirmspringen <b>ist</b> teuer, <b>weil</b> man ein Flugzeug <b>braucht</b>.<br>
+    <i>Skydiving is expensive because you need a plane.</i>
+  </div>
+
+  <p><span class="label">Two main clauses → one sentence with weil</span></p>
+  <div class="table-scroll">
+  <table>
+    <tr><th colspan="3">Main clause 1</th><th colspan="3">Main clause 2</th></tr>
+    <tr><td>Fallschirmspringen</td><td class="verb">ist</td><td>teuer.</td>
+        <td>Man</td><td class="verb">braucht</td><td>ein Flugzeug.</td></tr>
+    <tr><td>Tom</td><td class="verb">will</td><td>einen Tandemsprung machen.</td>
+        <td>Er</td><td class="verb">möchte</td><td>einmal fliegen.</td></tr>
+  </table>
+  <table>
+    <tr><th colspan="3">Main clause (verb in position 2)</th><th colspan="4">Subordinate clause with weil (verb at the end)</th></tr>
+    <tr><td>Fallschirmspringen</td><td class="verb">ist</td><td>teuer,</td>
+        <td class="weil">weil</td><td>man</td><td>ein Flugzeug</td><td class="verb">braucht.</td></tr>
+    <tr><td>Tom</td><td class="verb">will</td><td>einen Tandemsprung machen,</td>
+        <td class="weil">weil</td><td>er</td><td>einmal</td><td class="verb">fliegen möchte.</td></tr>
+  </table>
+  </div>
+
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Fallschirmspringen ist teuer, <b>weil</b> man ein Flugzeug <b>braucht</b>.<br>
+    <i>Skydiving is expensive because you need a plane.</i><br><br>
+    Tom will einen Tandemsprung machen, <b>weil</b> er einmal fliegen <b>möchte</b>.<br>
+    <i>Tom wants to do a tandem jump because he'd like to fly once.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2><i>gern</i> in a <i>weil</i> clause</h2>
+  <div class="meaning">gern stays in the middle. Only the conjugated verb moves to the end.</div>
+
+  <div class="rule">
+    <b>Step 1:</b> Start from the normal sentence: Er <b>ist</b> gern in der Natur.<br>
+    <b>Step 2:</b> Put <i>weil</i> + subject first: weil er …<br>
+    <b>Step 3:</b> Keep everything else in the same order (gern in der Natur).<br>
+    <b>Step 4:</b> Move the conjugated verb to the very end: … weil er gern in der Natur <b>ist</b>.<br>
+    <b>Tip:</b> <i>gern</i> usually comes right before the place or the thing you like: gern <u>in der Natur</u>, gern <u>Fußball</u>.
+  </div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Main clause</th><th colspan="5">weil clause</th></tr>
+    <tr><td>Herr Augustin wandert oft,</td><td class="weil">weil</td><td>er</td><td>gern</td><td>in der Natur</td><td class="verb">ist.</td></tr>
+    <tr><td>Ich gehe oft ins Stadion,</td><td class="weil">weil</td><td>ich</td><td>gern</td><td>Fußball</td><td class="verb">sehe.</td></tr>
+  </table>
+  </div>
+
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Herr Augustin wandert oft, <b>weil</b> er <b>gern</b> in der Natur <b>ist</b>.<br>
+    <i>Mr Augustin often goes hiking because he likes being out in nature.</i><br><br>
+    Ich lerne Deutsch, <b>weil</b> ich <b>gern</b> Sprachen <b>lerne</b>.<br>
+    <i>I'm learning German because I like learning languages.</i><br><br>
+    ✗ … weil er in der Natur <b>ist</b> gern. → the verb is not last<br>
+    ✓ … weil er gern in der Natur <b>ist</b>.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Personalpronomen: Nominativ, Akkusativ, Dativ</h2>
+  <div class="meaning">Pronouns change their form depending on the case.</div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Nominativ</th><th>Akkusativ</th><th>Dativ</th><th>English</th></tr>
+    <tr><td>ich</td><td class="verb">mich</td><td class="weil">mir</td><td>I / me</td></tr>
+    <tr><td>du</td><td class="verb">dich</td><td class="weil">dir</td><td>you (one person, informal)</td></tr>
+    <tr><td>er</td><td class="verb">ihn</td><td class="weil">ihm</td><td>he / him</td></tr>
+    <tr><td>sie</td><td class="verb">sie</td><td class="weil">ihr</td><td>she / her</td></tr>
+    <tr><td>es</td><td class="verb">es</td><td class="weil">ihm</td><td>it</td></tr>
+    <tr><td>wir</td><td class="verb">uns</td><td class="weil">uns</td><td>we / us</td></tr>
+    <tr><td>ihr</td><td class="verb">euch</td><td class="weil">euch</td><td>you (several people, informal)</td></tr>
+    <tr><td>sie</td><td class="verb">sie</td><td class="weil">ihnen</td><td>they / them</td></tr>
+    <tr><td>Sie</td><td class="verb">Sie</td><td class="weil">Ihnen</td><td>you (formal, one or many)</td></tr>
+  </table>
+  </div>
+
+  <div class="rule">
+    <b>Which "you"?</b><br>
+    One person, informal → <b>du</b> (Akk. dich, Dat. dir)<br>
+    Several people, informal → <b>ihr</b> (Akk. euch, Dat. euch)<br>
+    Formal, one or several people → <b>Sie</b> (Akk. Sie, Dat. Ihnen)
+  </div>
+
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Ich begrüße <b>euch</b>. <i>I welcome you (all).</i> (begrüßen + Akkusativ)<br>
+    Ich begrüße <b>dich</b>. <i>I welcome you (one person).</i><br>
+    Ich begrüße <b>Sie</b>. <i>I welcome you (formal).</i><br>
+    Ich helfe <b>dir</b>. <i>I help you.</i> (helfen + Dativ)<br>
+    Das gefällt <b>mir</b>. <i>I like that.</i> (gefallen + Dativ)
+  </div>
+</div>
+
+<div class="card">
+  <h2>dieser, diese, dieses (this / that)</h2>
+  <div class="meaning">dieser takes the same endings as der, die, das.</div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th></th><th>maskulin</th><th>feminin</th><th>neutral</th><th>Plural</th></tr>
+    <tr><th>Nominativ</th><td>der → dies<b>er</b></td><td>die → dies<b>e</b></td><td>das → dies<b>es</b></td><td>die → dies<b>e</b></td></tr>
+    <tr><th>Akkusativ</th><td class="verb">den → dies<b>en</b></td><td>die → dies<b>e</b></td><td>das → dies<b>es</b></td><td>die → dies<b>e</b></td></tr>
+    <tr><th>Dativ</th><td class="weil">dem → dies<b>em</b></td><td>der → dies<b>er</b></td><td>dem → dies<b>em</b></td><td>den → dies<b>en</b> (+n)</td></tr>
+  </table>
+  </div>
+
+  <div class="rule">
+    <b>Trick:</b> look at the last letter of the article and put it on <i>dies-</i>:
+    de<b>r</b> → diese<b>r</b>, de<b>n</b> → diese<b>n</b>, de<b>m</b> → diese<b>m</b>, da<b>s</b> → diese<b>s</b>, di<b>e</b> → dies<b>e</b>.<br>
+    <b>Same endings:</b> jeder (every), welcher (which), jener (that).
+  </div>
+
+  <div class="example">
+    <span class="label">Example</span><br>
+    Ich kann mich noch immer gut an <b>diesen</b> Sprung erinnern.<br>
+    <i>(sich erinnern an + Akkusativ, der Sprung → den Sprung → diesen Sprung)</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Dativ plural: the noun gets <i>-n</i></h2>
+  <div class="meaning">In the Dativ plural, not only the article changes. The noun itself gets <b>-n</b>.</div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Nominativ plural</th><th>Dativ plural</th><th>Example</th></tr>
+    <tr><td>die Jahre</td><td>den Jahre<b>n</b></td><td>seit über zehn Jahre<b>n</b></td></tr>
+    <tr><td>die Kinder</td><td>den Kinder<b>n</b></td><td>mit den Kinder<b>n</b></td></tr>
+    <tr><td>die Häuser</td><td>den Häuser<b>n</b></td><td>in den Häuser<b>n</b></td></tr>
+    <tr><td>die Freunde</td><td>den Freunde<b>n</b></td><td>mit den Freunde<b>n</b></td></tr>
+    <tr><td>die Männer</td><td>den Männer<b>n</b></td><td>bei den Männer<b>n</b></td></tr>
+  </table>
+  </div>
+
+  <div class="rule">
+    <b>Two changes at once:</b> the article (<i>die → den</i>) <b>and</b> the noun (+n).<br>
+    <b>No article?</b> The noun still gets -n: <i>seit über zehn Jahren</i> (there is only a number, so the -n is the only sign of the Dativ).<br>
+    <b>Exceptions:</b> plurals that already end in <b>-n</b> or <b>-s</b> get nothing extra:
+    <i>die Frauen → mit den Frauen</i>, <i>die Autos → mit den Autos</i>.<br>
+    <b>Singular:</b> the noun almost never changes (<i>dem Mann, der Frau, dem Kind</i>). Only the article does.
+  </div>
+
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Ich tanze schon seit über zehn <b>Jahren</b>.<br>
+    <i>I've been dancing for more than ten years already.</i><br><br>
+    Freddy Jung hat in den letzten 20 <b>Jahren</b> bereits über 19 000 Sprünge gemacht.<br>
+    <i>In the last 20 years, Freddy Jung has already done more than 19,000 jumps.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Leaving out <i>das</i>: the verb comes first</h2>
+  <div class="meaning">In speech, <i>das</i> is often dropped when it's obvious. The verb moves to the front, and <i>ich</i> follows it.</div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Full</th><th>Short</th></tr>
+    <tr><td>Das <b>finde</b> ich auch.</td><td><b>Finde</b> ich auch.</td></tr>
+    <tr><td>Das <b>habe</b> ich.</td><td><b>Habe</b> ich.</td></tr>
+    <tr><td>Das <b>weiß</b> ich.</td><td><b>Weiß</b> ich.</td></tr>
+  </table>
+  </div>
+
+  <div class="rule">
+    <b>Pattern:</b> leave out <i>das</i> → verb first → <i>ich</i> after the verb.
+  </div>
+
+  <div class="example">
+    <span class="label">Examples (your dialogue)</span><br>
+    Hast du die Einladung zum Firmenausflug schon gelesen? – Ja, <b>habe ich</b>.<br>
+    <i>Have you already read the invitation to the company outing? – Yes, I have.</i><br><br>
+    Dieses Jahr gibt es tolle Angebote. – Ja, <b>finde ich auch</b>.<br>
+    <i>This year there are great options. – Yes, I think so too.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Wechselpräpositionen (two-way prepositions)</h2>
+  <div class="meaning">9 prepositions that take Dativ OR Akkusativ, depending on the verb.</div>
+
+  <div class="rule">
+    <b>Wo?</b> (where? = at rest, in a place) → <b>Dativ</b><br>
+    <b>Wohin?</b> (where to? = movement to a place) → <b>Akkusativ</b>
+  </div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Präposition</th><th>Meaning</th><th>Wo? → Dativ</th><th>Wohin? → Akkusativ</th></tr>
+    <tr><td><b>an</b></td><td>at, on (wall, edge), to</td><td>Das Bild hängt <b>an der</b> Wand.</td><td>Ich hänge das Bild <b>an die</b> Wand.</td></tr>
+    <tr><td><b>auf</b></td><td>on (top of)</td><td>Das Buch liegt <b>auf dem</b> Tisch.</td><td>Ich lege das Buch <b>auf den</b> Tisch.</td></tr>
+    <tr><td><b>in</b></td><td>in, into</td><td>Ich bin <b>in der</b> Küche.</td><td>Ich gehe <b>in die</b> Küche.</td></tr>
+    <tr><td><b>neben</b></td><td>next to</td><td>Die Lampe steht <b>neben dem</b> Sofa.</td><td>Ich stelle die Lampe <b>neben das</b> Sofa.</td></tr>
+    <tr><td><b>vor</b></td><td>in front of</td><td>Das Auto steht <b>vor dem</b> Haus.</td><td>Ich fahre das Auto <b>vor das</b> Haus.</td></tr>
+    <tr><td><b>hinter</b></td><td>behind</td><td>Der Ball liegt <b>hinter dem</b> Schrank.</td><td>Der Ball rollt <b>hinter den</b> Schrank.</td></tr>
+    <tr><td><b>über</b></td><td>above, over</td><td>Die Lampe hängt <b>über dem</b> Tisch.</td><td>Ich hänge die Lampe <b>über den</b> Tisch.</td></tr>
+    <tr><td><b>unter</b></td><td>under; among</td><td>Die Katze schläft <b>unter dem</b> Tisch.</td><td>Die Katze läuft <b>unter den</b> Tisch.</td></tr>
+    <tr><td><b>zwischen</b></td><td>between</td><td>Der Tisch steht <b>zwischen dem</b> Sofa und dem Fenster.</td><td>Ich stelle den Tisch <b>zwischen das</b> Sofa und das Fenster.</td></tr>
+  </table>
+  </div>
+
+  <p><span class="label">The articles</span></p>
+  <div class="table-scroll">
+  <table>
+    <tr><th></th><th>maskulin</th><th>feminin</th><th>neutral</th><th>Plural</th></tr>
+    <tr><th>Wo? → Dativ</th><td class="weil">dem</td><td class="weil">der</td><td class="weil">dem</td><td class="weil">den (+n)</td></tr>
+    <tr><th>Wohin? → Akkusativ</th><td class="verb">den</td><td class="verb">die</td><td class="verb">das</td><td class="verb">die</td></tr>
+  </table>
+  </div>
+
+  <div class="rule">
+    <b>The verb tells you which question to ask:</b><br>
+    <b>Wo? (Dativ):</b> sein, bleiben, wohnen, liegen, stehen, sitzen, hängen (hat gehangen)<br>
+    <b>Wohin? (Akkusativ):</b> gehen, fahren, kommen, legen, stellen, setzen, hängen (hat gehängt)<br>
+    <b>Pairs:</b> liegen → legen · stehen → stellen · sitzen → setzen<br>
+    <b>Choice:</b> <i>zwischen … und …</i> for a choice is always <b>Dativ</b> (there is no movement).
+  </div>
+
+  <div class="example">
+    <span class="label">From the Firmenausflug email</span><br>
+    Dieses Jahr geht unser Firmenausflug nach Norderney <b>an die</b> Nordsee.<br>
+    <i>(Wohin? the outing goes to the sea → Akkusativ: an die)</i><br>
+    Wir sind <b>an der</b> Nordsee.<br>
+    <i>(Wo? we are at the sea → Dativ: an der)</i><br><br>
+    Die Sportfans können <b>zwischen</b> Windsurfen und Kitesurfen auswählen.<br>
+    <i>(a choice → Dativ: zwischen einem Sportprogramm und einem Kulturprogramm)</i>
+  </div>
+</div>
+
+</section>
+
+<!-- ============ PRÄPOSITIONEN ============ -->
+<section class="page grammar" id="praepositionen">
+
+<div class="card">
+  <h2>Präpositionen: the big picture</h2>
+  <div class="meaning">A preposition decides the case of the noun after it. Learn which family it belongs to.</div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Family</th><th>Prepositions</th><th>Case</th></tr>
+    <tr><td>Always <span class="akk">Akkusativ</span></td><td>durch, für, gegen, ohne, um</td><td>den / die / das / die</td></tr>
+    <tr><td>Always <span class="dat">Dativ</span></td><td>aus, bei, mit, nach, seit, von, zu (also: ab, gegenüber)</td><td>dem / der / dem / den (+n)</td></tr>
+    <tr><td>Two-way</td><td>an, auf, in, neben, vor, hinter, über, unter, zwischen</td><td>Wo? → <span class="dat">Dativ</span> · Wohin? → <span class="akk">Akkusativ</span></td></tr>
+    <tr><td>Genitiv</td><td>wegen, trotz, während, statt</td><td>des / der / des / der (in speech often Dativ)</td></tr>
+  </table>
+  </div>
+
+  <div class="table-scroll">
+  <table>
+    <tr><th>Case</th><th>der (m.)</th><th>die (f.)</th><th>das (n.)</th><th>die (Pl.)</th></tr>
+    <tr><td>Nominativ</td><td>der</td><td>die</td><td>das</td><td>die</td></tr>
+    <tr><td class="akk">Akkusativ</td><td class="akk">den</td><td>die</td><td>das</td><td>die</td></tr>
+    <tr><td class="dat">Dativ</td><td class="dat">dem</td><td class="dat">der</td><td class="dat">dem</td><td class="dat">den (+n)</td></tr>
+  </table>
+  </div>
+
+  <div class="rule">
+    <b>Memory trick (Akkusativ):</b> <b>DOGFU</b> = <b>d</b>urch, <b>o</b>hne, <b>g</b>egen, <b>f</b>ür, <b>u</b>m.<br>
+    <b>Memory trick (Dativ):</b> say it like a rhyme until it sticks: <i>aus, bei, mit, nach, seit, von, zu</i>.<br>
+    <b>How to choose:</b> 1) Is it a fixed verb + preposition? Learn it as one chunk (see below).
+    2) Is it time or place? 3) Check which family the preposition is in, then pick the article.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Always Akkusativ: durch · für · gegen · ohne · um</h2>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Prep.</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td><b>durch</b></td><td>through; by</td><td>Wir gehen <b>durch den</b> Park.<br><i>We walk through the park.</i></td></tr>
+    <tr><td><b>für</b></td><td>for</td><td>Das Geschenk ist <b>für dich</b>.<br><i>The present is for you.</i><br>Wir fahren <b>für zwei Wochen</b> weg. <i>(a planned duration)</i></td></tr>
+    <tr><td><b>gegen</b></td><td>against; around (time)</td><td>Ich bin <b>gegen die</b> Idee.<br><i>I'm against the idea.</i><br>Wir kommen <b>gegen 7 Uhr</b>. <i>(around 7)</i></td></tr>
+    <tr><td><b>ohne</b></td><td>without</td><td>Ich trinke Kaffee <b>ohne</b> Zucker.<br>Eine Stadtführung mit oder <b>ohne</b> Rad. <i>(your email)</i></td></tr>
+    <tr><td><b>um</b></td><td>around; at (clock time)</td><td>Wir sitzen <b>um den</b> Tisch.<br>Abfahrt <b>um 7 Uhr</b>. <i>(your email)</i></td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Always Dativ: aus · bei · mit · nach · seit · von · zu</h2>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Prep.</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td><b>aus</b></td><td>out of; from (origin)</td><td>Ich komme <b>aus der</b> Türkei.<br><i>I come from Turkey.</i></td></tr>
+    <tr><td><b>bei</b></td><td>at (someone's place, a company); near</td><td>Sie wohnt <b>bei ihren</b> Eltern.<br><i>She lives with her parents.</i><br>Ich bin <b>beim</b> Arzt. <i>I'm at the doctor's.</i></td></tr>
+    <tr><td><b>mit</b></td><td>with; by (transport)</td><td>Ich fahre <b>mit dem</b> Bus.<br><b>Mit</b> 18 Jahren bin ich das erste Mal gesprungen. <i>(Freddy)</i></td></tr>
+    <tr><td><b>nach</b></td><td>after; to (city, country, home)</td><td><b>Nach der</b> Arbeit gehe ich schwimmen.<br>Der Ausflug geht <b>nach</b> Norderney. <i>(your email)</i></td></tr>
+    <tr><td><b>seit</b></td><td>since; for (still going on)</td><td>Ich lerne <b>seit einem</b> Jahr Deutsch.<br><i>I've been learning German for a year.</i></td></tr>
+    <tr><td><b>von</b></td><td>from; of</td><td>Das Geschenk ist <b>von meiner</b> Mutter.<br><b>Von</b> Montag bis Freitag. <i>From Monday to Friday.</i></td></tr>
+    <tr><td><b>zu</b></td><td>to (a person or place); for (an event)</td><td>Ich gehe <b>zu meiner</b> Oma.<br>Die Einladung <b>zum</b> Firmenausflug. <i>(your dialogue)</i></td></tr>
+  </table>
+  </div>
+  <div class="rule">
+    <b>bei / mit / zu are easy to mix up:</b><br>
+    <b>bei</b> = at someone's place (<i>bei meiner Oma</i>) · <b>zu</b> = going to someone (<i>zu meiner Oma</i>) · <b>mit</b> = together with someone (<i>mit meiner Oma</i>).
+  </div>
+</div>
+
+<div class="card">
+  <h2>Time: um · am · im · bis · seit · vor · nach · in · für</h2>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Question / idea</th><th>Prep.</th><th>Example</th></tr>
+    <tr><td>clock time</td><td><b>um</b></td><td><b>um</b> 7 Uhr, <b>um</b> 19 Uhr</td></tr>
+    <tr><td>day, date, part of the day, weekend</td><td><b>am</b></td><td><b>am</b> Freitag, <b>am</b> 15. Juli, <b>am</b> Morgen, <b>am</b> Wochenende</td></tr>
+    <tr><td>month, season</td><td><b>im</b></td><td><b>im</b> Juli, <b>im</b> Sommer</td></tr>
+    <tr><td>night (exception!)</td><td><b>in der</b></td><td><b>in der</b> Nacht (but: am Tag)</td></tr>
+    <tr><td>from … to …</td><td><b>von … bis</b></td><td><b>von</b> 9 <b>bis</b> 17 Uhr</td></tr>
+    <tr><td>deadline</td><td><b>bis (spätestens)</b></td><td><b>bis spätestens</b> 15. Juni <i>(your email)</i></td></tr>
+    <tr><td>after / before</td><td><b>nach / vor</b> + Dat.</td><td><b>nach</b> der Arbeit, <b>vor</b> dem Essen</td></tr>
+    <tr><td>ago</td><td><b>vor</b> + Dat.</td><td><b>vor</b> drei Jahren</td></tr>
+    <tr><td>since / for (still going on)</td><td><b>seit</b> + Dat.</td><td><b>seit</b> zwei Jahren</td></tr>
+    <tr><td>in (a time from now)</td><td><b>in</b> + Dat.</td><td><b>in</b> einer Woche, <b>in</b> zehn Minuten</td></tr>
+    <tr><td>for (a planned duration)</td><td><b>für</b> + Akk.</td><td><b>für</b> zwei Wochen</td></tr>
+    <tr><td>age</td><td><b>mit</b> + Dat.</td><td><b>mit</b> 18 Jahren <i>(Freddy)</i></td></tr>
+    <tr><td>over a period</td><td><b>in</b> + Dat.</td><td><b>in den</b> letzten 20 Jahren <i>(Freddy)</i></td></tr>
+  </table>
+  </div>
+  <div class="rule">
+    <b>Rule of thumb:</b> <b>um</b> = o'clock · <b>am</b> = day · <b>im</b> = month / season.<br>
+    <b>seit vs. vor:</b> <i>seit</i> = it's still true now (<i>Ich wohne seit drei Jahren hier</i>). <i>vor</i> = it's over (<i>Ich habe vor drei Jahren dort gewohnt</i>).
+  </div>
+</div>
+
+<div class="card">
+  <h2>Place and direction: Wo? · Woher? · Wohin?</h2>
+  <div class="table-scroll">
+  <table>
+    <tr><th>What</th><th>Wo? (where)</th><th>Woher? (from where)</th><th>Wohin? (where to)</th></tr>
+    <tr><td>cities, most countries (no article)</td><td><b>in</b> Berlin, <b>in</b> Deutschland</td><td><b>aus</b> Berlin</td><td><b>nach</b> Berlin, <b>nach</b> Deutschland</td></tr>
+    <tr><td>countries with an article (die Türkei, die Schweiz, die USA)</td><td><b>in der</b> Türkei</td><td><b>aus der</b> Türkei</td><td><b>in die</b> Türkei</td></tr>
+    <tr><td>people, doctor, grandma</td><td><b>bei</b> meiner Oma, <b>beim</b> Arzt</td><td><b>von</b> meiner Oma, <b>vom</b> Arzt</td><td><b>zu</b> meiner Oma, <b>zum</b> Arzt</td></tr>
+    <tr><td>buildings, rooms, the city</td><td><b>in der</b> Schule, <b>in der</b> Küche</td><td><b>aus der</b> Schule</td><td><b>in die</b> Schule, <b>in die</b> Küche</td></tr>
+    <tr><td>sea, coast, lake, river</td><td><b>an der</b> Nordsee, <b>am</b> Meer</td><td><b>von der</b> Nordsee</td><td><b>an die</b> Nordsee, <b>ans</b> Meer</td></tr>
+    <tr><td>mountains</td><td><b>in den</b> Bergen</td><td><b>aus den</b> Bergen</td><td><b>in die</b> Berge</td></tr>
+    <tr><td>islands (by name)</td><td><b>auf</b> Norderney</td><td><b>von</b> Norderney</td><td><b>nach</b> Norderney</td></tr>
+    <tr><td>home</td><td><b>zu</b> Hause</td><td><b>von zu</b> Hause</td><td><b>nach</b> Hause</td></tr>
+  </table>
+  </div>
+  <div class="rule">
+    <b>Three trios to memorize:</b><br>
+    cities / countries: <b>in – aus – nach</b><br>
+    people: <b>bei – von – zu</b><br>
+    sea / coast: <b>an – von – an</b><br>
+    <b>Transport:</b> <i>mit dem</i> Bus / Zug / Auto / Fahrrad / Flugzeug · <i>zu</i> Fuß
+  </div>
+</div>
+
+<div class="card">
+  <h2>Contractions (Kontraktionen)</h2>
+  <div class="meaning">Preposition + article are usually merged in everyday German.</div>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Full</th><th>Short</th><th>Example</th></tr>
+    <tr><td>an dem</td><td><b>am</b></td><td>Der Ausflug beginnt <b>am</b> Freitag.</td></tr>
+    <tr><td>an das</td><td><b>ans</b></td><td>Wir fahren <b>ans</b> Meer.</td></tr>
+    <tr><td>in dem</td><td><b>im</b></td><td>Ich bin <b>im</b> Live-Chat.</td></tr>
+    <tr><td>in das</td><td><b>ins</b></td><td>Wir gehen <b>ins</b> Kino.</td></tr>
+    <tr><td>zu dem</td><td><b>zum</b></td><td>Die Einladung <b>zum</b> Firmenausflug.</td></tr>
+    <tr><td>zu der</td><td><b>zur</b></td><td>Ich fahre <b>zur</b> Arbeit.</td></tr>
+    <tr><td>bei dem</td><td><b>beim</b></td><td>Ich bin <b>beim</b> Arzt.</td></tr>
+    <tr><td>von dem</td><td><b>vom</b></td><td>Ich komme <b>vom</b> Arzt.</td></tr>
+    <tr><td>auf das / für das</td><td><b>aufs / fürs</b></td><td>Ich lege es <b>aufs</b> Bett.</td></tr>
+  </table>
+  </div>
+  <div class="rule">
+    The article is gone, so the case is hidden: <i>am</i> = Dativ (an dem), <i>ans</i> = Akkusativ (an das). Use that to check Wo? vs. Wohin?
+  </div>
+</div>
+
+<div class="card">
+  <h2>Verbs with a fixed preposition</h2>
+  <div class="meaning">Learn the verb together with its preposition and its case, as one chunk. English often doesn't help.</div>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Verb + preposition</th><th>Case</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td>warten <b>auf</b></td><td class="akk">Akk.</td><td>to wait for</td><td>Ich warte <b>auf</b> den Bus.</td></tr>
+    <tr><td>sich freuen <b>auf</b></td><td class="akk">Akk.</td><td>to look forward to (future)</td><td>Ich freue mich <b>auf</b> den Ausflug.</td></tr>
+    <tr><td>sich freuen <b>über</b></td><td class="akk">Akk.</td><td>to be happy about (now / past)</td><td>Ich freue mich <b>über</b> das Geschenk.</td></tr>
+    <tr><td>sich ärgern <b>über</b></td><td class="akk">Akk.</td><td>to be annoyed about</td><td>Ich ärgere mich <b>über</b> den Regen.</td></tr>
+    <tr><td>sich erinnern <b>an</b></td><td class="akk">Akk.</td><td>to remember</td><td>Ich erinnere mich <b>an</b> diesen Sprung.</td></tr>
+    <tr><td>denken <b>an</b></td><td class="akk">Akk.</td><td>to think of</td><td>Ich denke oft <b>an</b> dich.</td></tr>
+    <tr><td>sich interessieren <b>für</b></td><td class="akk">Akk.</td><td>to be interested in</td><td>Ich interessiere mich <b>für</b> Musik.</td></tr>
+    <tr><td>sich kümmern <b>um</b></td><td class="akk">Akk.</td><td>to take care of</td><td>Er kümmert sich <b>um</b> den Hund.</td></tr>
+    <tr><td>aufpassen <b>auf</b></td><td class="akk">Akk.</td><td>to look after, watch out for</td><td>Pass <b>auf</b> die Kinder auf!</td></tr>
+    <tr><td>sich vorbereiten <b>auf</b></td><td class="akk">Akk.</td><td>to prepare for</td><td>Ich bereite mich <b>auf</b> die Prüfung vor.</td></tr>
+    <tr><td>bitten <b>um</b></td><td class="akk">Akk.</td><td>to ask for</td><td>Wir bitten <b>um</b> Ihre Anmeldung. <i>(your email)</i></td></tr>
+    <tr><td>danken <b>für</b></td><td class="akk">Akk.</td><td>to thank for</td><td>Ich danke dir <b>für</b> deine Hilfe.</td></tr>
+    <tr><td>sich entscheiden <b>für</b></td><td class="akk">Akk.</td><td>to decide on</td><td>Er entscheidet sich <b>für</b> Kitesurfen.</td></tr>
+    <tr><td>sprechen <b>über</b></td><td class="akk">Akk.</td><td>to talk about</td><td>Wir sprechen <b>über</b> das Wetter.</td></tr>
+    <tr><td>sprechen <b>mit</b></td><td class="dat">Dat.</td><td>to talk to</td><td>Ich spreche <b>mit</b> meinem Chef.</td></tr>
+    <tr><td>teilnehmen <b>an</b></td><td class="dat">Dat.</td><td>to take part in</td><td>Ich nehme <b>an</b> einem Kurs teil.</td></tr>
+    <tr><td>anfangen <b>mit</b></td><td class="dat">Dat.</td><td>to start with</td><td>Ich habe <b>mit dem</b> Studium angefangen.</td></tr>
+    <tr><td>fragen <b>nach</b></td><td class="dat">Dat.</td><td>to ask about / for</td><td>Ich frage <b>nach dem</b> Weg.</td></tr>
+    <tr><td>träumen <b>von</b></td><td class="dat">Dat.</td><td>to dream of</td><td>Er träumt <b>von</b> einem Haus am Meer.</td></tr>
+    <tr><td>Angst haben <b>vor</b></td><td class="dat">Dat.</td><td>to be afraid of</td><td>Ich habe Angst <b>vor</b> Spinnen.</td></tr>
+    <tr><td>sich verabschieden <b>von</b></td><td class="dat">Dat.</td><td>to say goodbye to</td><td>Ich verabschiede mich <b>von</b> ihm.</td></tr>
+    <tr><td>einladen <b>zu</b></td><td class="dat">Dat.</td><td>to invite to</td><td>Ich lade dich <b>zu</b> meinem Geburtstag ein.</td></tr>
+    <tr><td>gratulieren <b>zu</b></td><td class="dat">Dat.</td><td>to congratulate on</td><td>Ich gratuliere dir <b>zum</b> Geburtstag.</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>da- and wo- (for things)</h2>
+  <div class="meaning">When a preposition refers to a <b>thing</b>, it becomes da(r)- (answer) or wo(r)- (question).</div>
+  <div class="table-scroll">
+  <table>
+    <tr><th>Preposition</th><th>Answer (da-)</th><th>Question (wo-)</th></tr>
+    <tr><td>auf</td><td><b>darauf</b></td><td><b>worauf</b>?</td></tr>
+    <tr><td>an</td><td><b>daran</b></td><td><b>woran</b>?</td></tr>
+    <tr><td>über</td><td><b>darüber</b></td><td><b>worüber</b>?</td></tr>
+    <tr><td>für</td><td><b>dafür</b></td><td><b>wofür</b>?</td></tr>
+    <tr><td>mit</td><td><b>damit</b></td><td><b>womit</b>?</td></tr>
+    <tr><td>von</td><td><b>davon</b></td><td><b>wovon</b>?</td></tr>
+    <tr><td>vor</td><td><b>davor</b></td><td><b>wovor</b>?</td></tr>
+  </table>
+  </div>
+  <div class="rule">
+    Put an <b>r</b> in between if the preposition starts with a vowel: da + auf = da<b>r</b>auf.<br>
+    <b>For people</b> use the preposition + pronoun instead: <i>Auf <b>wen</b> wartest du? – Ich warte auf <b>sie</b>.</i>
+  </div>
+  <div class="example">
+    <span class="label">Examples</span><br>
+    Freust du dich auf den Ausflug? – Ja, ich freue mich schon <b>darauf</b>.<br>
+    <i>Are you looking forward to the outing? – Yes, I'm already looking forward to it.</i><br><br>
+    <b>Worauf</b> wartest du? – Auf den Bus.<br>
+    <i>What are you waiting for? – For the bus.</i>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Typical mistakes</h2>
+  <div class="table-scroll">
+  <table>
+    <tr><th>✗ Wrong</th><th>✓ Right</th><th>Why</th></tr>
+    <tr><td>Ich bin nach Hause.</td><td>Ich bin <b>zu</b> Hause.</td><td>zu Hause = being at home, nach Hause = going home</td></tr>
+    <tr><td>Wir fahren in die Nordsee.</td><td>Wir fahren <b>an die</b> Nordsee.</td><td>in die = into the water; an die = to the coast</td></tr>
+    <tr><td>Ich warte für den Bus.</td><td>Ich warte <b>auf</b> den Bus.</td><td>warten auf, learn the chunk</td></tr>
+    <tr><td>Ich wohne für drei Jahren hier.</td><td>Ich wohne <b>seit</b> drei Jahren hier.</td><td>seit = still going on</td></tr>
+    <tr><td>Ich freue mich über den Urlaub (nächste Woche).</td><td>Ich freue mich <b>auf</b> den Urlaub.</td><td>future = auf, now / past = über</td></tr>
+    <tr><td>in Freitag</td><td><b>am</b> Freitag</td><td>days take am</td></tr>
+    <tr><td>Ich gehe bei dem Arzt.</td><td>Ich gehe <b>zum</b> Arzt.</td><td>going to a person = zu; being at a person = bei</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Practice</h2>
+  <p>There are interactive exercises for all of this in the flashcard app: open it and choose <b>Präpositionen üben</b> at the top of the page. You can practice all questions or one topic at a time (time, place, two-way prepositions, Akkusativ / Dativ, verbs, contractions, da- / wo-).</p>
+</div>
+
+</section>
+
+<script>
+  const buttons = document.querySelectorAll(".tabs button");
+  function openPage(id) {
+    if (!document.getElementById(id)) id = "wortschatz";
+    document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
+    buttons.forEach(b => b.classList.toggle("active", b.dataset.page === id));
+    history.replaceState(null, "", "#" + id);
+  }
+  buttons.forEach(b => b.onclick = () => openPage(b.dataset.page));
+  openPage(location.hash.slice(1));
+</script>
+</body>
+</html>
